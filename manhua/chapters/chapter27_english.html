@@ -461,7 +461,7 @@
     </div>
     
     <div class="footer" id="footer">
-        <div class="footer-title">制作人员</div>
+        <div class="footer-title">Staff</div>
         <div class="staff-grid" id="staffGrid">
             <!-- 由JavaScript动态生成 -->
         </div>
@@ -469,7 +469,7 @@
     
     <div class="status-bar" id="statusBar">
         <i class="fas fa-spinner fa-spin"></i>
-        <span>加载进度: <span id="loadedCount">0</span>/<span id="totalCount">0</span></span>
+        <span>Loading Progress: <span id="loadedCount">0</span>/<span id="totalCount">0</span></span>
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
@@ -481,15 +481,15 @@
         <div class="nav-buttons">
             <div class="nav-btn prev" id="prevBtn">
                 <i class="fas fa-arrow-left"></i>
-                上一章
+                Pre
             </div>
             <div class="nav-btn center" id="homeBtn">
                 <i class="fas fa-home"></i>
-                目录
+                Chapters
             </div>
             <div class="nav-btn next" id="nextBtn">
                 <i class="fas fa-arrow-right"></i>
-                下一章
+                Next
             </div>
         </div>
     </div>
@@ -503,7 +503,7 @@
             // 创建提示元素
             const hint = document.createElement('div');
             hint.className = 'nav-hint hint-enter';
-            hint.innerHTML = '<i class="fas fa-hand-pointer"></i> 点击页面任意位置显示导航菜单';
+            hint.innerHTML = '<i class="fas fa-hand-pointer"></i> Click anywhere to show nav menu';
             document.body.appendChild(hint);
             
             // 3秒后自动隐藏
@@ -590,11 +590,7 @@
           "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392176/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_46_ak0uix.png"
         ],
             staffMembers: [ // 制作人员
-                { role: "图源", name: "lilocat" },
-                { role: "翻译", name: "Deco、往生已逝" },
-                { role: "修图", name: "Deco" },
-                { role: "嵌字", name: "Deco" },
-                { role: "校对", name: "青空朝颜、lilocat" }
+                { role: "ALL", name: "Deco" }
             ],
            };
         
