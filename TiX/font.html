@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Edit Comparison · 9 Before & After</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #f2f4f8;
+            color: #1e2b3c;
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 对比对卡片 */
+        .compare-pair {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px 25px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03), 0 2px 5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9edf4;
+            transition: box-shadow 0.2s;
+        }
+
+        .compare-pair:hover {
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 两列布局 */
+        .pair-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* 每张图片的容器 */
+        .image-card {
+            background: #f8fafd;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #dee5ed;
+        }
+
+        .image-label {
+            background: #eef2f7;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: #2c3e50;
+            border-bottom: 1px solid #d4dce9;
+            text-transform: uppercase;
+        }
+
+        .image-label span {
+            background: #ffffffb3;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+            color: #4a6fa5;
+        }
+
+        .image-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            background: #ffffff;
+            transition: opacity 0.1s;
+            min-height: 120px; /* 占位，避免加载抖动 */
+        }
+
+        /* 图片下方简短说明（可选单独说明，但我们主要使用整体note） */
+        .image-caption {
+            padding: 10px 16px 12px;
+            font-size: 0.95rem;
+            color: #4a5568;
+            background: #ffffff;
+            border-top: 1px solid #edf2f7;
+        }
+
+        /* 整对图片的通用解释 (跨列) */
+        .pair-note {
+            grid-column: span 2;
+            background: #f0f7fe;
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin-top: 8px;
+            font-size: 1.05rem;
+            color: #1e3c5a;
+            border-left: 5px solid #4a6fa5;
+            box-shadow: inset 0 1px 3px #ffffff80, 0 2px 4px #00000008;
+            line-height: 1.6;
+        }
+
+        /* 碎碎念区域 (与原风格一致) */
+        .talk-section {
+            background: #eef7ff;
+            border-radius: 24px;
+            padding: 28px 32px;
+            margin: 50px auto 20px;
+            max-width: 1000px;
+            border-left: 6px solid #4a6fa5;
+            box-shadow: 0 8px 22px rgba(0, 30, 60, 0.08);
+        }
+
+        .talk-content {
+            line-height: 1.8;
+            font-size: 1.15rem;
+            color: #0b2a41;
+        }
+
+        .talk-content p {
+            margin-bottom: 16px;
+        }
+
+        .talk-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Header description */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-weight: 500;
+            font-size: 2.2rem;
+            color: #1e3b5c;
+            letter-spacing: -0.3px;
+        }
+
+        .page-header p {
+            color: #5e6f88;
+            font-size: 1.1rem;
+        }
+
+        /* 加载占位 (已移除，但保留样式备用) */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c7a92;
+        }
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 4px solid #dde3ed;
+            border-top: 4px solid #4a6fa5;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 0.9s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* 移动端：堆叠为一列 */
+        @media (max-width: 700px) {
+            .pair-row {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .pair-note {
+                grid-column: span 1;
+            }
+            .compare-pair {
+                padding: 18px;
+            }
+            .talk-section {
+                padding: 22px 18px;
+            }
+        }
+
+        /* 微调 */
+        .badge {
+            background: #4a6fa5;
+            color: white;
+            font-size: 0.7rem;
+            border-radius: 30px;
+            padding: 2px 10px;
+            margin-left: 12px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <!-- Header -->
+        <div class="page-header">
+            <h1>🎨 Image Edit Comparison · 3x3 Grid</h1>
+            <p>Before (left) vs After (right) — each pair includes a note below</p>
+        </div>
+
+        <!-- Generated comparison cards will appear here -->
+        <div id="compare-list"></div>
+    </div>
+
+    <script>
+        (function() {
+            // --------------------------------------------------------------
+            // Configuration: set your 9 image pairs and notes below
+            // Each item includes: before, after, note
+            // --------------------------------------------------------------
+            const pairs = [
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064770/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_10_ylzbkf.png",
+                     after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247875/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_10_pyaggt.png",
+                            note: "Only changed font to regular, size unchanged."
+                },
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064344/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_13_gmpxml.png",
+                       after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247869/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_13_dnyrfz.png",
+                                 note: "Only changed font to regular, size unchanged."
+                },
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064449/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_14_rdrxob.png",
+                       after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247861/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_14_lpikav.png",
+                                           note: "Only changed font to regular, size unchanged."
+                },
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064461/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_15_olqmhl.png",
+                      after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247861/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_15_dcqc7p.png",
+                       note: "Font reduced by one size."
+                },
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064554/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_17_gjhcjk.png",
+                     after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247862/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_17_vb7oce.png",
+                                note: "Font reduced by one size."
+                },
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064549/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_18_nnwlut.png",
+                       after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247861/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_18_wzeooo.png",
+                          note: "Font reduced by two sizes."
+                },
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064646/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_19_nse6ph.png",
+                     after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247861/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_19_uok6lw.png",
+                        note: "Font reduced by two sizes."
+                },
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064772/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_27_fpruam.png",
+                       after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247862/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_27_tm6l81.png",
+                          note: "Font reduced by three sizes."
+                },
+                {
+                    before: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773064837/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_30_wseurd.png",
+                     after: "https://res.cloudinary.com/dbulxrm7b/image/upload/v1773247868/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_30_bdenpa.png",
+                           note: "Font reduced by three sizes."
+                }
+            ];
+
+            // --------------------------------------------------------------
+            // End of configuration
+            // --------------------------------------------------------------
+
+            const container = document.getElementById('compare-list');
+            if (!container) return;
+
+            // clear any loading placeholder (compare-list starts empty)
+            container.innerHTML = '';
+
+            // Generate comparison cards
+            pairs.forEach((pair, idx) => {
+                // 创建卡片外层
+                const pairDiv = document.createElement('div');
+                pairDiv.className = 'compare-pair';
+
+                // 两列区域
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'pair-row';
+
+                // --- Before (left) ---
+                const beforeCard = document.createElement('div');
+                beforeCard.className = 'image-card';
+                beforeCard.innerHTML = `
+                    <div class="image-label">🔹 Before <span>#${idx+1}</span></div>
+                    <img src="${pair.before}" alt="before-${idx}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x800/e9eef2/6c7a92?text=Image+load+failed'">
+                `;
+                // Note: optional per-image caption is omitted to keep layout clean; pair-note is used.
+
+                // --- After (right) ---
+                const afterCard = document.createElement('div');
+                afterCard.className = 'image-card';
+                afterCard.innerHTML = `
+                    <div class="image-label">✅ After <span>#${idx+1}</span></div>
+                    <img src="${pair.after}" alt="after-${idx}" loading="lazy" onerror="this.src='https://via.placeholder.com/600x800/e9eef2/6c7a92?text=Image+load+failed'">
+                `;
+
+                rowDiv.appendChild(beforeCard);
+                rowDiv.appendChild(afterCard);
+
+                // --- Pair note (spans both columns) ---
+                const noteDiv = document.createElement('div');
+                noteDiv.className = 'pair-note';
+                noteDiv.textContent = pair.note || '(No note provided)';
+
+                pairDiv.appendChild(rowDiv);
+                pairDiv.appendChild(noteDiv);
+                container.appendChild(pairDiv);
+            });
+
+            // Optional: console hint for editing
+            console.log('✅ Comparison interface loaded. To change images/notes, edit the `pairs` array in code.');
+        })();
+    </script>
+
+    <!-- 简单的使用说明（直接显示在页面上，方便填充） -->
+    <div style="max-width: 1000px; margin: 30px auto 10px; background: #ffffffd9; border-radius: 30px; padding: 22px 28px; border: 1px dashed #a0b8d4; color: #2a405c;">
+        <h3 style="font-weight: 500; margin-bottom: 10px;">📋 如何填充您自己的图片和注释</h3>
+        <p style="margin-bottom: 12px;">1. 找到上面 <code style="background: #e9eef4; padding: 2px 8px; border-radius: 20px;">&lt;script&gt;</code> 里的 <strong style="color:#1d4e89;">pairs</strong> 数组。</p>
+        <p style="margin-bottom: 8px;">2. 每个花括号 <code>{ }</code> 代表一组：<br>
+        &nbsp;&nbsp;• <code>before</code> : 修改前图片的URL<br>
+        &nbsp;&nbsp;• <code>after</code>  : 修改后图片的URL<br>
+        &nbsp;&nbsp;• <code>note</code>   : 这对图片的描述文字</p>
+        <p style="margin-bottom: 8px;">3. 一共九组，您可以直接替换示例中的URL（包含占位图）。图片建议使用稳定图床，避免外链失效。</p>
+        <p>4. 下方的“碎碎念”区域可在 <code>afterwordHTML</code> 常量中修改（支持HTML）。完成后刷新页面即可。</p>
+        <p style="margin-top: 15px; color: #4a6fa5;">🔍 提示：移动端会自动堆叠为单列，方便查看。</p>
+    </div>
+</body>
+</html>
