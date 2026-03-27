@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>鹫巢外传</title>
+    <title>Photo Collection</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -40,10 +40,10 @@
             line-height: 1.6;
             min-height: 100vh;
             transition: padding 0.3s ease;
-            padding-bottom: 60px; /* 为状态栏预留空间 */
+            padding-bottom: 60px; /* Reserve space for status bar */
         }
 
-                /* 导航提示样式 */
+                /* Navigation hint styles */
         .nav-hint {
             position: fixed;
             bottom: 30px;
@@ -194,7 +194,7 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* 碎碎念区域样式 */
+        /* Talk section styles */
         .talk-section {
             background: var(--talk-bg);
             border-radius: 10px;
@@ -299,7 +299,7 @@
             display: none;
         }
         
-        /* 导航菜单样式 */
+        /* Navigation menu styles */
         .nav-overlay {
             position: fixed;
             top: 0;
@@ -383,7 +383,7 @@
             color: var(--primary-color);
         }
         
-        /* 隐藏页眉页脚的状态 */
+        /* Hide header/footer status */
         .header.hidden {
             transform: translateY(-100%);
         }
@@ -392,11 +392,11 @@
             transform: translateY(100%);
         }
         
-        /* 最后一页检测 */
+        /* Last page detection */
         .end-indicator {
             height: 1px;
             position: absolute;
-            bottom: 300px; /* 在底部留出空间 */
+            bottom: 300px; /* Leave space at bottom */
             width: 100%;
         }
         
@@ -437,33 +437,33 @@
 </head>
 <body>
     <div class="header" id="header">
-        <div class="title" id="chapterTitle">Legend of Washizu</div>
-        <div class="subtitle" id="chapterSubtitle">中文汉化版 | Cloudinary CDN加速</div>
+        <div class="title" id="chapterTitle">Photo Collection</div>
+        <div class="subtitle" id="chapterSubtitle">Guangzhou Slums & Shandong Rural Life</div>
     </div>
     
     <div class="notice">
-        This localized version is for study, reference and communication only, and shall not be used for commercial gain in any form.
+        These photos are shared for personal memory and cultural documentation purposes only.
     </div>
     
     <div class="comic-container" id="comic-container">
         <div class="loading-container">
             <div class="loading-spinner"></div>
-            <p>正在加载漫画，请稍候...</p>
-            <p><i class="fas fa-cloud"></i> 使用Cloudinary CDN加速中</p>
+            <p>Loading photos, please wait...</p>
+            <p><i class="fas fa-cloud"></i> Using Cloudinary CDN acceleration</p>
         </div>
     </div>
     
-    <!-- 碎碎念区域 -->
+    <!-- Talk section -->
     <div class="talk-section" id="talkSection">
         <div class="talk-content" id="talkContent">
-            <!-- 由JavaScript动态生成 -->
+            <!-- Generated dynamically by JavaScript -->
         </div>
     </div>
     
     <div class="footer" id="footer">
         <div class="footer-title">Staff</div>
         <div class="staff-grid" id="staffGrid">
-            <!-- 由JavaScript动态生成 -->
+            <!-- Generated dynamically by JavaScript -->
         </div>
     </div>
     
@@ -473,10 +473,10 @@
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <span class="completed-message" id="completedMessage"><i class="fas fa-check-circle"></i> 加载完成!</span>
+        <span class="completed-message" id="completedMessage"><i class="fas fa-check-circle"></i> All photos loaded successfully!</span>
     </div>
     
-    <!-- 导航菜单 -->
+    <!-- Navigation menu -->
     <div class="nav-overlay" id="navOverlay">
         <div class="nav-buttons">
             <div class="nav-btn prev" id="prevBtn">
@@ -494,24 +494,24 @@
         </div>
     </div>
     
-    <!-- 最后一页检测元素 -->
+    <!-- Last page detection element -->
     <div class="end-indicator" id="endIndicator"></div>
     
 <script>
-            // 显示导航提示
+            // Show navigation hint
         function showNavHint() {
-            // 创建提示元素
+            // Create hint element
             const hint = document.createElement('div');
             hint.className = 'nav-hint hint-enter';
             hint.innerHTML = '<i class="fas fa-hand-pointer"></i> Click anywhere to show nav menu';
             document.body.appendChild(hint);
             
-            // 3秒后自动隐藏
+            // Auto-hide after 3 seconds
             const hideTimer = setTimeout(() => {
                 hint.classList.remove('hint-enter');
                 hint.classList.add('hint-exit');
                 
-                // 动画结束后移除元素
+                // Remove element after animation
                 setTimeout(() => {
                     if (document.body.contains(hint)) {
                         document.body.removeChild(hint);
@@ -519,7 +519,7 @@
                 }, 500);
             }, 5000);
             
-            // 点击页面时立即隐藏提示
+            // Hide hint immediately when page is clicked
             document.body.addEventListener('click', function hideOnClick() {
                 clearTimeout(hideTimer);
                 hint.classList.remove('hint-enter');
@@ -529,83 +529,77 @@
                     if (document.body.contains(hint)) {
                         document.body.removeChild(hint);
                     }
-                    // 移除事件监听
+                    // Remove event listener
                     document.body.removeEventListener('click', hideOnClick);
                 }, 500);
             }, { once: true });
         }
 
-        // 页面加载完成后显示提示
+        // Show hint after page loads
         document.addEventListener('DOMContentLoaded', showNavHint);
         // ========================
-        // 配置区域 - 只需修改这部分
+        // Configuration area - modify only this section
         // ========================
         
-        // 当前章节配置
+        // Current chapter configuration
         const chapterConfig = {
-            chapterNumber: 27, // 当前章节号
-            chapterTitle: "Sparkling Frog 1", // 章节标题
-            imageUrls: [ // 图片URL数组
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392163/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_1_nlbab0.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392231/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_2_b0rutr.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392172/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_4_xbb90o.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392167/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_5_sxh8rt.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392161/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_6_lyqq1k.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392163/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_7_zgqbg6.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392230/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_8_ncftwc.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392190/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_9_olbejy.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392246/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_10_ozt94j.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392211/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_12_r1lcid.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392191/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_13_yypich.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392240/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_14_ua9dsy.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392240/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_15_yv486l.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392270/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_16_qldwcl.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392256/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_17_krun6i.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392247/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_18_uj7vo8.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392255/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_19_k1a86d.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392348/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_20_ntxpni.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392289/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_21_cqvjki.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392318/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_22_fhigmm.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392332/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_23_go3hzh.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392357/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_24_dl0qcw.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392371/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_25_hmps7w.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392348/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_26_jzmipm.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392355/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_27_astko3.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392533/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_28_pmmeje.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392404/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_30_v7btcq.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392394/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_31_d51rso.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392411/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_32_dkbamr.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392408/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_33_jq6kff.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392464/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_34_oc28vr.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392447/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_35_yn6n1m.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392507/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_36_ziuiqp.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392538/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_37_sub18y.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392511/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_38_e7lwai.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392562/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_39_sdao70.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392556/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_40_kuf0wb.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392499/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_42_ez5on6.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392558/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_43_dczlfy.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392582/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_44_by6bcr.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392586/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_45_oclvve.png",
-          "https://res.cloudinary.com/dbulxrm7b/image/upload/v1770392176/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_46_ak0uix.png"
-        ],
-            staffMembers: [ // 制作人员
-                { role: "ALL", name: "Deco" }
+            chapterNumber: 1, // Current chapter number
+            chapterTitle: "Photo Collection", // Chapter title
+            imageUrls: [ // Image URL array
+                // Guangzhou Slums Photos
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608022/edf1bfc4444acb3efc3584fb3fa3533b_720_lsbiin.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608003/a34abbf653e61b54a7e8a520848ca8c4_720_hr5phl.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608003/a02bb00c19db0d3f4b09317f9b07ca61_720_unzkrx.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608002/7175e6666532de7f1e1d9c38ad73c9cd_720_yedhtu.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608003/a8c66e286a0265d8ebb8207781581419_720_g1mxkk.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608001/9e92a092564372354e7791a641065fd5_720_adwljc.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608000/95ff33378220c88e7a7c1e1c3074c829_720_s5vhxb.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774607999/0a97429550b7b4c8986041d6cb58b7a7_720_j5z519.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608000/0d7e474b5543c7d4529a1a037023f6c4_720_vwzlle.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774607999/76c48b214a2044fa7c5d9c602056b500_720_nuz7bn.jpg",
+                // Shandong Rural Photos
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608022/dec79a91e3908c6576c2d6e2393f7a59_0_wqqmd9.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608022/fcc2a2422171fde84c5e8fbd768bdc63_720_swwglg.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608022/f1ee8c0bc09d25e5d73fb9dc12ddb31d_720_fkgfac.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608021/e062033f33cc0e6e71d9d4e2cd5aa07a_720_la2v1f.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608021/e54984e5ccadb325f79bb77fe231c2dc_0_cszw9l.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608004/da5e3d7a70a95eff91f4723822eefa02_720_loz8su.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608006/c3c865d1c1bf8cf86bf70956458ab318_720_r8ucqf.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608002/05187c8b5ef474e6c202b863c3c74229_720_hljayb.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608004/d949cbb3a23433eec6fe7beb74f8a784_720_mlzwdt.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608004/d26cf8d68de6cd83672acde65a233028_720_banhwr.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608003/a55bd6ea43f5d1e58da638ebe250956e_720_kfcrsh.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608003/793780d565e1e48f6fbcf4febb0c2030_720_yodxnk.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608003/baafb7065399f2fb11192dc2db0f8c93_0_vp9tu1.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608004/d79068b80750e700862706d52e678e37_0_uvfbkq.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608001/9f9c31715d45439c097aaccc24a28c65_720_xsqcdl.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608002/9f8886b43bfde74d84a66dab1c813d2b_720_zwz65v.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608001/4f200eb73a0c8033a8c5be1574aa925c_720_rpqizm.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608002/5084ad4af6b9068d584064e5c325cb2a_720_m4kj7a.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608002/523a7a4b4ac95ef296f9b116ca2ef462_720_pklaxp.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608001/402e762bf327bd2cd7e42f9ffa2350e2_720_cizol6.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608000/2f83f0b515cb1b749ff85d6821b27f80_720_nlvkfm.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608001/6f926966b975f043da3965c3e613dbfc_720_lv87vb.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774608000/03a013b02ffc65f55b29704d29a52f49_720_nop14k.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774607999/0abbc8bc3c31b47686ad354df4c51c9c_720_loeefy.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1774607999/13c39d195bbf8d589a3d48b98a9c6eda_720_c6sydv.jpg"
             ],
-           };
+            staffMembers: [], // Remove staff members
+            talkContent: "" // Remove talk content
+        };
         
         // ========================
-        // 自动优化模块 - 自动添加压缩参数 (您无需修改此部分)
+        // Auto-optimization module - automatically adds compression parameters (no modification needed)
         // ========================
         (function optimizeCloudinaryUrls() {
-            // 智能添加压缩参数到所有Cloudinary URL
+            // Intelligently add compression parameters to all Cloudinary URLs
             chapterConfig.imageUrls = chapterConfig.imageUrls.map(url => {
-                if (!url.includes('res.cloudinary.com')) return url; // 非Cloudinary链接保持原样
+                if (!url.includes('res.cloudinary.com')) return url; // Keep non-Cloudinary links unchanged
                 
-                // 检查是否已有优化参数
+                // Check if optimization parameters already exist
                 if (url.includes('/f_') || url.includes('/q_')) return url;
                 
-                // 在/upload/后添加优化参数
+                // Add optimization parameters after /upload/
                 return url.replace(
                     /(https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)(v\d+\/)/, 
                     '$1f_auto,q_auto/$2'
@@ -613,15 +607,15 @@
             });
         })();
 // ========================
-// 脚本代码 - 无需修改
+// Script code - no modification needed
 // ========================
         
         document.addEventListener('DOMContentLoaded', function() {
-            // 设置章节标题
-            document.getElementById('chapterTitle').textContent = `Legend of Washizu${chapterConfig.chapterNumber}`;
-            document.getElementById('chapterSubtitle').textContent = `${chapterConfig.chapterTitle} | In English`;
+            // Set chapter title
+            document.getElementById('chapterTitle').textContent = chapterConfig.chapterTitle;
+            document.getElementById('chapterSubtitle').textContent = `Guangzhou Slums & Shandong Rural Life`;
             
-            // 设置制作人员
+            // Set staff members
             const staffGrid = document.getElementById('staffGrid');
             chapterConfig.staffMembers.forEach(member => {
                 const staffItem = document.createElement('div');
@@ -633,7 +627,7 @@
                 staffGrid.appendChild(staffItem);
             });
             
-            // 设置碎碎念内容
+            // Set talk content
             document.getElementById('talkContent').innerHTML = chapterConfig.talkContent;
             
             const comicContainer = document.getElementById('comic-container');
@@ -651,29 +645,29 @@
             const endIndicator = document.getElementById('endIndicator');
             const talkSection = document.getElementById('talkSection');
             
-            // 滚动变量
+            // Scroll variables
             let lastScrollTop = 0;
             let isNearBottom = false;
             
             totalCount.textContent = chapterConfig.imageUrls.length;
             
-            // 移除加载提示
+            // Remove loading prompt
             comicContainer.innerHTML = '';
             
-            // 创建并添加所有漫画图片
-// 在现有代码中找到这部分，替换图片加载方式
+            // Create and add all photo images
+// Find this section in existing code and replace image loading method
 chapterConfig.imageUrls.forEach((url, index) => {
     const imgContainer = document.createElement('div');
     imgContainer.className = 'img-container';
     
     const img = document.createElement('img');
-    // 修改这里，初始时不加载图片
-    img.dataset.src = url; // 使用data-src代替src
-    img.alt = `第 ${index + 1} 页`;
+    // Change here, don't load images initially
+    img.dataset.src = url; // Use data-src instead of src
+    img.alt = `Photo ${index + 1}`;
     img.className = 'comic-image';
-    img.loading = "lazy"; // 添加懒加载属性
+    img.loading = "lazy"; // Add lazy loading attribute
     
-    // 修改图片加载逻辑
+    // Modify image loading logic
     const loadImage = function() {
         if (img.dataset.src) {
             img.src = img.dataset.src;
@@ -681,7 +675,7 @@ chapterConfig.imageUrls.forEach((url, index) => {
         }
     };
     
-    // 当图片进入视口时加载
+    // Load when image enters viewport
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -696,47 +690,47 @@ chapterConfig.imageUrls.forEach((url, index) => {
 
     
                 
-                // 添加图片加载状态监听
+                // Add image loading status listener
                 img.onload = function() {
                     this.classList.add('loaded');
                     
-                    // 更新加载计数
+                    // Update loading count
                     const loaded = parseInt(loadedCount.textContent) + 1;
                     loadedCount.textContent = loaded;
                     
-                    // 更新进度条
+                    // Update progress bar
                     const progress = Math.floor((loaded / chapterConfig.imageUrls.length) * 100);
                     progressBar.style.width = `${progress}%`;
                     
-                    // 当所有图片加载完成时
+                    // When all images are loaded
                     if (loaded === chapterConfig.imageUrls.length) {
                         setTimeout(() => {
-                            statusBar.innerHTML = '<i class="fas fa-check-circle"></i> 所有图片加载完成!';
+                            statusBar.innerHTML = '<i class="fas fa-check-circle"></i> All photos loaded successfully!';
                             statusBar.style.color = '#28a745';
                             
-                            // 将最后一页检测元素放在所有内容之后
+                            // Place the last page detection element after all content
                             document.body.appendChild(endIndicator);
                         }, 500);
                     }
                 };
                 
                 img.onerror = function() {
-                    this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600"><rect width="400" height="600" fill="%23f8f9fa"/><text x="200" y="300" font-family="Arial" font-size="20" fill="%236c757d" text-anchor="middle">图片加载失败</text></svg>';
+                    this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600"><rect width="400" height="600" fill="%23f8f9fa"/><text x="200" y="300" font-family="Arial" font-size="20" fill="%236c757d" text-anchor="middle">Image failed to load</text></svg>';
                     this.classList.add('loaded');
                     
-                    // 更新加载计数
+                    // Update loading count
                     const loaded = parseInt(loadedCount.textContent) + 1;
                     loadedCount.textContent = loaded;
                     
-                    // 更新进度条
+                    // Update progress bar
                     const progress = Math.floor((loaded / chapterConfig.imageUrls.length) * 100);
                     progressBar.style.width = `${progress}%`;
                 };
                 
-                // 添加页码标签
+                // Add page number label
                 const pageNum = document.createElement('div');
                 pageNum.className = 'page-number';
-                pageNum.textContent = `第 ${index + 1} 页`;
+                pageNum.textContent = `Photo ${index + 1}`;
                 pageNum.style.textAlign = 'center';
                 pageNum.style.margin = '5px 0 15px';
                 pageNum.style.color = '#6c757d';
@@ -747,7 +741,7 @@ chapterConfig.imageUrls.forEach((url, index) => {
                 comicContainer.appendChild(imgContainer);
             });
             
-            // 滚动时隐藏页眉页脚（优化版）
+            // Hide header/footer when scrolling (optimized version)
             window.addEventListener('scroll', function() {
                 const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
                 const windowHeight = window.innerHeight;
@@ -759,10 +753,10 @@ chapterConfig.imageUrls.forEach((url, index) => {
                     document.documentElement.offsetHeight
                 );
                 
-                // 计算距离底部的距离
+                // Calculate distance to bottom
                 const distanceToBottom = documentHeight - (currentScroll + windowHeight);
                 
-                // 如果接近底部（1200像素内），显示所有元素
+                // If close to bottom (within 1200 pixels), show all elements
                 if (distanceToBottom < 1200) {
                     header.classList.remove('hidden');
                     footer.classList.remove('hidden');
@@ -773,13 +767,13 @@ chapterConfig.imageUrls.forEach((url, index) => {
                     isNearBottom = false;
                 }
                 
-                // 向下滚动超过50px时隐藏
+                // Hide when scrolling down more than 50px
                 if (currentScroll > lastScrollTop && currentScroll > 50) {
                     header.classList.add('hidden');
                     footer.classList.add('hidden');
                     statusBarEl.classList.add('hidden');
                 } 
-                // 向上滚动或到顶部时显示
+                // Show when scrolling up or at top
                 else {
                     header.classList.remove('hidden');
                     footer.classList.remove('hidden');
@@ -789,42 +783,42 @@ chapterConfig.imageUrls.forEach((url, index) => {
                 lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
             });
             
-            // 点击中间区域显示导航菜单
+            // Click center area to show navigation menu
             document.body.addEventListener('click', function(e) {
-                // 排除按钮点击
+                // Exclude button clicks
                 if (e.target.closest('.nav-btn')) return;
                 
-                // 切换导航菜单显示状态
+                // Toggle navigation menu display state
                 navOverlay.classList.toggle('active');
             });
             
-            // 导航按钮功能
+            // Navigation button functions
             prevBtn.addEventListener('click', function() {
-                // 跳转到上一章
-                window.location.href = `chapter${chapterConfig.chapterNumber - 1}.html`;
+                // No previous page, disable
+                prevBtn.classList.add('disabled');
             });
             
             homeBtn.addEventListener('click', function() {
-                // 跳转到目录页 - 修正为您的实际路径
-                window.location.href = '../index.html';
+                // Navigate to index page
+                window.location.href = 'index.html';
             });
             
             nextBtn.addEventListener('click', function() {
-                // 跳转到下一章
-                window.location.href = `qita.html`;
+                // No next page, disable
+                nextBtn.classList.add('disabled');
             });
             
-            // 初始时隐藏碎碎念区域，在滚动到末尾时显示
+            // Initially hide talk section, show when scrolling to end
             talkSection.style.opacity = '0';
             talkSection.style.transform = 'translateY(20px)';
             talkSection.style.transition = 'all 0.5s ease';
             
-            // 滚动到末尾时显示碎碎念区域
+            // Show talk section when scrolling to end
             window.addEventListener('scroll', function() {
                 const talkSectionRect = talkSection.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
                 
-                // 当碎碎念区域进入视口时显示
+                // Show when talk section enters viewport
                 if (talkSectionRect.top < windowHeight * 0.8) {
                     talkSection.style.opacity = '1';
                     talkSection.style.transform = 'translateY(0)';
