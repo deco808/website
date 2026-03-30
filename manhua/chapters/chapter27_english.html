@@ -621,20 +621,25 @@ talkContent: "",
 
         // Extract page numbers from URLs and handle duplicates
         const pageNumbers = [];
-        const pageCountMap = {};
+        const extractedPageNumbers = [];
         chapterConfig.imageUrls.forEach((url) => {
             const match = url.match(/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_([^_]+)_/);
             if (match) {
                 const pageNum = match[1];
-                if (pageNum === '25') {
-                    if (!pageCountMap['25']) pageCountMap['25'] = 0;
-                    pageCountMap['25']++;
-                    pageNumbers.push(`${pageNum}.${pageCountMap['25']}`);
-                } else {
-                    pageNumbers.push(pageNum);
-                }
+                extractedPageNumbers.push(pageNum);
             } else {
-                pageNumbers.push('?');
+                extractedPageNumbers.push('?');
+            }
+        });
+
+        // Renumber all "25" related pages as 25.1, 25.2, 25.3
+        let page25Counter = 0;
+        extractedPageNumbers.forEach((pageNum) => {
+            if (pageNum.startsWith('25')) {
+                page25Counter++;
+                pageNumbers.push(`25.${page25Counter}`);
+            } else {
+                pageNumbers.push(pageNum);
             }
         });
 
