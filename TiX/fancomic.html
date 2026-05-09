@@ -12,6 +12,29 @@
             font-family: 'Segoe UI', sans-serif;
         }
         
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .home-button a {
+            display: inline-block;
+            background: #4a6fa5;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+        
+        .home-button a:hover {
+            background: #3a5a85;
+        }
+        
         body {
             background: #f0f2f5;
             color: #333333;
@@ -106,6 +129,9 @@
     </style>
 </head>
 <body>
+    <div class="home-button">
+        <a href="index.html">Home</a>
+    </div>
     <div class="container" id="comic-container">
         <div class="loading">
             <div class="spinner"></div>
