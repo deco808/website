@@ -304,14 +304,7 @@
     </div>
     
     <!-- Talk section (author notes etc.) -->
-    <div class="talk-section" id="talkSection">
-        <div class="talk-content" id="talkContent"></div>
-    </div>
-    
-    <div class="footer" id="footer">
-        <div class="footer-title">Staff</div>
-        <div class="staff-grid" id="staffGrid"></div>
-    </div>
+    <div class="footer" id="footer"></div>
     
     <div class="status-bar" id="statusBar">
         <i class="fas fa-spinner fa-spin"></i>
@@ -369,7 +362,7 @@
             "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731041/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_36_oiazhj.png",
             "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731054/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_37_ech6gu.png",
             "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731063/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_38_ovanzn.png",
-            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731069/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_39_tu1nti.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778735158/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_39_nmzprh.png",
             "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731084/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_40_dinpq9.png",
             "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731072/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_42_rpyy0y.png",
             "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731085/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_43_fu2oai.png",
@@ -393,20 +386,6 @@ talkContent: "",
         document.getElementById('chapterTitle').textContent = `Legend of Washizu ${chapterConfig.chapterNumber}`;
         document.getElementById('chapterSubtitle').textContent = `${chapterConfig.chapterTitle} | In English`;
 
-        const staffGrid = document.getElementById('staffGrid');
-        chapterConfig.staffMembers.forEach(member => {
-            const staffItem = document.createElement('div');
-            staffItem.className = 'staff-item';
-            staffItem.innerHTML = `
-                <div class="staff-role">${member.role}</div>
-                <div class="staff-name">${member.name}</div>
-            `;
-            staffGrid.appendChild(staffItem);
-        });
-
-        // Set talk content (use default if not provided)
-        document.getElementById('talkContent').innerHTML = chapterConfig.talkContent || '<p>Author’s notes.</p>';
-
         const comicContainer = document.getElementById('comic-container');
         const loadedCount = document.getElementById('loadedCount');
         const totalCount = document.getElementById('totalCount');
@@ -415,7 +394,6 @@ talkContent: "",
         const footer = document.getElementById('footer');
         const statusBarEl = document.getElementById('statusBar');
         const endIndicator = document.getElementById('endIndicator');
-        const talkSection = document.getElementById('talkSection');
 
         let lastScrollTop = 0;
         let isNearBottom = false;
@@ -524,19 +502,7 @@ talkContent: "",
 
 
 
-        // Talk section fade-in
-        talkSection.style.opacity = '0';
-        talkSection.style.transform = 'translateY(20px)';
-        talkSection.style.transition = 'all 0.5s ease';
 
-        window.addEventListener('scroll', function() {
-            const talkSectionRect = talkSection.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            if (talkSectionRect.top < windowHeight * 0.8) {
-                talkSection.style.opacity = '1';
-                talkSection.style.transform = 'translateY(0)';
-            }
-        });
     });
 </script>
 </body>
