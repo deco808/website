@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK6CD9HS88"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZK6CD9HS88');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Washizu Gaiden</title>
+    <!-- Font Awesome (single instance) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6b8cae;
+            --accent-color: #ffcc00;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #d1e3f6;
+            --talk-bg: #eef7ff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: padding 0.3s ease;
+            padding-bottom: 60px;
+        }
+
+
+        
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .title {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .notice {
+            background: linear-gradient(to right, #b30000, #cc0000);
+            color: #fff;
+            font-weight: bold;
+            padding: 14px;
+            text-align: center;
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 8px;
+            border: 2px solid #ff5252;
+            box-shadow: 0 0 15px rgba(255, 82, 82, 0.3);
+            animation: redPulse 2s infinite;
+        }
+        
+        @keyframes redPulse {
+            0% { box-shadow: 0 0 10px rgba(255, 82, 82, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 82, 82, 0.6); }
+            100% { box-shadow: 0 0 10px rgba(255, 82, 82, 0.3); }
+        }
+        
+        .comic-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        .comic-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .comic-image.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .loading-container {
+            text-align: center;
+            padding: 50px 20px;
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(74, 111, 165, 0.2);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .talk-section {
+            background: var(--talk-bg);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 800px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .talk-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .talk-content p {
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            background: var(--card-bg);
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .staff-item {
+            background: #f8fbff;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .staff-role {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .staff-name {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            font-size: 1rem;
+            text-align: center;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+            transition: transform 0.3s ease;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-container {
+            width: 200px;
+            height: 8px;
+            background: rgba(74, 111, 165, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .completed-message {
+            color: #28a745;
+            font-weight: bold;
+            display: none;
+        }
+        
+
+        
+        .header.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .footer.hidden, .status-bar.hidden {
+            transform: translateY(100%);
+        }
+        
+        .end-indicator {
+            height: 1px;
+            position: absolute;
+            bottom: 300px;
+            width: 100%;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .staff-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .nav-btn {
+                width: 80px;
+                height: 80px;
+                font-size: 0.9rem;
+            }
+            .nav-btn i {
+                font-size: 2rem;
+            }
+            .talk-section {
+                padding: 20px;
+                margin: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="header">
+        <div class="title" id="chapterTitle">Legend of Washizu</div>
+        <div class="subtitle" id="chapterSubtitle">English Version | Cloudinary CDN</div>
+    </div>
+    
+    <div class="notice">
+        This localized version is for study, reference and communication only, and shall not be used for commercial gain in any form.
+    </div>
+    
+    <div class="comic-container" id="comic-container">
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p>Loading comic, please wait...</p>
+            <p><i class="fas fa-cloud"></i> Using Cloudinary CDN</p>
+        </div>
+    </div>
+    
+    <!-- Talk section (author notes etc.) -->
+    <div class="talk-section" id="talkSection">
+        <div class="talk-content" id="talkContent"></div>
+    </div>
+    
+    <div class="footer" id="footer">
+        <div class="footer-title">Staff</div>
+        <div class="staff-grid" id="staffGrid"></div>
+    </div>
+    
+    <div class="status-bar" id="statusBar">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Loading Progress: <span id="loadedCount">0</span>/<span id="totalCount">0</span></span>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <span class="completed-message" id="completedMessage"><i class="fas fa-check-circle"></i> Loading complete!</span>
+    </div>
+    
+
+    <div class="end-indicator" id="endIndicator"></div>
+
+<script>
+
+    // ========================
+    // Configuration
+    // ========================
+    const chapterConfig = {
+        chapterNumber: 27,
+        chapterTitle: "Sparkling Frog 1",
+        imageUrls: [
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730896/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_1_fqwoi6.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730946/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_2_k0dtaz.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730910/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_4_xnatur.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730904/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_5_tic8uv.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730903/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_6_qwotnu.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730898/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_7_ml86km.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778732838/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_8_usq898.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730953/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_9_yso8qh.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731000/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_10_sg0v11.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730944/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_12_zzqvdi.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730955/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_13_t36yua.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730971/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_14_qfctnk.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730994/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_15_vhhigr.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731027/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_16_lkfvck.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731010/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_17_hhqizq.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731019/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_18_kctbql.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731026/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_19_pcrvro.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731035/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_20_eqbovi.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731098/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_21_mwpee7.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731064/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_22_wn84z9.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731062/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_23_x5zfmr.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730904/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_24_cn3lxu.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730913/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_25_hwd0m5.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730918/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_26_pa7ncm.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778733420/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_27_muyquz.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731027/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_28_wqrrac.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730988/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_30_f4xxin.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778730988/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_31_uregp8.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731022/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_32_yydemu.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731032/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_33_zetcxl.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731033/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_34_j2zevb.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731041/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_35_bjqpgu.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731041/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_36_oiazhj.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731054/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_37_ech6gu.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731063/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_38_ovanzn.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731069/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_39_tu1nti.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731084/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_40_dinpq9.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731072/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_42_rpyy0y.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731085/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_43_fu2oai.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731089/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_44_s00yg5.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731089/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_45_y8mpxt.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731090/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_46_qlr9oo.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731078/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_47_cby2ma.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778731490/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A027_48_ev5lhh.png",
+            "https://res.cloudinary.com/dbulxrm7b/image/upload/v1778732186/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260514121603_6130_261_fddffo.jpg"
+        ],
+        staffMembers: [
+        ],
+        // Default talk content (English)
+       // Default talk content (English)
+talkContent: "",
+    };
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('chapterTitle').textContent = `Legend of Washizu ${chapterConfig.chapterNumber}`;
+        document.getElementById('chapterSubtitle').textContent = `${chapterConfig.chapterTitle} | In English`;
+
+        const staffGrid = document.getElementById('staffGrid');
+        chapterConfig.staffMembers.forEach(member => {
+            const staffItem = document.createElement('div');
+            staffItem.className = 'staff-item';
+            staffItem.innerHTML = `
+                <div class="staff-role">${member.role}</div>
+                <div class="staff-name">${member.name}</div>
+            `;
+            staffGrid.appendChild(staffItem);
+        });
+
+        // Set talk content (use default if not provided)
+        document.getElementById('talkContent').innerHTML = chapterConfig.talkContent || '<p>Author’s notes.</p>';
+
+        const comicContainer = document.getElementById('comic-container');
+        const loadedCount = document.getElementById('loadedCount');
+        const totalCount = document.getElementById('totalCount');
+        const progressBar = document.getElementById('progressBar');
+        const header = document.getElementById('header');
+        const footer = document.getElementById('footer');
+        const statusBarEl = document.getElementById('statusBar');
+        const endIndicator = document.getElementById('endIndicator');
+        const talkSection = document.getElementById('talkSection');
+
+        let lastScrollTop = 0;
+        let isNearBottom = false;
+
+        totalCount.textContent = chapterConfig.imageUrls.length;
+        comicContainer.innerHTML = '';
+
+        // Extract page numbers from URLs
+        const pageNumbers = Array.from({length: chapterConfig.imageUrls.length}, (_, i) => i + 1);
+
+        // Create images with lazy loading
+        chapterConfig.imageUrls.forEach((url, index) => {
+            const imgContainer = document.createElement('div');
+            imgContainer.className = 'img-container';
+            
+            const img = document.createElement('img');
+            img.dataset.src = url;
+            img.alt = `Page ${pageNumbers[index]}`;
+            img.className = 'comic-image';
+            img.loading = "lazy";
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            delete img.dataset.src;
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            observer.observe(img);
+
+            img.onload = function() {
+                this.classList.add('loaded');
+                const loaded = parseInt(loadedCount.textContent) + 1;
+                loadedCount.textContent = loaded;
+                const progress = Math.floor((loaded / chapterConfig.imageUrls.length) * 100);
+                progressBar.style.width = `${progress}%`;
+
+                if (loaded === chapterConfig.imageUrls.length) {
+                    setTimeout(() => {
+                        statusBarEl.innerHTML = '<i class="fas fa-check-circle"></i> All images loaded!';
+                        statusBarEl.style.color = '#28a745';
+                        document.body.appendChild(endIndicator);
+                    }, 500);
+                }
+            };
+
+            img.onerror = function() {
+                this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600"><rect width="400" height="600" fill="%23f8f9fa"/><text x="200" y="300" font-family="Arial" font-size="20" fill="%236c757d" text-anchor="middle">Image failed to load</text></svg>';
+                this.classList.add('loaded');
+                const loaded = parseInt(loadedCount.textContent) + 1;
+                loadedCount.textContent = loaded;
+                const progress = Math.floor((loaded / chapterConfig.imageUrls.length) * 100);
+                progressBar.style.width = `${progress}%`;
+            };
+
+            imgContainer.appendChild(img);
+            
+            const pageNum = document.createElement('div');
+            pageNum.className = 'page-number';
+            pageNum.textContent = `p ${pageNumbers[index]}`;
+            pageNum.style.textAlign = 'center';
+            pageNum.style.margin = '5px 0 15px';
+            pageNum.style.color = '#6c757d';
+            pageNum.style.fontSize = '0.9rem';
+            
+            imgContainer.appendChild(pageNum);
+            comicContainer.appendChild(imgContainer);
+        });
+
+        // Scroll to hide header/footer
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = Math.max(
+                document.body.scrollHeight, document.body.offsetHeight,
+                document.documentElement.clientHeight, document.documentElement.scrollHeight,
+                document.documentElement.offsetHeight
+            );
+            const distanceToBottom = documentHeight - (currentScroll + windowHeight);
+
+            if (distanceToBottom < 1200) {
+                header.classList.remove('hidden');
+                footer.classList.remove('hidden');
+                statusBarEl.classList.remove('hidden');
+                isNearBottom = true;
+                return;
+            } else {
+                isNearBottom = false;
+            }
+
+            if (currentScroll > lastScrollTop && currentScroll > 50) {
+                header.classList.add('hidden');
+                footer.classList.add('hidden');
+                statusBarEl.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+                footer.classList.remove('hidden');
+                statusBarEl.classList.remove('hidden');
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+
+
+
+        // Talk section fade-in
+        talkSection.style.opacity = '0';
+        talkSection.style.transform = 'translateY(20px)';
+        talkSection.style.transition = 'all 0.5s ease';
+
+        window.addEventListener('scroll', function() {
+            const talkSectionRect = talkSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (talkSectionRect.top < windowHeight * 0.8) {
+                talkSection.style.opacity = '1';
+                talkSection.style.transform = 'translateY(0)';
+            }
+        });
+    });
+</script>
+</body>
+</html>
