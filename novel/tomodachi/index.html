@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tomodachi | Silent Orchard</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-strong: #162133;
+      --line: rgba(224, 232, 240, 0.12);
+      --text: #edf2f7;
+      --muted: rgba(237, 242, 247, 0.72);
+      --accent: #d6c4a1;
+      --reader-size: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", "Noto Serif SC", sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    h1, h2 { margin: 0; font-family: "Cormorant Garamond", "Noto Serif SC", serif; font-weight: 500; }
+
+    .topbar { border-bottom: 1px solid var(--line); padding: 18px 0; background: rgba(11,16,32,0.84); }
+    .topbar-inner { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .brand { font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; }
+    .nav { display:flex; gap:20px; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); }
+    .page { max-width:1200px; margin:0 auto; padding:24px 20px 80px; }
+    .header { padding:10px 0 22px; }
+    .eyebrow { display:inline-block; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+    h1 { font-size: clamp(2.6rem, 5vw, 5rem); line-height:0.96; margin-bottom:8px; }
+    .meta { color: var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform: uppercase; }
+    .toolbar { display:flex; justify-content:flex-end; align-items:center; gap:12px; margin:12px 0 24px; color:var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .toolbar input[type="range"] { width:170px; accent-color: var(--accent); }
+    .toolbar button { background: rgba(255,255,255,0.03); color:var(--text); border:1px solid var(--line); border-radius:999px; padding:8px 12px; cursor:pointer; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .chapter-wrap { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:18px; margin-bottom:28px; }
+    .chapter { border:1px solid var(--line); border-radius:18px; overflow:hidden; background: rgba(17,24,39,0.9); }
+    .chapter h2 { font-size: clamp(1.9rem, 3vw, 2.8rem); padding:18px 18px 10px; }
+    .lang-grid { display:flex; gap:18px; padding:0 18px 18px; }
+    .panel { border:1px solid var(--line); border-radius:16px; background: rgba(255,255,255,0.02); overflow:hidden; min-width:0; }
+    .panel-head { display:flex; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .panel-body { padding:18px 18px 12px; font-size:var(--reader-size); line-height:2; }
+    .panel-body p { margin:0 0 1.1em; }
+    .english-panel { flex:7; }
+    .chinese-panel { flex:3; }
+    .bottom-nav { position: sticky; bottom:0; z-index:20; display:flex; gap:10px; overflow-x:auto; background: rgba(11,16,32,0.94); border-top:1px solid var(--line); padding:12px 20px; backdrop-filter:blur(12px); }
+    .bottom-nav a { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; border:1px solid var(--line); background: rgba(255,255,255,0.02); color: var(--text); border-radius:999px; padding:9px 14px; white-space:nowrap; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .bottom-nav a.is-current { border-color: rgba(214,196,161,0.5); background: rgba(214,196,161,0.08); }
+    .bottom-nav .chapter-label { max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+    @media (max-width:900px){ .lang-grid{ flex-direction:column; } .chapter-wrap{ grid-template-columns:1fr; } }
+    @media (max-width:680px){ .nav{ display:none; } .toolbar{ justify-content:space-between; flex-wrap:wrap; } .bottom-nav a .chapter-label{ display:none; } .bottom-nav a{ padding:9px 12px; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Silent Orchard</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../index.html">Archive</a>
+        <a href="index.html">Reader</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <header class="header">
+      <div class="eyebrow">Reader</div>
+      <h1>tomodachi</h1>
+      <div class="meta">2 chapters • archive</div>
+    </header>
+
+    <div class="toolbar">
+      <label for="fontSize">Text size</label>
+      <input id="fontSize" type="range" min="14" max="24" step="1" value="18" />
+      <button id="resetSize" type="button">Reset</button>
+    </div>
+
+    <section class="chapter-wrap">
+      <article class="chapter" id="chapter-1">
+        <h2>Chapter 1</h2>
+        <div class="lang-grid">
+          <div class="panel english-panel">
+            <div class="panel-head"><span>English</span><span>1</span></div>
+            <div class="panel-body">
+              <p>No one spoke at the morning doorway; only the wind passed through the corridor, carrying a hint of moisture and a strand of pale sunlight. She stood at the door, like someone who had not yet decided whether to knock.</p>
+              <p>They once believed familiarity could solve everything, until one accidental pause made both of them realize that true presence often comes from understanding that follows silence.</p>
+            </div>
+          </div>
+          <div class="panel chinese-panel">
+            <div class="panel-head"><span>中文</span><span>1</span></div>
+            <div class="panel-body">
+              <p>清晨的门口没有人说话，只有风从走廊里绕过，带着一点湿润与微弱的晨光。她站在门边，像一位还没有决定是否需要去敲门的人。</p>
+              <p>他们曾经以为熟悉能解决一切，直到某个不经意的停顿，让彼此都意识到：真正的在场，往往来自沉默之后的理解。</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter" id="chapter-2">
+        <h2>Chapter 2</h2>
+        <div class="lang-grid">
+          <div class="panel english-panel">
+            <div class="panel-head"><span>English</span><span>2</span></div>
+            <div class="panel-body">
+              <p>The music drifted in from the window like an old letter without words. Her fingers hovered over the keys, not moving for a long time, as if she wanted to leave the words suspended in the air a little longer.</p>
+              <p>A certain gentleness does not appear in a grand blaze, but gradually takes shape through trial and error; it glows like a light turning on, then quietly settles back into darkness when unseen.</p>
+            </div>
+          </div>
+          <div class="panel chinese-panel">
+            <div class="panel-head"><span>中文</span><span>2</span></div>
+            <div class="panel-body">
+              <p>音乐从窗边淡淡流进来，像一段没有歌词的旧信。她的手指停在键盘上，久久没有落下，仿佛想把话语留在空气里，再等一等。</p>
+              <p>某种温柔不是轰然出现，而是在试探中逐渐成形；它像灯光一点点亮起，又在不被看见时悄悄落回去。</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Chapter navigation">
+    <a class="is-current" href="#chapter-1"><span class="chapter-label">tomodachi</span> · Chapter 1</a>
+    <a href="#chapter-2"><span class="chapter-label">tomodachi</span> · Chapter 2</a>
+    <a href="../sexual-performance-assessment/index.html"><span class="chapter-label">Sexual performance assessment</span></a>
+    <a href="../school/index.html"><span class="chapter-label">school</span></a>
+  </nav>
+
+  <script>
+    const sizeInput = document.getElementById('fontSize');
+    const resetBtn = document.getElementById('resetSize');
+    const root = document.documentElement;
+    sizeInput.addEventListener('input', (event) => root.style.setProperty('--reader-size', event.target.value + 'px'));
+    resetBtn.addEventListener('click', () => { root.style.setProperty('--reader-size', '18px'); sizeInput.value = '18'; });
+  </script>
+</body>
+</html>

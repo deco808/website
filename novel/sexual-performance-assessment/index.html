@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sexual performance assessment | Silent Orchard</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-strong: #162133;
+      --line: rgba(224, 232, 240, 0.12);
+      --text: #edf2f7;
+      --muted: rgba(237, 242, 247, 0.72);
+      --accent: #d6c4a1;
+      --reader-size: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", "Noto Serif SC", sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { margin: 0; font-family: "Cormorant Garamond", "Noto Serif SC", serif; font-weight: 500; }
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+      background: rgba(11, 16, 32, 0.84);
+    }
+    .topbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .nav {
+      display: flex;
+      gap: 20px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+    .header {
+      padding: 10px 0 22px;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 5rem);
+      line-height: 0.96;
+      margin-bottom: 8px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0 24px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .toolbar input[type="range"] {
+      width: 170px;
+      accent-color: var(--accent);
+    }
+    .toolbar button {
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .chapter-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .chapter {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(17, 24, 39, 0.9);
+    }
+    .chapter h2 {
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      padding: 18px 18px 10px;
+    }
+    .lang-grid {
+      display: flex;
+      gap: 18px;
+      padding: 0 18px 18px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+      min-width: 0;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .panel-body {
+      padding: 18px 18px 12px;
+      font-size: var(--reader-size);
+      line-height: 2;
+    }
+    .english-panel { flex: 7; }
+    .chinese-panel { flex: 3; }
+    .panel-body p {
+      margin: 0 0 1.1em;
+    }
+
+    .bottom-nav {
+      position: sticky;
+      bottom: 0;
+      z-index: 20;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      background: rgba(11, 16, 32, 0.94);
+      border-top: 1px solid var(--line);
+      padding: 12px 20px;
+      backdrop-filter: blur(12px);
+    }
+    .bottom-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 9px 14px;
+      white-space: nowrap;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .bottom-nav a.is-current {
+      border-color: rgba(214, 196, 161, 0.5);
+      background: rgba(214, 196, 161, 0.08);
+    }
+    .bottom-nav .chapter-label {
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media (max-width: 900px) {
+      .lang-grid {
+        flex-direction: column;
+      }
+      .chapter-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 680px) {
+      .nav { display: none; }
+      .toolbar {
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .bottom-nav a .chapter-label {
+        display: none;
+      }
+      .bottom-nav a {
+        padding: 9px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Silent Orchard</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../index.html">Archive</a>
+        <a href="index.html">Reader</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <header class="header">
+      <div class="eyebrow">Reader</div>
+      <h1>Sexual performance assessment</h1>
+      <div class="meta">2 chapters • archive</div>
+    </header>
+
+    <div class="toolbar">
+      <label for="fontSize">Text size</label>
+      <input id="fontSize" type="range" min="14" max="24" step="1" value="18" />
+      <button id="resetSize" type="button">Reset</button>
+    </div>
+
+    <section class="chapter-wrap">
+      <article class="chapter" id="chapter-1">
+        <h2>Chapter 1</h2>
+        <div class="lang-grid">
+          <div class="panel english-panel">
+            <div class="panel-head"><span>English</span><span>1</span></div>
+            <div class="panel-body">
+              <p>When the light fell from the ceiling, every inch of the room seemed to be interrogated all over again. She stood before the mirror, lowering her gaze to her own shadow, as if awaiting a verdict that had never truly been completed.</p>
+              <p>The assessment began with rules, not emotion. The inspecting gaze was more precise than any language, like an invisible hand tapping on the skin, trying to pull out the unnatural from each subtle detail.</p>
+              <p>She did not rush to explain, nor did she rush to defend herself. Because the answer had already been written into the glass and the air at that very moment, waiting only for someone to notice it.</p>
+            </div>
+          </div>
+          <div class="panel chinese-panel">
+            <div class="panel-head"><span>中文</span><span>1</span></div>
+            <div class="panel-body">
+              <p>灯光从天花板落下时，房间的每一寸空气都像被重新审讯了一遍。她站在镜子前，低头看着自己的影子，仿佛正在等待一项从未真正完成的结论。</p>
+              <p>评估开始于规矩，而不是情绪。审视的目光比任何语言都更准确，像一只无形的手在皮肤上敲打，试图从每一处细节里挑出非自然的面孔。</p>
+              <p>她不急着解释，也不急着辩白。因为答案早就在那一瞬间被写进了玻璃和空气里，只等被人看见。</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="chapter" id="chapter-2">
+        <h2>Chapter 2</h2>
+        <div class="lang-grid">
+          <div class="panel english-panel">
+            <div class="panel-head"><span>English</span><span>2</span></div>
+            <div class="panel-body">
+              <p>Silence gradually took shape in the room, like a stone being polished into finer contours. At last, she raised her head, her gaze no longer evasive, but carrying the clarity that follows exhaustion.</p>
+              <p>When that boundary was gently opened, the real divide was not who stepped back first, but who finally admitted that being seen did not necessarily mean being understood.</p>
+              <p>The story had not truly ended; it had simply moved breathing from the surface to a deeper place, like dusk falling across wood grain, making the outlines more distinct.</p>
+            </div>
+          </div>
+          <div class="panel chinese-panel">
+            <div class="panel-head"><span>中文</span><span>2</span></div>
+            <div class="panel-body">
+              <p>沉默在房间里慢慢成形，像一块石头被磨成更多的轮廓。她终于抬起头，眼神不再躲闪，反而带着一点疲惫后的清醒。</p>
+              <p>当那条边界被轻轻划开时，真正的分界并不在于谁先退一步，而在于谁终于承认：被看见，未必意味着被理解。</p>
+              <p>故事并没有真的结束，它只是把呼吸从表层移到了更深处，像暮色落在木纹上，轮廓愈发清晰。</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Chapter navigation">
+    <a class="is-current" href="#chapter-1"><span class="chapter-label">Sexual performance assessment</span> · Chapter 1</a>
+    <a href="#chapter-2"><span class="chapter-label">Sexual performance assessment</span> · Chapter 2</a>
+    <a href="../tomodachi/index.html"><span class="chapter-label">tomodachi</span></a>
+    <a href="../school/index.html"><span class="chapter-label">school</span></a>
+  </nav>
+
+  <script>
+    const sizeInput = document.getElementById('fontSize');
+    const resetBtn = document.getElementById('resetSize');
+    const root = document.documentElement;
+
+    sizeInput.addEventListener('input', (event) => {
+      root.style.setProperty('--reader-size', event.target.value + 'px');
+    });
+
+    resetBtn.addEventListener('click', () => {
+      root.style.setProperty('--reader-size', '18px');
+      sizeInput.value = '18';
+    });
+  </script>
+</body>
+</html>

@@ -499,7 +499,7 @@
             
             const img = document.createElement('img');
             img.dataset.src = url;
-            img.alt = `Page ${pageNumbers[index]}`;
+            img.alt = `Page ${index + 1}`;
             img.className = 'comic-image';
             img.loading = "lazy";
 
@@ -545,7 +545,7 @@
             
             const pageNum = document.createElement('div');
             pageNum.className = 'page-number';
-            pageNum.textContent = `p ${pageNumbers[index]}`;
+            pageNum.textContent = `Page ${index + 1}`;
             pageNum.style.textAlign = 'center';
             pageNum.style.margin = '5px 0 15px';
             pageNum.style.color = '#6c757d';

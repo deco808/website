@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive | Silent Orchard</title>
+  <meta name="description" content="Editorial archive catalog without reader or story content." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-strong: #162133;
+      --line: rgba(224, 232, 240, 0.12);
+      --text: #edf2f7;
+      --muted: rgba(237, 242, 247, 0.72);
+      --soft: rgba(237, 242, 247, 0.08);
+      --accent: #d6c4a1;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", "Noto Serif SC", sans-serif;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { margin: 0; font-family: "Cormorant Garamond", "Noto Serif SC", serif; font-weight: 500; letter-spacing: -0.02em; }
+    p { margin: 0; }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+      margin-bottom: 28px;
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .brand {
+      font-size: 0.8rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .nav {
+      display: flex;
+      gap: 26px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav a { position: relative; }
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 1px;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+    .nav a:hover::after { transform: scaleX(1); }
+
+    .hero {
+      padding: 18px 0 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6vw, 7rem);
+      line-height: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .catalog {
+      padding-top: 28px;
+    }
+
+    .list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .item {
+      border-top: 1px solid var(--line);
+      padding: 18px 0 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(180px, 0.5fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .item:first-child { border-top: 1px solid var(--line); }
+
+    .book-head {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .item-title {
+      font-size: clamp(1.7rem, 2vw, 2.5rem);
+      line-height: 1.05;
+      text-transform: none;
+      letter-spacing: -0.03em;
+    }
+
+    .item-title a {
+      color: var(--text);
+      transition: color 0.2s ease;
+    }
+
+    .item-title a:hover {
+      color: var(--accent);
+    }
+
+    .chapter-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chapter-row {
+      display: block;
+      width: fit-content;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .chapter-row:hover {
+      color: var(--text);
+      border-color: rgba(214, 196, 161, 0.5);
+      background: rgba(214, 196, 161, 0.08);
+    }
+
+    .meta {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: var(--panel-strong);
+    }
+
+    .status.complete { }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .meta {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Silent Orchard</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#archive">Archive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" id="archive">
+      <div class="eyebrow">Archive</div>
+      <h1>Novels</h1>
+      <div class="subtitle">目录</div>
+    </section>
+
+    <section class="catalog" aria-label="Novel catalog">
+      <div class="list">
+        <article class="item" id="assessmen_chapter1">
+          <div class="book-head">
+            <h2 class="item-title"><a href="sexual-performance-assessment/index.html#chapter-1">Sexual performance assessment</a></h2>
+            <div class="chapter-links">
+              <a class="chapter-row" href="sexual-performance-assessment/index.html#chapter-1">Chapter1</a>
+              <a class="chapter-row" id="assessmen_chapter2" href="sexual-performance-assessment/index.html#chapter-2">Chapter2</a>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="status complete">Complete</span>
+            <span>2 chapters</span>
+          </div>
+        </article>
+
+        <article class="item" id="tomodachi_chapter1">
+          <div class="book-head">
+            <h2 class="item-title"><a href="tomodachi/index.html#chapter-1">tomodachi</a></h2>
+            <div class="chapter-links">
+              <a class="chapter-row" href="tomodachi/index.html#chapter-1">Chapter1</a>
+              <a class="chapter-row" id="tomodachi_chapter2" href="tomodachi/index.html#chapter-2">Chapter2</a>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="status">Ongoing</span>
+            <span>2 chapters</span>
+          </div>
+        </article>
+
+        <article class="item" id="school_chapter1">
+          <div class="book-head">
+            <h2 class="item-title"><a href="school/index.html#chapter-1">school</a></h2>
+            <div class="chapter-links">
+              <a class="chapter-row" href="school/index.html#chapter-1">Chapter1</a>
+              <a class="chapter-row" id="school_chapter2" href="school/index.html#chapter-2">Chapter2</a>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="status">Ongoing</span>
+            <span>2 chapters</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
