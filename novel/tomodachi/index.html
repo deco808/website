@@ -40,25 +40,43 @@
     .toolbar { display:flex; justify-content:flex-end; align-items:center; gap:12px; margin:12px 0 24px; color:var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
     .toolbar input[type="range"] { width:170px; accent-color: var(--accent); }
     .toolbar button { background: rgba(255,255,255,0.03); color:var(--text); border:1px solid var(--line); border-radius:999px; padding:8px 12px; cursor:pointer; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
-    .chapter-wrap { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:18px; margin-bottom:28px; }
-    .chapter { border:1px solid var(--line); border-radius:18px; overflow:hidden; background: rgba(17,24,39,0.9); }
-    .chapter h2 { font-size: clamp(1.9rem, 3vw, 2.8rem); padding:18px 18px 10px; }
-    .lang-grid { display:flex; gap:18px; padding:0 18px 18px; }
-    .panel { border:1px solid var(--line); border-radius:16px; background: rgba(255,255,255,0.02); overflow:hidden; min-width:0; }
-    .panel-head { display:flex; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
-    .panel-body { padding:18px 18px 12px; font-size:var(--reader-size); line-height:2; }
-    .panel-body p { margin:0 0 1.1em; }
-    .english-panel { flex:7; }
-    .chinese-panel { flex:3; }
+    .chapter-wrap { display:grid; grid-template-columns: 1fr; gap:28px; margin-bottom:28px; }
+    .chapter { border:none; border-radius:0; overflow:visible; background:transparent; padding:0; margin:0; }
+    .chapter h2 { font-size: clamp(1.9rem, 3vw, 2.8rem); padding:0 0 12px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:16px; }
+
+    .lang-grid {
+      display: flex;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .panel {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      overflow: visible;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .panel-head { display:flex; justify-content:space-between; gap:12px; padding:0 0 10px; border-bottom:none; color:var(--muted); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
+
+    .text-content {
+      font-size: var(--reader-size);
+      line-height: 2;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .chapter-info { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; margin:0 0 16px; color:var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .chapter-info a { color:var(--text); border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:2px; }
     .bottom-nav { position: sticky; bottom:0; z-index:20; display:flex; gap:10px; overflow-x:auto; background: rgba(11,16,32,0.94); border-top:1px solid var(--line); padding:12px 20px; backdrop-filter:blur(12px); }
     .bottom-nav a { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; border:1px solid var(--line); background: rgba(255,255,255,0.02); color: var(--text); border-radius:999px; padding:9px 14px; white-space:nowrap; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
     .bottom-nav a.is-current { border-color: rgba(214,196,161,0.5); background: rgba(214,196,161,0.08); }
-    .bottom-nav .chapter-label { max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
     @media (max-width:900px){ .lang-grid{ flex-direction:column; } .chapter-wrap{ grid-template-columns:1fr; } }
     @media (max-width:680px){ .nav{ display:none; } .toolbar{ justify-content:space-between; flex-wrap:wrap; } .bottom-nav a .chapter-label{ display:none; } .bottom-nav a{ padding:9px 12px; } }
   </style>
 </head>
-<body>
+<body id="top">
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">Silent Orchard</div>
@@ -82,22 +100,643 @@
       <button id="resetSize" type="button">Reset</button>
     </div>
 
+    <div class="chapter-info" aria-label="Current chapter navigation">
+      <span>Current:</span>
+      <a href="#chapter-1">Chapter 1</a>
+      <span>•</span>
+      <a href="#chapter-2">Chapter 2</a>
+    </div>
+
     <section class="chapter-wrap">
       <article class="chapter" id="chapter-1">
         <h2>Chapter 1</h2>
         <div class="lang-grid">
-          <div class="panel english-panel">
+          <div class="panel">
             <div class="panel-head"><span>English</span><span>1</span></div>
-            <div class="panel-body">
-              <p>No one spoke at the morning doorway; only the wind passed through the corridor, carrying a hint of moisture and a strand of pale sunlight. She stood at the door, like someone who had not yet decided whether to knock.</p>
-              <p>They once believed familiarity could solve everything, until one accidental pause made both of them realize that true presence often comes from understanding that follows silence.</p>
+            <div class="text-content">
+In a room resembling Tomodachi, a hand dragged over a small, blond-haired figure. He was a boy, slightly thinner than average, dressed in a well-fitting waistcoat and a bright yellow tie that perfectly matched his hair color.
+
+He seemed unaware of his current situation. Looking around, he found himself in a completely unfamiliar room. It appeared to be a bedroom, with a double bed, a wardrobe, a bedside table, and a bookshelf. However, there was no way to leave the room. The little man circled the room several times, unable to find any way out. Frustrated, he sat on the edge of the bed, his anxiety coalescing into a jumble of swirling black threads, solidifying in the speech bubble above his head.
+
+After an unknown amount of time, the large hand that had dragged the little man over returned. It clicked on the little man's dialogue box to check Tix's thoughts.
+
+Tix felt it was too boring to be alone, and he hoped to bring other people over to play with him.
+
+Then the large hand dragged over another small figure, a girl with black hair. She was taken to the center of the room, and to Tix's somewhat surprised look, the girl was thrown to the ground, nearly falling over.
+
+The girl didn't seem to know where she was either. She tilted her head and looked around the room like Tix did, before her gaze immediately fell on Tix, who was still sitting on the edge of the bed.
+
+Stared at with such a direct gaze, Tix suddenly tensed up.
+
+The girl found his reaction amusing and couldn't help but laugh, saying, "Hey, I don't know who you are, but you look so cute!"
+
+Faced with the sudden praise, Tix was so embarrassed that he stopped thinking for a moment. He didn't know how to respond, nor did he realize that his blushing and stiff appearance had been seen by the girl without reservation.
+
+The girl smiled even more broadly, but she still didn't forget to ask some basic questions: "My name is Deco. Do you know where this is? Do you know how we got here?"
+
+“My name is Tix…” Tix shook his head: “I don’t know either.”
+
+Deco then asked, "Do you know how to leave?"
+
+Tix's expression darkened further; he seemed ashamed of his ignorance: "I didn't know, I'm sorry..."
+
+However, Deco ignored Tix's embarrassment and walked around the room a few steps: "This place looks familiar. I might have dreamed about it before... If I ever have my own house, I might decorate it like this."
+
+When she walked to a spot near Tix, she suddenly stopped and said to him quite directly, "You know you're cute, right? The moment I saw you, I knew you were my type."
+
+"Wh...what?" Tix stammered.
+
+The girl stood a few steps in front of Tix, wearing denim shorts that barely covered her thighs, a white tank top, and a pale yellow shirt jacket. Tix had been keeping his head down to avoid eye contact, but as the girl approached, her shapely legs came into direct view.
+
+Tix's eyes involuntarily drifted towards the girl's crotch. The moment he saw her groin, he was shocked by his own perversion. Why was he looking at a stranger's crotch?
+
+However, the next second, the girl's face suddenly appeared in front of Tix. The girl bent down and brought her face close to Tix's face, asking with a smile, "Why aren't you saying anything? Why is your face so red? Are you shy? You are so cute, getting cuter and cuter. If I had a boyfriend, I hope he would be like you."
+
+Then, she moved even closer, and Tix could even smell the girl's faint fragrance. The girl's voice came from right next to Tix's ear: "Hehe, but I'd rather you be my boyfriend... Anyway, we have nothing to do right now, can you be my boyfriend? Darling...?"
+
+Boyfriend?! Deco's words exploded in Tix's mind like thunder.
+
+"I...I..." he stammered, "I don't have a girlfriend..."
+
+Tix immediately regretted it after saying it. Oh my god, that wasn't what he meant. His mind was a mess, and he didn't know what he wanted to say, but it certainly wasn't what he said now.
+
+What would Deco mean by that? Clearly, Deco would be overjoyed: "So you agree? Haha, that's wonderful! You're so adorable, you should really see just how adorable you are!"
+
+Before Deco could finish speaking, flowers and celebratory sound effects suddenly appeared from nowhere, seemingly celebrating their successful marriage.
+
+The large hand appeared again, this time not with a newcomer. It clicked on "deco" and gave her a gift.
+
+Curious, Tix looked up and saw a small plastic bottle that looked like a mineral water container. Deco was carefully reading the text on the bottle; it didn't seem to be mineral water at all. The more he read, the more interesting the expression on Deco's face became.
+
+"What is this?" Tix felt a vague sense of unease.
+
+"Do you want to know?" Deco looked at him with a smile.
+
+"I...is it better if I don't know?" Tix felt like crying.
+
+Do you know what couples should do?
+
+Deco moved closer to Tix. Instead of sitting on the bed next to him, she squatted down next to his knees, making her much lower than him. As she looked up to meet his gaze, she held up the bottle with both hands to show him: "This is lubricant, it's for sex."
+
+“I didn’t expect our relationship to develop so quickly, haha.” Deco put the bottle aside and said in a tone that was almost like talking to himself, “I’ve only known you for less than three minutes, and I only know your name. I never thought I would have sex with such a cute boy. My God, this really feels like a dream, haha.”
+
+Deco placed his hands on Tix's knees, gently pulling them apart, and said in a comforting tone, like he was talking to a puppy, "Okay, honey, now open your legs."
+
+"Ah...uh..." Tix made intermittent, trembling sounds. He probably wanted to refuse, but his legs still obediently opened under Deco's guidance.
+
+"Hehe, so obedient!" Deco praised, then squeezed her somewhat thin body between Tix's legs. Her hands, which were originally on Tix's knees, slid up with her movement, brushing against the hem of her trousers, until they met.
+
+Tix's body stiffened instantly. He felt a soft body pressed against his inner thigh, warm and faintly fragrant. And those soft, slender hands were gently resting on his sensitive areas, very close to them.
+
+Oh my god...
+
+If she applies a little more force, or moves it up a little more, she can feel that her penis has become slightly hard.
+
+Oh my god... Deco's hand was gently stroking his crotch, his fingertips occasionally brushing against the little thing inside his underwear. Oh my god, she touched it, didn't she? Not just Deco's hand, her head was also very close, her breath was on that sensitive spot, as if she would kiss him at any second... Oh my god, for the first time, Tix felt that his normally well-fitting trousers made him feel incredibly restricted.
+
+“I love your trousers, they’re so crisp and stylish, they make you look so abstinent, haha, that makes me want to devour you even more! This is it… let me open it up…” Deco unbuckled Tix’s belt and started unbuttoning Tix’s trousers.
+
+“Uh…” Tix responded mechanically.
+
+Deco's movements were swift and efficient. Before Tix could even figure out what was happening, his outer pants and underwear were pulled down, and his already erect penis was directly exposed to the slightly chilly air, right in front of Deco. This made Tix feel extremely ashamed, and he hurriedly tried to cover his penis with his hands.
+
+But Deco stopped him.
+
+“Emmm…” Deco looked at the penis, his mouth twitching slightly, seemingly dissatisfied: “It looks a bit small, doesn’t it? I’m not sure if this penis can satisfy me…”
+
+Deco gestured with her hand, indicating that the penis was only about half the length of her palm.
+
+"Ah, no!" Even Tix couldn't help but argue when his size was questioned: "I'm a normal size, a regular size, just like any other man... I'm just not fully erect yet, it will get bigger once it's erect..."
+
+"Really...?" Deco still seemed a little skeptical, but after a moment's hesitation, she immediately smiled again: "Then watch how I get him hard!"
+
+Before she could finish speaking, her hands, which had just been comparing sizes, directly grasped Tix's penis. Caught off guard, Tix immediately let out a lewd gasp, which he then forcefully suppressed in shame.
+
+Deco really liked Tix's reaction, and she smiled slyly: "I heard that oral sex makes men get hard faster..."
+
+She leaned close to Tix's penis, gently rubbing it with the side of her face, gazing at Tix with tender eyes.
+
+"Uh..." Deco's beautiful, erotic face was right in front of him. She was servicing her own penis. She loved her own penis. Oh my god, the visual shock of being so close made Tix almost unable to sit still. He wanted to cover his eyes and not look at the stimulating scene.
+
+"But before that!"
+
+Deco's voice suddenly came closer, and she leaned in and kissed Tix's cheek.
+
+Then, to Tix's shock, Deco, still not satisfied, wrapped his arms around Tix's shoulders, lifted himself up as high as he could, and kissed Tix's lips.
+
+Deco seemed incredibly eager, relentlessly demanding from Tix, occasionally letting out a soft nasal sound, as if unwilling to wait even a moment longer. Tix, gazing at Deco's face so close to his own, watched her explore intently with her eyes closed. Their breaths mingled, and the initially tense and stiff Tix, under the girl's persistent efforts, finally opened his mouth in response.
+
+After the kiss ended, Deco released Tix's arm and reluctantly slid back down onto his lower body. She wiped her mouth, her face full of satisfaction: "Before tasting your penis, I'd rather taste your mouth first... You're such a sweet guy, I like you more and more."
+
+“Wow, it seems to have gotten bigger than before.” Deco gently pinched the tip of Tix’s penis, as if playing with a toy. “You really like kissing, right? Just kissing has made you this hard… Hmm… I thought a man’s penis would have a strong smell, but it’s actually not that bad… Hmm, it tastes pretty good too, haha, it’s getting bigger and bigger, it’s making my mouth a little uncomfortable…”
+
+"Ah...no, this is going too far..." Tix held Deco's cheek, trying to get him to stop. "I...I can't take it anymore..."
+
+However, Deco wouldn't listen to him. She licked Tix's penis like she was licking a popsicle. Tix was flustered by her actions and could only cover his face, burying his head in the sand like an ostrich facing danger to escape reality. This shy reaction was like a side dish to Deco, which she found very amusing and satisfying.
+
+And strangely enough, Deco was certain this was the first time she had ever touched Tix's penis, yet when she gave him oral sex, the sensation of it in her mouth was strangely familiar, or rather, perfectly suited, as if she had sucked on it countless times before. Her tongue instinctively knew which spots to lick to elicit the most lewd sounds from Tix, her throat instinctively knew when to suck, she even knew to keep her teeth tucked in, and she knew her hands should rub the exposed base of his penis and scrotum.
+
+The moment the penis entered her mouth, her body seemed to have muscle memory, knowing exactly what to do without any conscious thought.
+
+Wow... Deco thought to himself, they were so compatible physically, maybe he and Tix were a match made in heaven. The psychological satisfaction that seeing Tix feel good gave him was even more exciting than receiving oral sex himself.
+
+The taste of prostatic fluid spread in his mouth, and Deco, who had been acting on instinct since the beginning, suddenly swallowed the penis deeply into his throat for some reason.
+
+The strong suction and the tight pressure on his throat stimulated Tix's most sensitive tip of his penis, causing the already extremely excited Tix to scream and almost ejaculate on the spot. After he finally calmed down from the urge to ejaculate, he noticed that Deco was coughing painfully beside him. She seemed to have choked on his penis, and her eyes were red and she had shed a lot of tears.
+
+"Are you alright!" Worried, Tix completely ignored the fact that his penis was still erect and hurriedly squatted down next to Deco, gently patting her back to help relieve her pain.
+
+"What's going on? I thought deep throat was easy!" Deco wiped away his tears. "Your penis has gotten so big! It's longer than my hand, and so thick!"
+
+"I'm sorry..." Tix looked like he was about to cry, "I shouldn't have grown up like this..."
+
+Deco was still annoyed by her blunder, but seeing Tix's unnecessary worry, she laughed: "What's wrong? What man apologizes for having a big penis! My service isn't over yet, go back to bed and sit down!"
+
+Tix obediently sat down, his legs awkwardly pressed together, but his penis remained shamelessly erect and exposed. His clothes were all neatly arranged, except for his pants, which were undone. This state of being completely safe except for his penis made him feel even more ashamed than if he were naked.
+
+"Hmm..." Deco didn't continue oral sex. She stood in front of Tix, arms crossed, without looking down, but with her eyelids slightly lowered, scrutinizing Tix's penis as if judging him.
+
+Deco was a tall girl. Although they had never stood side-by-side to compare heights, Tix felt she was about his height, maybe even a little taller. Being coldly scrutinized by such a assertive girl was incredibly shameful, yet it also stirred a secret excitement within Tix. A strange, tingling sensation welled up inside him; this mental stimulation was even more exhilarating than receiving oral sex from Deco. He was worried, yet anxiously awaited Deco's judgment.
+
+“From this perspective, it’s not that big of a deal…” Deco said, “How could I have choked on it? It must be because I lack experience and need more practice.”
+
+"Huh?! Wait a minute." Realizing that Deco wanted to continue, Tix hurriedly explained.
+
+"What's wrong?"
+
+"Um, if you continue, I might ejaculate..." Tix screamed inwardly at the thought of saying such a shameful thing.
+
+“Oh~~” Deco raised an eyebrow, looking knowing. “Ejaculation, you want your first ejaculation to be inside a girl’s body, or rather, inside her vagina, right? You virgins have a strange obsession with your first time… But I’ll grant your wish. Move a little further into the bed, give me some room.”
+
+"Uh..." Tix's face turned bright red when his secret was exposed, but he still obediently listened. He took off his pants, lay stiffly on the bed, covered his face with his hands, and peeked at Deco's actions through his fingers.
+
+　　
+
+Deco straddled Tix's hips, noticing that Tix hadn't taken off his white shirt and black vest, and his yellow tie was still intact. She tilted her head slightly, offering no objection, and simply slipped her hand inside Tix's shirt, tracing its way over his sensitive groin and lower abdomen…
+
+She felt Tix's body tremble because of her movements, and for some reason, she had a feeling of "I knew it, Tix is indeed ticklish." This feeling of being right made Deco feel great, and she continued to move upwards to his chest and nipples, but Deco stopped.
+
+The tight denim shorts had little elasticity, and the deco style, with its wide-legged kneeling pose, made it even more difficult to take off the shorts.
+
+Tix saw the girl clutching her unzipped jeans. The sexy girl sitting on him was bending over, sticking out her buttocks, and swaying her hips from side to side, trying to pull them off smoothly. He saw her shorts and underwear come off together. The girl's vagina was already wet; the lubricant she had prepared for sex was so plentiful that it soaked her entire underwear, creating a lascivious trail of saliva. Even after her underwear was off, the clear fluid continued to trickle down her inner thighs, constantly demonstrating just how wanton and thirsty this girl was.
+
+Or rather, because these fluids were secreted for Tix, they also demonstrated Deco's sexual interest in Tix. Tix figured that Deco was probably anticipating the insertion of his penis from oral sex, or even kissing.
+
+From the moment Deco lowered her body to take off her pants, her upper body wasn't far from Tix's. She also had her head down, observing from a similar angle to Tix, like a bystander witnessing how her vagina was lewdly secreting fluid. This caused her to exclaim, just like Tix, in a state of shock and disbelief: "Oh my god!", "Wow..."
+
+Deco exclaimed even more: "How did I get so wet? Oh my god, I look like a pervert or a prostitute!"
+
+“No! You’re amazing!” Tix corrected him. “I, I’m the pervert.” He pointed to his penis, lowering his voice, his words slurred with shame: “I… uh… it’s so hard, could you please comfort it a little?”
+
+"Oh?" Deco had been watching Tix the whole time. After the oral sex ended, Tix's penis didn't soften. Instead, it became even harder and bigger. It was as if all the blood in his body had been drawn to it. It was so hard that it was even a little red. You could vaguely see the pulsating blood vessels on the surface. Just looking at it made people's hearts race.
+
+Deco was proud of his attraction to Tix, and at the same time felt that Tix's blood was indeed concentrated in his penis. Shyly, he took the initiative to ask, which aroused Deco's playful side: "Soothe it? Sure, beg me."
+
+“…Please…” Tix said with difficulty.
+
+"That's not enough!" Deco maliciously rubbed the tip of Tix's penis against her vaginal opening, but refused to insert it.
+
+"Please, Deco..."
+
+"Mmm, the way you call my name is so cute, darling. I'll grant your wish then." Deco happily kissed Tix's cheek, looking at the little virgin with tears welling up in his eyes, flattered and overwhelmed.
+
+Deco casually tossed his pants aside, squeezed a lot of lubricant onto Tix's penis, supported Tix's lower abdomen with one hand, and guided Tix's penis with the other, aiming the tip at his vaginal opening before slowly lowering himself down...
+
+"Uh..." "Hmm..."
+
+Despite the double lubrication, the insertion process was still somewhat difficult. When the tip of the penis was fully inserted into the vagina, both people on the bed let out a satisfied sigh.
+
+“It’s a bit harder than I expected,” Deco muttered to himself. “But it’s okay, I can still go deeper… uh…”
+
+Before the penis was even halfway inserted, Deco stopped: "What's going on?"
+
+She felt something inside her vagina blocking the penis from entering, and if she ignored it and forced it in, she would feel a tearing pain.
+
+On the other side, Tix also felt something. He felt the tip of his penis being enveloped by a warm, moist, soft, and elastic wonderful place—the secret vagina of the beautiful girl on top of him. Deco's vagina was being penetrated by his penis at this moment. Tix's penis had never experienced such a comfortable feeling before...
+
+This made him even more eager to explore further, but that barrier restricted his movements. The tip of his penis touched something, and judging from the depth, it couldn't be the cervix. A seemingly impossible thought popped into Tix's mind: "Deco, you, you're still a virgin?!"
+
+“Of course I am.” Deco blinked. “Didn’t you know?”
+
+Tix was shocked: "My God, you're so proactive and open-minded. I thought you had a lot of sexual experience!"
+
+Deco sneered, "Sorry to disappoint you... I have a hymen, so I can't let you fuck me as much as you want."
+
+“No, how could that be?” Tix hesitated for a moment. “Um, could I take the initiative? I think it might be possible to change the perspective.”
+
+"Hmm... now I'm starting to doubt whether you're a virgin..."
+
+Despite saying that, Deco confidently handed over the reins of the sexual encounter to Tix, letting Tix hold her buttocks with his hands and direct her movements.
+
+"Could you stick your butt out a little higher? Yes, like this, stick it out a bit more. This will stretch your vagina and make it more straight, which will help me pass through your hymen more easily..."
+
+“Is it like this…” Deco obeyed Tix’s command, supporting himself on Tix’s hips with both hands, trying again and again to raise his buttocks higher. Although the penis was not thrusting in and out of the vagina, the change in position still caused the two sensitive organs to rub against each other, making Deco’s panting more erotic.
+
+"Can I go deeper?" Tix swayed his hips from time to time, trying to penetrate deeper, while asking Deco how he felt. Deco seemed to be biting his lower lip in pain and could only respond with nods or shakes of his head.
+
+Tix's idea worked. After a new attempt, his penis explored a completely new area and immediately advanced rapidly. It was wetter than before, seemingly where the lubricating fluid was secreted. For the first time, Tix's penis was completely enveloped by Deco's vagina, even the base of his penis was swallowed by the greedy vagina. He felt Deco constantly contracting her vaginal muscles, sucking on his penis as if it were being sucked, refusing to let go. An unprecedented pleasure washed over Tix like waves.
+
+Deco's buttocks were completely seated on Tix's penis, yet she couldn't relax. Tix's penis was far too large for a virgin like her; she was completely filled, as if she were nailed to Tix's body by a thick wooden stake. Besides panting, she felt she could do nothing. However, the uncontrollable contractions of her vagina squeezed the thick, foreign object, bringing her a pleasure she had never experienced before. She heard undisguised excitement and lewdness in her own sighs, shocked that such sounds, previously only heard in adult films, could actually come from her own mouth.
+
+"Can I move now?" Tix asked, both of them recovering from the initial stimulation of full penetration.
+
+Deco nodded, anticipating further action from Tix, who had brought him this unexpected surprise.
+
+　　
+
+　　
+
+The penis began to thrust inside her, bringing a completely new experience. The pressure of the thick penis on the vaginal walls was something Deco had never imagined before. Her tender, untouched vagina couldn't withstand such excessive stimulation. Deco felt like she was being pushed to the top on a roller coaster with each insertion, and then plummeting downwards with each withdrawal. Under Tix's powerful thrusting, she felt pleasure accumulating higher and higher, as if her lower body was about to lose control of its bladder. She felt nothing but more pleasure.
+
+Tix felt as if he naturally knew where Deco's sensitive spots were. After only a few thrusts, his male instincts led him to discover the spot that brought Deco the most pleasure. He noticed that every time he stimulated that spot, Deco couldn't help but gasp, and her vagina would tighten. So he began to focus his attack on that spot. It just so happened that the angle that was most comfortable for Tix was also that position, which made Tix marvel at how well his body and Deco's were in sync.
+
+Deco's beautiful body bounced against his, emitting pleasant moans from his movements. Even without asking, Tix could clearly feel that Deco was experiencing pleasure from him, and was completely captivated by that pleasure. The fact that his penis was bringing pleasure to Deco excited Tix even more. He lifted Deco's buttocks to allow himself more freedom of movement, and then began to thrust in and out with wide, sweeping strokes.
+
+"Ah...that feels so good...Tix, you're amazing..."
+
+In her excitement, Deco pulled open her white tank top, revealing her breasts. She took Tix's hand and placed it on her breasts: "Touch here too, it wants you here too."
+
+Deco's breasts were small; Tix could even feel her ribs through them, where there wasn't much fat to knead.
+
+"My breasts are a little small, aren't they? You can massage them a little longer, maybe that will make them bigger. And my nipples, can you massage my nipples? They're very sensitive there."
+
+Deco placed his hand over Tix's and kneaded his breasts with him. Tix even pinched Deco's nipples with his fingertips and rubbed them, as if playing with some small toy.
+
+Her sensitive nipples were also stimulated, and Deco felt that she was about to collapse into Tix's arms, but the thick penis inside her vagina left her nowhere to hide.
+
+"Ah...too fast...Oh my god, you've already reached my cervix..."
+
+Deco, who had been holding Tix's hand, clenched into a fist. Although he said it was too fast and too deep, Tix knew that Deco was about to climax, so he didn't stop and entered the final sprint stage, with another series of powerful thrusts that brought Deco to climax.
+
+Deco, who had just reached her climax, suddenly arched her back and screamed. Her vagina began to spasm and contract uncontrollably. A warm liquid hit the tip of Tix's penis. Under the repeated stimulation, Tix, who was already on the verge of climax, could not help but ejaculate, shooting his thick, white virgin semen deep into the deepest part of Deco's vagina.
+
+Deco's orgasm lasted a long time. Finally, she collapsed, too weak to pull the penis out of her vagina. She lay on Tix's arm, holding his chest, still in a daze.
+
+Tix stroked Deco's soft black hair. Although he could sense it from her expression, Tix still wanted to hear Deco's true thoughts: "Did I do a good job?"
+
+Hearing Tix's voice, Deco struggled to lift his head and meet Tix's gaze: "Of course, you did a fantastic job! You made me feel very comfortable."
+
+After saying that, she kissed Tix's lips again.
+
+Tix was also happy to be praised. He hugged Deco tightly and turned the light kiss he had just picked up into a long, lingering, and romantic deep kiss, trying to prolong the afterglow of their lovemaking.
+
+The two, experiencing sex for the first time, felt exhausted after only one orgasm and planned to lie down and fall asleep. However, the large hand didn't seem quite satisfied. He clicked on the deco icon, woke her up, and handed her a roll of toilet paper.
+
+"..."
+
+Deco frowned at the sight of toilet paper; she had absolutely no interest in it. However, the action of the large hand waking her up severed her physical connection with Tix. Tix's penis slipped out of her vagina, and without the obstruction of his penis, all the vaginal fluids and semen that had accumulated inside flowed out at once, running down her thighs and soaking the sheets.
+
+Deco felt a void in his heart after losing his penis. Looking back at the toilet paper, well, toilet paper could handle the fluids. Deco tore off a few pieces and began wiping his genitals.
+
+Besides giving Deco a gift, Da Shou also gave Tix some things, but those things were too small for Deco to see clearly.
+
+"Can I take a look?" Always full of curiosity, Deco pulled Tix's hand and found that it was some small square plastic packages.
+
+"Oh my god, it's a condom!" Deco exclaimed. "Why would he give us a condom at this time? You've already ejaculated inside me, look, it's everywhere!"
+
+“I don’t know either.” Tix was equally shocked: “He wouldn’t want us to continue, would he?”
+
+A rough count revealed that the man gave Tix seven condoms at once. If he used them all, Tix probably wouldn't be able to ejaculate anymore...
+
+Deco frowned and asked, "Hmm? Really... So you're going to use these condoms?"
+
+Tix thought for a moment: "Since he's already given it to us, it seems we should..."
+
+"No!" Tix was interrupted by Deco before she could finish speaking. Deco slapped the condoms away and pressed down on Tix again. "I don't want condoms! Why don't you keep ejaculating inside me? Let me get pregnant, okay? Let me have your child!"
+
+Tix was happy to continue the sex, and he gave Deco a smile before his now-erect penis was directly inserted again, and the two began a new round of sex.
+
+...
+
+"Hey, what's that sound?! May! What game are you playing on your dad's Switch?!"
+
+In the living room, on the sofa, a 13-year-old boy turned around in shock and saw a sexy middle-aged woman by the door. She had black hair and full breasts that looked like they had been thoroughly kneaded, enough to provide plenty of milk for the child.
+
+The game console in the boy's hand nearly fell to the ground. The video of two Mii having sex was still playing loudly in the game. A middle-aged man with blond hair followed the woman into the living room. He also noticed the game console in the boy's hand. However, this middle-aged man, who was already married and had children, blushed with shame when faced with the sex scene, and was shocked: "May, you're not even 18 yet. You can't play games like this."
+
+The two Mii's shouts in the game were deafening. The woman noticed the game's content: "My God! You're playing your parents' sex game?! How could you do such a thing..."
+
+"..."
+
+Ugh, this is so annoying. May turned her head away, starting to regret playing erotic games in a place like the living room. Next time, she should go somewhere more private.
+
+"In short, you can't play this game console anymore. Mom and Dad will put it away, and you can only play it after you turn 18, understand?"
+
+"I understand..." May replied perfunctorily.
+
+However, as he watched his parents discuss things and head to the basement together, he chuckled softly.
             </div>
           </div>
-          <div class="panel chinese-panel">
+          <div class="panel">
             <div class="panel-head"><span>中文</span><span>1</span></div>
-            <div class="panel-body">
-              <p>清晨的门口没有人说话，只有风从走廊里绕过，带着一点湿润与微弱的晨光。她站在门边，像一位还没有决定是否需要去敲门的人。</p>
-              <p>他们曾经以为熟悉能解决一切，直到某个不经意的停顿，让彼此都意识到：真正的在场，往往来自沉默之后的理解。</p>
+            <div class="text-content">
+　　在一个类似tomodachi的房间里，一只手拖过来一个黄色头发的小人。他是个男孩，身形在正常的范围内稍微有些瘦小，穿着一身得体的马甲正装，领带是跟他发色十分相配的亮黄色。
+
+　　他似乎并不知道自己当下的情况，环视了一下四周，发现自己来到了一个完全陌生的房间，这里看起来是一个卧室，有双人床，衣柜，床头柜，还有一个书架。然鹅，这个房间里根本就没有可以离开的门，小人在房间里转了几圈，并没有找到任何可以离开的方法，他沮丧地坐在床边，脑中的不安凝聚成一堆乱动的黑色线团，凝结在头上的气泡框里。。。
+
+　　不知过了多久，那只将小人拖动过来的大手又来了，他点击了小人的对话框，查看tix的心理。
+
+　　tix觉得一个人有些太无聊了， 他希望能带其他人过来跟他玩。
+
+　　于是那只大手拖过来了另外一个小人，那是一个黑色头发的女孩。她被带到房间的正中间，在tix有些惊讶的视线中，女孩被丢到地上，险些摔倒。
+
+　　女孩看起来也不知道这里是哪里，她歪着头，像是tix一样看了一遍房间的结构，之后视线立刻落到了依旧坐在床边的tix身上。
+
+　　被那样直白的眼神盯着，tix突然之间紧张了起来。
+
+　　女孩觉得他的反应很有趣，不禁笑了起来，说：“嘿，虽然我不知道你是谁，但你看起来好可爱啊！”
+
+　　面对突如其来的夸奖，tix尴尬到一瞬间停止了思考，他不知道应该如何回答，他也不知道，自己脸红并且浑身僵硬的样子毫无保留地进入了女孩的眼睛。
+
+　　女孩笑得更开心了，不过，她还是没有忘记询问一些基本情况：“我的名字是deco，你知道这里是哪里吗？知道我们是怎么过来的吗？”
+
+　　“我叫tix……”tix摇了摇头：“我也不知道。”
+
+　　deco接着问：“那你知道该怎么离开吗？”
+
+　　tix的表情更难看了，他似乎在为了自己的无知而羞愧：“我不知道，对不起……”
+
+　　然而，deco无视了tix的羞愧，她在房间里走了几步：“我觉得这里很眼熟，我可能在梦中梦到过这里……如果我以后有自己的房子的话，我可能会把房间装修成这个样子。”
+
+　　当她走到一个接近tix的位置时，她突然停下了，相当直接地对着tix说：“你知道你很可爱吗？看到你的第一眼，我就觉得你是我喜欢的类型。”
+
+　　“什……什么。”tix结巴起来。
+
+　　女孩就站在tix身前几步远的位置，她穿着一件短到大腿之上的牛仔短裤，一件白色背心和淡黄色的衬衣外套。tix一直都低着头避免跟女孩有眼神接触，可因为女孩的走近，她两条圆润的大腿直接闯入了tix的视线。
+
+　　tix的眼睛不受控制地向女孩的腿根看过去，看到女孩裆部的一瞬间，他立刻被自己的变态程度惊到了，他为什么要去看一个陌生女孩的裆部！
+
+　　然而下一秒，女孩的脸突兀地出现在了tix面前，女孩儿弯下了腰，将自己的脸凑到tix的脸附近，笑眯眯地询问：“你怎么不说话呢？你的脸为什么这么红？你害羞了吗？你真的好可爱啊，越来越可爱了，如果我有男朋友的话，希望他能是你这样的。”
+
+　　接着，她凑得更近了，tix甚至闻到了女孩身上淡淡的香味，女孩的声音就来自tix的耳边：“嘻嘻，不过，我更希望你能做我的男朋友……反正我们现在也无事可做，你可以做我的男朋友吗？亲爱的……？”
+
+　　男朋友？！deco的话像是雷声一样在tix的脑子里炸开。
+
+　　“我……我……”他哆哆嗦嗦地说：“我没有女朋友……”
+
+　　刚说完tix立刻就后悔了，天哪，他原本想表达的不是这个意思，他的头脑混乱，他也不知道自己想说什么，可肯定不是现在这句。
+
+　　这句话落到deco耳朵里会是什么意思呢？显而易见，deco非常开心：“这么说你同意了？哈哈，太棒了！亲爱的你实在是太可爱了，你真该看看自己到底有多可爱！”
+
+　　deco话音未落，突然有鲜花和庆祝音效不止从哪里冒了出来，似乎是在庆祝他们成功结为了情侣。
+
+　　那只大手又一次出现了，这次带来的不是新人，他点击了一下deco，送给了她一样礼物。
+
+　　好奇的tix抬头看了一眼，是一个看起来像是矿泉水的塑料小瓶子。deco正在仔细阅读瓶身上的文字，这似乎并不是矿泉水，越是阅读，deco脸上的表情就越是精彩。
+
+　　“这是什么？”tix心里隐隐有不安的想法。
+
+　　“你想知道吗？”deco笑眯眯地看着他。
+
+　　“我……是不是不知道比较好？”tix觉得自己要哭了。
+
+　　“你知道，情侣之间要做什么吗？”
+
+　　deco凑到tix身边，她并没有坐在tix身侧的床上，而是蹲在tix的膝盖旁边，这个姿势让她比tix低了好多，她一边抬起眼睛与tix对视，一边双手捧着那个瓶子向tix展示：“这是润滑剂哦，是性爱的润滑剂。”
+
+　　“没想到我们之间的关系发展有这么快，哈哈。”deco将瓶子放到一边，用一种类似自言自语的语气说道：“我跟你认识还不到三分钟，仅仅只是知道你的名字而已，没想到，我竟然能跟这么可爱的男孩子性爱，天哪，这真的像是做梦一样，哈哈。”
+
+　　deco的将双手搭在tix的膝盖上，向两侧微微用力，用一种安慰小狗的语气说：“好啦，亲爱的，现在把你的腿打开吧。”
+
+　　“啊……呃……”tix断断续续地发出颤抖的声音，他大概是想拒绝，可他的双腿还是在deco的引导下，顺从地打开了。
+
+　　“嘻嘻，真听话！”deco夸奖道，接着将她那有些瘦小地身体挤进了tix的双腿之间，原本放在tix膝盖上的双手随着她的移动一路上滑，擦过西裤的裤腿，直到交汇的地方。
+
+　　tix的身体立刻僵硬了，他感到一个软软的身体贴在自己的大腿内侧，暖暖的，还散发着淡淡的香气。还有那双柔软细长的手，就轻轻地搭在他的敏感部位，离他的敏感部位很近。
+
+　　天哪……
+
+　　如果她在用力一点，或者再往上移动一点点，就能感受到自己那跟东西已经有些稍微发硬了。
+
+　　天哪……deco的手在裤裆那里轻轻地抚摸着，指尖偶尔会擦到内裤里的小东西，天哪，她摸到了吧，不只是deco的手，她的头也离得很近，她的呼吸就打在那敏感的地方，似乎下一秒就会亲吻上来……天哪，tix头一次觉得原本合身的西裤让他倍感束缚。
+
+　　“我喜欢你的西裤，笔挺又帅气，衬得你非常地禁欲，哈哈，这让我更想要吃掉你了！就是这里吧……让我打开它……”deco拉开了tix的皮带，开始解tix的裤子。
+
+　　“呃……”tix机械地回应。
+
+　　deco的动作十分利落，tix还没搞清楚事情的发展时，他的外裤，以及内裤就被扒下来了，那根已经开始硬起的阴茎直接暴露在微微发冷的空气中，直接暴露在deco的面前，让tix非常羞耻，他急忙想要伸手挡住自己的阴茎。
+
+　　可是deco制止了他。
+
+　　“emmm……”deco看着那根阴茎，歪着嘴，似乎略有不满：“他看起来有点小，对吗？我不确定这根阴茎能不能让我感到满足……”
+
+　　deco拿手比划了一下，那根阴茎大概只有她的半个手掌那么长。
+
+　　“啊，不！”竟然被质疑了大小，即便是tix也忍不住争辩起来：“我是普通大小，常规尺寸，跟其他男人都是一样的……我只是还没有完全硬起来而已，硬起来之后，他会变大的……”
+
+　　“真的吗……？”deco看起来还是有些不相信，不过她只是迟疑了一下，立刻又展开了笑颜：“那就看我怎么让他硬起来吧！”
+
+　　话音未落，她那双刚刚还在比较大小的手就直接握住了tix的阴茎，毫无准备的tix立刻发出一声淫荡的惊呼，接着又被羞耻的他强压了下去。
+
+　　deco很喜欢tix的反应，她狡黠地笑起来：“听说，口交会让男人硬的更快……”
+
+　　她凑近tix的阴茎，用侧脸轻轻地摩擦它，目光盈盈地看着tix。
+
+　　“呃……”deco漂亮色情的脸就在眼前，她正在服务自己的阴茎，她喜欢自己的阴茎，天哪，近距离接受这样的视觉冲击让tix快要坐不住了，他想要捂住自己的眼睛，不去看那刺激的画面。
+
+　　“但是，在那之前！”
+
+　　deco的声音突然离得更近了，她突然凑上了，亲吻了一下tix的脸颊。
+
+　　接着，在tix的震惊中，犹嫌不足的deco直接环抱住了他的肩膀，尽力抬高身体，吻上了tix的嘴唇。
+
+　　deco似乎非常饥渴，她不停地像tix索求着，不时发出一两声细微的鼻音，似乎一刻也不愿意等待。而tix，他着近在咫尺的deco的脸，女孩儿闭着眼睛，认真又仔细地探索，他们两个人呼吸交汇，原本紧张又僵硬的tix，在女孩的努力之下，最终也顺从的张开了自己的嘴巴。
+
+　　亲吻结束，deco松开tix的胳膊，颇为不舍地滑落回tix的下半身。她擦擦自己的嘴角，脸上全是满足：“在品尝你的阴茎之前，我更想先品尝你的嘴巴……你可真是个甜美的家伙，我越来越喜欢你了。”
+
+　　“哇，他好像变得比刚刚大了。”deco轻轻捏了一下tix的阴茎顶端，好像在玩一个玩具：“你很喜欢接吻对吗？只是接吻就让你硬了这么多……嗯……我原以为男人的阴茎会有很大味道呢，但其实也还好……唔，尝起来也不错，哈，哈，他越来越大了，撑得我的嘴有些不舒服……”
+
+　　“啊……不，有些太过头了……”tix扶着deco的脸颊，想让deco停下来：“我，我快受不了了……”
+
+　　然而，deco又怎么会听他的话呢，她像是舔一根棒冰一样舔舐着tix的阴茎。tix因为她的行动而手足无措，只能捂着自己的脸，像是遇到危险的鸵鸟将头埋进沙子里一样逃避现实，这样羞涩的反应像是佐餐的配菜一样让deco感到非常有趣，充满了满足感。
+
+　　而且说来有些奇怪，deco确定自己这是第一次触碰tix的阴茎，可为他口交时，那根阴茎在口腔里的触感却异常地熟悉，或者说契合，就好像曾经吮吸过它无数次一样。她的舌头天然的知道舔舐哪个位置可以让tix发出最淫荡的声音，她的喉咙天然的知道在哪个时刻应该吮吸，她的还知道应该收着自己的牙齿，还知道双手应该揉搓裸露在外的阴茎根部和阴囊。
+
+　　那根阴茎刚刚插入嘴里，她的身体就好像是有肌肉记忆一样，完全不经过大脑思考就知道怎么行动。
+
+　　哇……deco在心里悄悄地感叹，生理上这么契合，说不定自己跟tix是天生一对呢，看到tix舒服时带给她心理上的满足简直要比自己被口交还要令人兴奋。
+
+　　前列腺液的味道在嘴里弥散开，从刚刚起就在跟着本能行动的deco不知道怎么想的，突然深深地把阴茎吞入了喉咙。
+
+　　强烈的吸力和紧致喉咙的挤压，刺激着tix最敏感的阴茎前端，让本就兴奋异常地tix直接大叫起来，险些当场射精。等他好不容易缓过了那股射精的冲动，才注意到deco在一边痛苦地咳嗽，她好像被自己的阴茎呛到了，两只眼睛都红红的，还流了不少眼泪。
+
+　　“你没事吧！”担心的tix完全不顾自己的阴茎还硬着，急忙蹲到deco身边，轻轻拍她的后背帮她缓解痛苦。
+
+　　“什么情况，我以为深喉很简单呢！”deco擦擦眼泪：“你这根阴茎也变得太大了吧！比我的手掌都长的，还这么粗！”
+
+　　“对不起……”tix一副快要哭出来的表情：“我不应该长这么大……”
+
+　　deco本来还在为自己的失态而烦躁，可看到tix没有必要的过度担心之后，她笑了起来：“干嘛呀，哪里会有男人因为自己的阴茎太大而道歉的！我的服务还没结束呢，快回床上坐好！”
+
+　　tix乖巧地听话坐好，两条腿别扭地加紧，可阴茎却依旧恬不知耻地坚挺着，露在外边，他全身的衣服都很板正，只有裤子被解开了而已，这种全身都很安全却只有阴茎暴露的状态，让他感觉比脱光了都要感到更加羞耻。
+
+　　“嗯……”deco没有继续口交，她站在tix身前，环抱着双臂，没有低头，只是微微垂下眼皮，审判似的审视着tix的阴茎。
+
+　　deco是个高个子的女孩，虽然他们并没有站在一起比过身高，但tix觉得，她应该跟自己差不多高，说不定比自己还要高那么一点点，被这样一个强势的女孩儿冷漠地审视阴茎，虽然十分羞耻，可是却让tix心中泛起了一些隐秘的兴奋，一阵奇特的酸爽从心底萌发，这种来源于精神的刺激甚至比被deco口交还要兴奋。他担忧，却又焦急地等待着deco的判断。
+
+　　“从这个角度看，其实也没有多大……”deco说道：“我怎么会被它呛到呢，肯定是缺乏经验，还得多练。”
+
+　　“咦？！等等。”意识到deco还想继续，tix慌张地解释。
+
+　　“怎么了？”
+
+　　“那个，我，如果你继续的话，我可能就要射精了……”说出这样羞耻的话让tix在心里大叫。
+
+　　“哦~~”deco一挑眉，一副了然于心的表情：“射精吗，你希望第一次射精是射进女孩儿的身体里，或者说阴道里，对吧？你们处男对于第一次总之有种奇特的执念……不过，我满足你。往床里边移动一点，给我一些位置。”
+
+　　“呃……”被戳中心事的tix脸涨得通红，可是依旧乖乖地听话了，他脱掉自己的裤子，僵硬地躺在床上，双手捂着脸，从指缝里偷窥deco的行动。
+
+　　
+
+　　deco跨坐在tix的胯部上，她注意到tix并未脱掉自己的白衬衣和黑马甲，黄色的领带也还完整。她歪了歪头，并没有对此表示异议，她仅仅只是将手伸进了tix的衬衣下摆里，在tix敏感的三角区域和小腹那里游走……
+
+　　她感受到tix的身体因为她的行动而颤抖，不知为何，她的心中产生一种“果然如此，tix果然还是怕痒”的感觉，这种预判得中的感觉让deco心情大好，继续向上是胸部和乳头，但deco停住了动作。
+
+　　紧身的牛仔短裤没什么弹性，再加上deco又是双腿大开的跪恣，脱掉裤子的难度更是攀升。
+
+　　tix看到拉开了裤链的牛仔裤被女孩捏在手里，那个坐在自己身上的性感女孩努力压低身体，翘起屁股，左右摇摆腰部，只为能将它顺利脱下来。他看到短裤和内裤一起被脱了下来，女孩的阴道早就湿了，为了性爱而准备的润滑液体多到将整条内裤都打湿，淫荡地牵出银丝。即便内裤已经脱掉，透明的液体还是会沿着大腿的根部下滑，时刻显示着这个女孩是有多么的淫荡和饥渴。
+
+　　或者说，因为这些液体是为了tix而分泌的，他们也展示着deco对tix的性趣，tix琢磨着，deco大概从口交，甚至是接吻时就在期待着自己那根阴茎的插入了。
+
+　　从刚刚起，deco为了脱掉裤子而压低身体，她的上半身其实离tix的上半身并不远，她也低着头，用跟tix差不多的视角，像是一个旁观的第三者一样鉴证了自己的阴道是如何淫荡地分泌液体，这让她跟tix一样发出来没见过世面的惊呼：“天哪！”，“哇……”
+
+　　deco的感叹还要再多一点：“我怎么湿成这样了，天哪，我好像是个色情狂或者妓女！”
+
+　　“没有！你棒极了！”tix纠正道：“我，我才是那个色情狂。”他指了指自己的阴茎，压低了声音，羞耻让他的话语都说不清楚：“我……呃……硬的好难受，可以麻烦你稍微安慰它一下吗？”
+
+　　“哦？”deco一直都在关注着tix，口交结束之后，tix的阴茎并没有软下来，反倒还更硬更大了，那根阴茎像是把全身的血液都吸了过来一样，硬得甚至有些发红，表面隐约可见一跳一跳的血管，光是看着就让人心潮澎湃。
+
+　　deco骄傲于自己对tix的吸引力，同时也觉得tix的血液果然是都集中到阴茎去了，羞涩的他竟然主动开口请求，这让deco玩心大起：“抚慰它？可以啊，求我吧。”
+
+　　“……求你……”tix艰难地说。
+
+　　“这可不够！”deco恶劣地用自己的阴道口磨蹭tix的阴茎前端，可就是不插入进去。
+
+　　“求求你🙏，deco……”
+
+　　“嗯，你叫我名字的声音真可爱，亲爱的。那我就满足你吧。”deco高兴地亲亲tix的脸颊，满意地看着那个眼角已经急出眼泪的小处男受宠若惊的样子。
+
+　　deco随手把裤子丢到一边，挤了好多润滑液在tix的阴茎上，一只手撑着tix的小腹，一只手扶着tix的阴茎，将阴茎的前端对准自己的阴道口，接着缓缓向下坐……
+
+　　“呃……”，“嗯……”
+
+　　虽然有双重的润滑，可是插入的过程依旧有些艰难，当阴茎前端完全插入阴道时，床上的两个人都发出了满足的叹息。
+
+　　“它比我想象中要难一些”deco自言自语：“不过还好，还可以继续深入……呃……”
+
+　　阴茎尚未插入一半，deco却停了下来：“什么情况？”
+
+　　她感受到阴道内有什么东西正在阻拦着阴茎的进入，如果不管不顾强行插入的话，会感到撕裂一般的疼痛。
+
+　　另一边的tix也感受到了什么，他感到阴茎的前端被一个温暖，湿润，柔软，富有弹性的美妙地方包裹着，那是身上那个漂亮女孩隐秘的阴道，deco的阴道此刻正在被自己的阴茎插入着，tix的阴茎还从未来体验过如此舒服的感受……
+
+　　这让他更加焦急地想要深入探索，可那层阻碍限制了他的行动，他阴茎的前端抵到了什么东西，根据深度推断，那不可能是子宫颈。一个似乎有些不可能得想法出现在tix的头脑里：“deco，你，你还是处女吗？！”
+
+　　“我当然是。”deco眨眨眼：“你不知道吗？”
+
+　　tix大为震惊：“天哪，你那么主动又开放，我以为你有丰富的性经验！”
+
+　　deco冷笑一声：“不好意思我让你失望了啊……我有处女膜，没办法让你尽情抽插。”
+
+　　“不，怎么会呢”tix纠结了一下：“那个，可不可以让我主动呢，我觉得，似乎换一个角度就可以了。”
+
+　　“嗯……我现在反倒有些怀疑你是不是处女了……”
+
+　　话虽这么说，deco却放心地将性爱的主导权交到了tix的手里，任由tix的双手扶着她的屁股，指挥她应该如何动作。
+
+　　“你的屁股可以更翘一点吗？对，就像是这样，翘地再高一点，这样会拉伸你的阴道，让它的角度更直，可以帮助我顺利地通过你的处女膜……”
+
+　　“像是这样吗……”deco听从着tix的命令，双手撑着tix的髋部，一次又一次地尝试让自己的屁股翘地更高，虽然阴茎并没有在阴道内抽插，但是姿势的改变依旧让两个敏感的器官相互摩擦，引得deco的喘息声中多了浓重的色情意味。
+
+　　“我可以继续深入吗？”tix不时摆动自己的腰部，试探着插入更深的位置，同时询问deco的感受，deco似乎是痛苦地咬着自己的下嘴唇，只能用点头或者摇头回应。
+
+　　tix的想法果然有效，在一次新的试探后，阴茎开拓出来了一块全新的领域，并立刻大举前进，那里比之前的部分更加湿润，似乎正是那些润滑液体分泌的地方。tix的阴茎首次被deco的阴道完全包裹，就连阴茎的根部也被贪吃的阴道吞下，他感到deco在不停的收缩着自己的阴道肌肉，像是吮吸一般吸着自己的阴茎不肯放开，前所未有的舒适如海浪一般向tix袭来。
+
+　　deco的屁股完全坐在了tix的阴茎上，可她却并不能放松，tix的阴茎对她这个处女来说实在是太大了，她完全被塞满了，像是被一根粗大的木桩钉在了tix的身上一样，除了喘息之外她觉得自己什么都做不了。然而，阴道不受控制的收缩动作却又挤压着那根粗壮的异物，带来她此前从未体验过的愉快感受，她听到自己的叹息声中有掩饰不住的兴奋与淫荡，震惊于这样只在小电影中听过的声音竟然也能从自己的嘴巴里边发出来。
+
+　　“我可以动了吗？”两个人都从初次完全插入的刺激中缓过神来，tix问道。
+
+　　deco点点头，期待着这个带给他意料之外惊喜的tix的进一步行动。
+
+　　阴茎开始在体内抽插，带来全新的体验。粗大阴茎对阴道内壁的压迫是deco此前从未想象过的，未经人事的稚嫩阴道也经不起如此过量的刺激，deco觉得tix的每一次插入都让自己像是坐过山车一样被推到顶端，之后的抽出又像是急速的下坠，她在tix那充满力量的抽插动作下，感到快乐堆积地越来越高，下半身像是要失禁了一般，除了更多的快乐外什么都感受不到。
+
+　　tix觉得自己好像天然的知道deco的敏感点在哪里，只抽插了几下，他的男性本能就让他发现了那个最能让deco快乐的地方，他发现每次刺激那个地方，deco都会忍不住惊呼，阴道也会收紧，便开始专心的向那个地方进攻，正好tix最舒适的角度也是那个位置，这让tix在心里感叹自己的身体跟deco是如此契合。
+
+　　deco漂亮的身体在自己的身上颠簸，因为自己的动作而发出悦耳的呻吟，即便不问，tix也清晰地感受到deco正感受着由自己带来的快乐，并因为那份快乐而神魂颠倒。自己的阴茎让deco快乐这个事实让tix更加兴奋了，他托起deco的屁股，好让自己能动作地更加自如，接着便大开大合地抽插起来。
+
+　　“啊……好舒服……tix 你真的太棒了……”
+
+　　兴奋中的deco拉开自己的白色吊带衫，露出自己的胸部。她牵起tix的手放到胸部上：“你也抚摸一下这里吧，这里也想要你。”
+
+　　deco的胸部很小，tix甚至能隔着胸部直接摸到她的肋骨，那里并没有多少脂肪可以揉。
+
+　　“我的胸部有点小，是吗？你可以多揉她一会儿，这样说不定她就可以变大了。还有我的乳头，可以揉捏我的乳头吗？那里也很敏感。”
+
+　　deco将自己的手也覆盖到tix的手上，跟他一起揉捏自己的胸部，tix还用指尖夹起deco的乳头来揉搓，像是把玩什么小巧的玩具。
+
+　　敏感的乳头也被刺激到了，deco感觉她快要撑不住身体，快要软到tix的怀里了，可是阴道里那根粗大的阴茎却又让她无处可躲。
+
+　　“啊……太快了……天哪，你已经顶到我的子宫了……”
+
+　　deco原本扶着tix的手攥成了拳头，虽然话里是说太快太深了，但是tix知道deco马上要高潮了，他便没有停下动作，进入了最后的冲刺阶段，又是一连串强力的抽插，将deco送上了高潮。
+
+　　达到高潮的deco突然弓起腰，大叫起来，阴道也开始不受控制地痉挛收缩，一股温热的液体打在tix的阴茎前端，连番刺激之下，本就在高潮边缘的tix也控制不住射了出来，将自己那浓白的处男精液深深地射入了deco的阴道最深处。
+
+　　deco的高潮持续了很长时间，最终瘫软下来的她没有力气再拔出阴道内的阴茎，躺在tix的胳膊上，扶着他的胸口，还在失神。
+
+　　tix摸摸她柔软的黑色头发，虽然从表现也能感觉到，但tix还是想要听到deco真实的想法：“我做的还好吗？”
+
+　　听到tix的声音，deco努力的抬起头，与tix目光相接：“当然，你做得棒极了！你让我非常舒服。”
+
+　　说罢她又一次亲吻了tix的嘴唇。
+
+　　被夸奖了的tix也很开心，他抱紧了怀里deco的身体，将那个捡到的轻吻变成了漫长，缠绵而浪漫的深吻，尽量延长此次性爱的余韵。
+
+　　初次经历性爱的两人，只高潮了一次就觉得已经力竭了，打算就这样躺着睡着，可那只大手却似乎并不是很满意。他点击了一下deco，把她叫起来，送给了她一卷卫生纸。
+
+　　“……”
+
+　　看到卫生纸的deco皱起了眉，她对卫生纸完全不感兴趣。然而因为大手把她叫起来的这个动作，她跟tix身体的链接断开了，tix的阴茎划出了她的阴道，失去阴茎的堵塞后，原本阴道内积存的什么淫液啊，精液啊全都一股脑地流了出来，沿着她的大腿流到床单上，把床单都弄湿了一片。
+
+　　失去了阴茎的deco感觉心里有些空落落地。再看回卫生纸，好吧，卫生纸可以处理这些液体，deco撕下几节至今开始擦拭自己的下体。
+
+　　除了给deco礼物外，大手也给了tix一些东西，只是那些东西比较小，deco看不清楚。
+
+　　“可以让我看看嘛？”总是充满好奇心的deco拉开tix的手，发现那是一些小的方形塑料包装。
+
+　　“天哪，这是避孕套！”deco惊呼：“他干嘛在这个时候给我们避孕套，你明明都已经射到我的身体里边了，你看，到处都是！”
+
+　　“我也不知道。”tix一样震惊：“他不会是想让我们继续吧。”
+
+　　粗略一数，大手一次性给了tix 7个避孕套，如果全用完，估计tix都已经射不出来了……
+
+　　deco皱着眉问：“嗯？真的吗……那你要用这些套子吗？”
+
+　　tix思考了一下：“既然他都给了，看来我们还是……”
+
+　　“不要！”tix话音未落既被deco打断，她一巴掌拍开那些避孕套，再一次压到tix身上：“我不想要避孕套！你为什么不继续射入我的子宫里呢？让我怀孕好不好？让我生一个属于你的孩子吧！”
+
+　　tix当然也乐意继续性爱，他回给deco一个微笑，接着便是重新硬起来了的阴茎一次直接的重新插入，两个人又开始了新的一轮性爱。
+
+　　……
+
+　　“嘿，这是什么声音？！may！你在你爸爸的Switch上玩什么游戏呢！”
+
+　　客厅里，沙发上，一个13岁的男孩子震惊地回过头来，看到门边一个穿着性感的中年女性，她的头发是黑色的，胸部丰满，看起来经过了足量的揉捏，可以给孩子提供充足的奶水。
+
+　　手中的游戏机险些掉落到地上，游戏里两个mii性爱的视频还在大声播放着，一个金色头发的中年男人紧随着女人的脚步走进客厅，他也注意到了男孩手中的游戏机。然而这个已经结完婚生了孩子的中年男人在面对性爱时却羞耻地涨红了脸，震惊不已：“may，你还不到18岁，你还不能玩这样的游戏。”
+
+　　游戏中两个mii呼喊的声音震耳欲聋，女人注意到了游戏的内容：“天哪！你在玩爸爸妈妈的性爱游戏？！你这个孩子怎么可以做这样的事……”
+
+　　“……”
+
+　　呃，真烦，may撇开头，开始在心里后悔，不应该在客厅这样的场合玩色情游戏，下次应该去一个更有个人隐私的地方。
+
+　　“总之，这个游戏机不能再给你玩了，爸爸妈妈会把它收起来，等你成年之后才能玩，明白吗？”
+
+　　“明白……”may敷衍着应了一声。
+
+　　然而，他看着自己父母彼此商量之后一起前往地下室的身影，又轻笑了出来。
             </div>
           </div>
         </div>
@@ -106,36 +745,601 @@
       <article class="chapter" id="chapter-2">
         <h2>Chapter 2</h2>
         <div class="lang-grid">
-          <div class="panel english-panel">
+          <div class="panel">
             <div class="panel-head"><span>English</span><span>2</span></div>
-            <div class="panel-body">
-              <p>The music drifted in from the window like an old letter without words. Her fingers hovered over the keys, not moving for a long time, as if she wanted to leave the words suspended in the air a little longer.</p>
-              <p>A certain gentleness does not appear in a grand blaze, but gradually takes shape through trial and error; it glows like a light turning on, then quietly settles back into darkness when unseen.</p>
+            <div class="text-content">
+It took Tix a while to figure out where he was—it was an isolated island in the sea, with only him and Deco on it. The island had no way to communicate with the outside world, but fortunately, the infrastructure was complete, and a giant hand gave them food, gifts, and sometimes played games, providing necessary advice and help.
+
+It seems that they can live well even without communicating with the outside world.
+
+Neither Tix nor Deco are the type to delve into things deeply, and they naturally accepted life on the island. In fact, Deco adapted much faster than Tix. It took Tix more than two months to grasp his situation, while Deco seemed to be living comfortably from day one.
+
+Tix saw her naturally enjoying the island's beaches, restaurants, and Ferris wheel; she saw her asking Big Hand for many things from the shops; she saw her always playing games with Big Hand; and she even asked Big Hand to arrange for them to stay in the same house and in the same bed.
+
+They moved in together on the third day after they met. Deco went to the big hand for two consecutive days, saying she was so thirsty she couldn't bear it anymore. The big hand rejected her twice, but finally agreed on the third time.
+
+Tix was shocked that a virgin could be so sexually frustrated. They had made love all night on their very first night together, and continued for the next two days! If his penis hadn't actually touched Deco's hymen, Tix would never have believed she was a virgin.
+
+Besides sex, Deco is also very open in other aspects... Deco kept saying Tix was cute and that she loved Tix...
+
+Tix listened to these words, his heart filled with mixed emotions. He had a bad memory and was slow to react; he couldn't accept or understand them, he couldn't sort out his own feelings, and he couldn't give Deco the same response. Whenever Deco confessed his feelings, he would remain awkwardly silent, neither accepting nor rejecting.
+
+...It took Tix more than two months to finally get a sense of the island and his relationship with Deco. Besides the alluring body and sex, he also began to notice other aspects of Deco, which made him uneasy. He was always uneasy.
+
+Deco has been excessively sleepy lately, sleeping more than 12 hours a day. Her libido seems to have increased, and she insists on having sex with Tix several times a day (although the frequency was about the same before, it's actually increased considering Deco's increased sleep). Her body temperature seems higher than before, and she's been asking Big Hand for food more often. During sex, Tix can feel that Deco's vaginal fluids are more abundant than before, and her breasts seem to have gotten larger (Deco says it's because Tix keeps rubbing them). In addition, Deco is more prone to incontinence than before, as if her bladder has shrunk; she shouts that she's about to ejaculate right at the start of sex… They changed the sheets three times in one day, after which Big Hand gave them a waterproof pad…
+
+Tix didn't know what had happened to Deco, and he was worried that Deco was sick. He had consulted Big Hand about Deco, and Big Hand told him not to worry...
+
+How could Tix not worry? It was Deco. Although Tix wasn't quite ready to accept this girlfriend yet, he still felt uneasy and couldn't put his mind at ease. Lately, his worries about Deco had increased dramatically. He kept thinking about her; he couldn't accept her leaving.
+
+However, poor Tix didn't know what he could do. After thinking it over, he decided to ask Big Hand for a gift to give to Deco... As for what gift to give, Tix still had to think about it.
+
+Big Hand didn't always fulfill the Mii's requests. Once, Tix wanted the dog uniform as a souvenir, but Big Hand refused. Tix knew it was because the uniform was expensive, and Big Hand didn't have the money. Another time, Deco asked Big Hand for a gift, but Big Hand didn't give it to him either. Tix was just passing by at the time and didn't hear clearly, but now, thinking back, he could vaguely remember a word that sounded like "children."
+
+What kind of gift would be suitable for a child? Would giving that gift to Deco be helpful to her? Tix sat on a bench by the lawn, pondering.
+
+Perhaps now that Big Hand has money, he can afford those gifts... When Big Hand reappears, after careful consideration, Tix finally comes to a conclusion and asks for a "dildo that is as thick and long as a child's arm".
+
+When Tix received the actual product, he was utterly shocked. He knew it was a bit exaggerated, but he hadn't expected it to be this exaggerated. My God, this dildo was probably nine feet long! Its radius was almost 1.5 times Tix's size. The top of the dildo was a hand with five fingers together, poised as if to insert into some narrow hole… From the outside, it did look like a child's hand, but wouldn't Deco break if such a dildo were inserted? Did she really want something like this?
+
+Tix, who had already made up his mind, began to feel uneasy again.
+
+But since Tix had already received the items, he could only give them to Deco… It was evening now, and the sun had left only a deep red semicircle on the sea. At this time, Deco should be back in their bedroom, getting ready for bed. She'd been unusually sleepy lately…　
+
+Tix held the dildo, his head down the whole way, lost in thought. Though he was physically present, his mind was wandering far away in a jumble of thoughts. If there were cars around, he might get hit and killed; if he were driving, he might run over pedestrians.
+
+He walked back to the small room he shared with Deco. The environment there was exactly the same as the bedroom where they first made love: a white, simply decorated, pentagonal bedroom.
+
+Deco wasn't sleeping as he expected. She was communicating with the large hand, which gave her something and then left. It was a long, thin object packaged in a plastic box. Judging from the packaging alone, it looked like a medical device. Tix couldn't see any text on it and didn't know what it was, but the thought of it as a medical device made him worry. Could it be that Deco really had some serious illness and needed something to treat it?
+
+Are there any hospitals here? What if this little box can't cure her? What if her illness gets worse? What if she becomes bedridden because of this illness? What if she dies because of this illness...?
+
+Tix became increasingly worried, and he felt terrible.
+
+At this point, Deco finished packing and realized that Tix was there. Before Deco could notice, a flustered Tix hurriedly hid the dildo behind his back—he suddenly felt that giving Deco such a toy while she was sick made him feel like he was not human, but the most despicable pervert!
+
+Deco's body was still facing the direction where she had just been talking to the big hand. She raised her head from the small box in her hand and first turned her gaze to Tix. The moment she saw Tix, she immediately smiled. Her smile was very cute, and compared to her previous somewhat sly and mischievous smile, Deco now looked like a mother with tenderness.
+
+Deco turned to Tix and asked, "Honey, you're back. Is something wrong? Why are you being so secretive?"
+
+Tix blushed with embarrassment, hiding the dildo even deeper behind his back, and stammered, "N-nothing..."
+
+Deco didn't delve into it further; she lowered her head to examine the box in her hand.
+
+But this didn't reassure Tix even a little bit... Deco was always very perceptive, able to spot any problem. Before, his act of hiding the dildo wouldn't have escaped her notice at all, so why hadn't she noticed today? Was it because of her illness?
+
+While Tix was worrying, Deco walked past him and yawned: "Ah~~~ Honey, I'm so sleepy, I want to go to sleep..."
+
+“But the bed isn’t in that direction…” Tix asked, puzzled.
+
+"I need to go to the restroom to do a test..." Deco didn't turn around, but just shook the small box in her hand.
+
+“Um…” Tix wanted to ask more, but the bathroom door was closed.
+
+Tix sat alone on the edge of the bed, the prosthetic arm beside him...
+
+Deco was going to get tested... and sure enough, she had a problem with her body...
+
+Although Tix was only looking down at his toes, he was constantly listening to what was happening in the bathroom. He felt like a family member outside the operating room, anxiously hoping the doctor would come out and tell him good news, but also worried that the doctor would bring bad news...
+
+The result of this tension was that although he heard Deco come out of the bathroom, he forgot to put away the dildo, which caused Deco to yell, "Oh my god, honey, what's that next to you?! A dildo?!"
+
+Tix then realized he had been distracted and hurriedly tried to hide the dildo: "No, no... this..."
+
+As it turned out, Deco got the dildo before him, and carefully examined the terrifying-looking thing from head to toe, even comparing it to his own arm.
+
+“It’s huge! Do you want to insert it into my uterus?” Deco glanced at Tix with a hint of mockery. “I didn’t expect you to be such a pervert, darling. I feel like I’m meeting you for the first time…”
+
+"Insert...insert into the uterus?!" Tix repeated the key phrase from Deco's words in shock. "No, I never thought of that! I'm not a pervert!"
+
+“That’s what you think!” Deco casually placed a thin white strip on the bedside table, then grabbed the dildo and collapsed onto the bed.
+
+She licked the tip of the dildo, trying to look seductive, but instead yawned and her eyes were almost closed.
+
+"Let's give it a try..." Deco's voice trailed off.
+
+Tix looked worriedly at the small thing Deco had placed on the bedside table; it looked like some kind of test strip.
+
+When Tix went to see Deco again, she had very dark circles under her eyes, and her eyelids were almost drooping, looking like she hadn't slept for days...
+
+Tix asked softly, "But you look very sleepy, Deco, you should go to sleep..."
+
+Tix wanted to ask about the test strip, but ultimately didn't.
+
+"No, I need to try it out before I go to sleep." Deco, who was already drowsy, suddenly perked up after being rejected by Tix and sat up, grabbing the dildo.
+
+"If you're not willing to try it with me, I'll do it myself..."
+
+After saying that, Deco leaned against the pillow at the head of the bed, bent her knees and opened her legs.
+
+Deco wasn't wearing her classic camisole and shorts set; instead, she wore a dark blue slip dress with small white hearts. Tix was sitting at the foot of the bed, so when Deco propped herself up on her knees and spread her legs, Tix could almost immediately see her private parts…
+
+The little slit that always opened to welcome Tix was closed today, like its owner, revealing a sense of weariness. But perhaps she was aware that she was being watched by her lover, because when Tix's gaze fell upon her, she still shyly shrank back.
+
+Tix's heart skipped a beat.
+
+Even though Tix had seen and entered that place every day for the past three months, he still felt his blood boil instantly when he saw it again. His worries and anxieties about Deco's body were overwhelmed by lust. He felt like a pervert, his blood rushing to his lower body, and his penis almost immediately became erect.
+
+Deco pinched the hem of her skirt and pulled the nightgown up to her lower abdomen, thus exposing her entire private area.
+
+　　
+She grabbed the arm-shaped dildo that had only been lightly licked at the tip, and then, without any preparation, inserted it directly into her vagina.
+
+"Whoa! What are you doing!" Even before Deco's painful groans came Tix's exclamation. He frantically snatched the dildo that was being forcefully inserted into Deco's arm as if it were a rape from Deco's hand.
+
+"Ugh...it hurts!" Deco belatedly cried out in pain, pulled her legs back, lay on her side on the bed, tucked both arms between her legs, and massaged her vaginal opening as if to comfort herself, as if the rough person was not herself.
+
+Tix wanted to put the arm-shaped dildo away, but he knew that Deco wouldn't easily change his mind once he made a decision. He could only sigh and take a bottle of lubricant from the bedside table drawer.
+
+Tix sat back between Deco's legs. Deco seemed to have recovered from the pain and returned to her previous hungry and alluring appearance. She bit her lower lip lightly, looked at Tix with a soft smile, and invited him to enter her.
+
+Tix swallowed hard, applied lubricant to the entire arm of the dildo, and then squeezed some more lubricant onto Deco's vaginal opening. He stroked the soft, warm spot, spreading the lubricant evenly.
+
+Deco urged him somewhat grumblingly, "Hurry up and come in, honey, I can't wait..."
+
+The tip of the dildo pressed against the entrance of Deco's vagina. Because the dildo was deliberately made in the shape of a hand, it looked as if someone was really trying to put their arm into Deco's vagina...
+
+Tix and Deco had tried more aggressive sexual practices before, but those were usually arranged by the "big man," with both Tix and Deco being the passive recipients. But now, Tix pushed the dildo forward slightly, and Deco's eager hole immediately responded, enveloping the tip like a greedy child. This was the first time Tix had initiated such a stimulating activity, and he felt his hands trembling.
+
+Deco's sensitive vagina was stretched open, and she felt as if a void in her heart had finally been filled. Her recently unusually hungry sexual desire was finally soothed. The feeling of pleasure flowed like an electric current from her vagina along her nerves to her brain. Deco's body convulsed slightly, and she let out a satisfied sigh.
+
+However, the dildo was far too thick, almost twice the size of Tix's penis. Deco only felt a brief moment of pleasure when it was first inserted, and soon she was no longer happy.
+
+Even though her body had been "developed" for over three months and was no longer the virgin who would cry from pain just from the insertion of Tix's penis, her vagina was still very narrow without proper foreplay. Tix had only applied lubricant to the vaginal opening, not evenly inside, and she could feel that her vagina was still dry. The dildo initially introduced lubricant, but the deeper it went, the less effective it became. The already large dildo now felt like a torture device trying to tear her apart.
+
+Tix's deliberately slowed movements, like a butcher killing someone with a blunt knife, further amplified the sense of torture.
+
+Deco couldn't see his genitals, but he could clearly feel the hand-shaped dildo inside him, its five fingers slowly but irresistibly pushing forward. When it reached the thickest part of the hand, the joint where the fingers met the palm, Deco felt as if it were tearing him in two.
+
+However, the tip of the dildo happened to stimulate her G-spot. Tix knew her sensitive spots too well; there was no searching process. As soon as it was inserted, it went straight to the most sensitive spot in her body. The feeling of excitement washed over Deco like waves, but the pain was also there. She wanted more, she wanted more comfort, but she was in so much pain that she dared not move. The two completely different feelings ebbd and flowed, pulling her apart and making her already drowsy and unclear mind even more confused.
+
+"Ah...darling, it's so big, please, a little slower..." Deco closed her eyes, desperately reaching down to grab Tix's arm like a lifeline. She shook her head, unusually, and softly pleaded with Tix, begging him to have pity on her. Then she suddenly felt her vagina become even wetter.
+
+Deco initially thought she was bleeding, but when she opened her eyes, she saw that Tix had squeezed out more lubricant for her.
+
+“Relax, Deco…you’re too tense, it’s making your vagina clench even tighter…” Tix kissed her trembling knees, gently comforting her. He pulled the dildo out a little and stroked Deco’s clitoris. The cute little thing became engorged and hard like a penis, craving Tix’s attention just like its owner. Just being touched by Tix was enough to cause Deco’s body to suddenly spasm. Her vagina, with the huge dildo inserted, tightened violently. The tip of the dildo pressed against her G-spot again. The excessive stimulation almost brought tears to the girl’s eyes. Gushes of lustful fluid flowed from deep within her vagina, most of it blocked inside by the dildo, while some overflowed from the vaginal opening, mixing with the lubricant and lubricating Deco and the dildo inside and out.
+
+If it weren't for Tix's hand supporting the dildo, that thick arm would probably have been squeezed out of the vagina during the previous tightening. Seeing this, Tix knew that Deco was experiencing pleasure. He readjusted the angle of the dildo and then, without any warning, suddenly thrust it in hard.
+
+"ah!"
+
+The thickest part of the dildo broke through the narrow vaginal opening in an instant, frantically squeezing the vaginal walls. Although Deco's face was contorted in pain, the intense stimulation she couldn't ignore also made her feel an unprecedented sexual excitement.
+
+"Oh my god..."
+
+Deco felt like he was about to lose his ability to speak.
+
+Although Deco's vagina kept tightening, as if savoring and sucking the dildo, because the thickest part was already inserted inside, it acted like a plug, wedging the entire dildo at the vaginal opening. No matter how much her vagina contracted, she couldn't push it out. All Deco could feel from contracting her vagina was wave after wave of endless stimulation.
+
+Tix was still sitting between Deco's legs. Deco didn't notice at all that Tix had already let go of his hands. Without Tix's help, Deco could play with the dildo on his own and have a great time...
+
+“Darling…” Deco’s voice trembled with tears, “Help me, this is too intense, I can’t take it anymore…”
+
+Tix rubbed his already rock-hard penis through his pants: "You actually like it a lot, don't you..."
+
+Deco is a somewhat strong-willed girl, and Tix rarely sees her cry so adorably. Or rather, while Deco cries when being subjected to those excessive acts of rough play, she rarely cries to Tix… Although Deco is crying, Tix knows it's a reaction when she feels comfortable…
+
+Listening to the girl's cute cries, looking at her stretched vagina, and the huge dildo trembling as the girl contracted her vagina, Tix unzipped his pants.
+
+"Darling, Tix, darling..." Deco kept calling out to Tix, her hands groping her lower body, trying to touch her lover.
+
+Tix grasped Deco's hand, the skin-to-skin contact offering Deco some comfort, but then Tix pressed his hard penis against Deco's raised thigh.
+
+The girl's thighs were smooth and soft, a completely different sensation from her vagina. Tix knelt between Deco's legs, twisting his waist and rubbing his penis against her thighs a few times. Then he adjusted Deco's position, squeezing his penis between Deco's thighs and calves.
+
+Deco was still focused on feeling the dildo inside her vagina and had no time to pay attention to Tix's penis. Tix held Deco's legs and twisted his waist back and forth, thrusting his penis in and out, masturbating with Deco's soft legs.
+
+"Honey... could you please make it move a little..."
+
+As expected of Deco, she quickly found pleasure in that huge arm-shaped dildo, openly and lewdly asking Tix for more.
+
+Tix felt that if he continued, he might ejaculate, so he stopped masturbating and pulled his penis out from between Deco's legs. Although he did not ejaculate, the overflowing pre-ejaculate had already made Deco's legs wet.
+
+Tix stared at the rock-hard penis, pressing down on Deco's knees to make her spread her legs wider, then squeezed directly in front of Deco. Deco's hole was right in front of Tix's penis; he could insert it whenever he wanted, and Deco's thirsty vagina, constantly drooling, seemed to be welcoming Tix as it writhed and contracted.
+
+Tix tried to pull on the arm-mounted dildo and found that it was still firmly stuck at the vaginal opening and could not be pulled out even a little bit.
+
+Since he couldn't get out, Tix grabbed the part of the dildo that was still outside Deco's body and twisted it to insert it inside.
+
+"Oh my god!!! This is so exciting!!" Deco screamed.
+
+The thick dildo pressed against every sensitive spot inside Deco's body, causing her to spasm even more violently. She clung to Tix's arm like a dehydrated fish, unable to do anything but gasp for breath.
+
+"Deco, you're so cute..."
+
+Tix leaned down and gently kissed Deco's lips. He placed one hand near Deco's shoulder and used the other to thrust the dildo back and forth. Although the kiss was gentle, the thrusting was fierce, leaving Deco unable to think of anything but her vagina and the dildo.
+
+Actually, Tix's current position is no different from normal sexual position. His hard penis is currently pressed against Deco's vagina, rubbing against Deco's sensitive clitoris.
+
+With Tix pinned down, Deco's vagina and clitoris were receiving excessive stimulation. Instinctively wanting more comfort from her lover, Deco tightly hugged Tix's neck, kissing him with each gasp.
+
+Tix thrust his hips as if inserting into a vagina, rubbing his penis against the clitoris. The back-and-forth motion brought vaginal fluids, lubricating their sensitive areas. Deco's vagina was just below. If Tix's thrusts were particularly forceful, his penis could rub against the dildo, which was twice his size. As his penis pushed forward again, the tip would brush against the vaginal opening as if trying to penetrate, then slam into Deco's clitoris. Afterward, the entire penis would rub against the delicate, sensitive clitoris from top to bottom. Deco was already rolling her eyes back in excitement from the overstimulation.
+
+Tix sank down a little more, pressing her entire body against Deco. She could feel Deco's slightly protruding breasts; her breasts had developed a lot recently, and her nipples stood erect, waiting to be kneaded. Deco's stomach was also slightly protruding, whether from weight gain or some other reason, she couldn't tell.
+
+Tix once again deeply inserted the dildo into Deco's body. The part of his skin that was in contact with Deco's lower abdomen could even feel the bulge of Deco's belly. The dildo was really too big, and every time it was inserted, it would make Deco's belly swell up.
+
+"Ah...no, it's too deep, it's almost penetrating my uterus..." Deco cried out in a daze.
+
+Tix looked at the girl's face, flushed with extreme excitement, the dildo practically driving her crazy. In previous sexual encounters with Deco, his own penis had almost never elicited such a deathly expression from her.
+
+"No...don't insert it into my uterus..." Deco was still shouting.
+
+Tix felt that a long part of the dildo was still outside Deco's body. If he continued to insert it, the dildo could penetrate deep into Deco's uterus. In his previous sexual encounters with Deco, his own penis had never actually penetrated inside Deco's uterus.
+
+Even though Deco shook her head with tears in her eyes, Tix still didn't stop his intention to go deeper. He held the dildo in his hand, recalling the position of Deco's uterus, and kept changing positions and angles, letting the tip of the dildo keep hitting the cervix. He waited for the cervix to be stimulated and relaxed before inserting the entire dildo hard.
+
+Deco's refusal was to no avail; the dildo continued its relentless penetration, determined not to leave until it reached the uterus. After a period of arduous work, the cervix seemed to have been so thoroughly damaged that it no longer had the strength to protect itself, and it opened slightly, giving the dildo a chance to enter.
+
+If it were the old Deco, she probably would have welcomed this kind of stimulating activity with open legs. But today, Deco seemed to have suddenly woken up from a nightmare. With a sudden burst of strength, she pushed Tix off her. The dildo was also pulled out quite a bit from her vagina, and lewd fluids flowed everywhere.
+
+The violent withdrawal of the dildo left Deco's vagina no longer full, and a strange unease made her tremble and tighten her vagina. She nervously touched the dildo and her lower abdomen, and only breathed a slight sigh of relief after confirming that everything was alright.
+
+"Deco, what's wrong?" Tix was already on the verge of climax, but being suddenly pushed away sent him plummeting from his peak to rock bottom, even his penis went limp. Deco had never shown such strong resistance during previous sexual encounters, and Tix had no idea what was going on.
+
+Deco gritted his teeth, pulled out the dildo, and threw it aside: "I don't want it anymore."
+
+Tix glanced at the dildo that had rolled to one side, then at Deco. Her vagina, which had just been penetrated by the arm-shaped dildo, was unable to close for a moment, leaving a large opening with fresh pink flesh exposed. It was slightly contracting due to the emptiness, as if praying for something to fill it again.
+
+“I’m sorry… I thought you would like it…” Tix lowered his head in frustration, his penis still hard, feeling that Deco hated him.
+
+"What are you talking about?" Deco frowned at him, as if looking at an idiot.
+
+“I…I thought you liked having something inserted into your uterus…I’m sorry, I’m sorry…you hate me…Waaah…” Tix choked up as she spoke.
+
+"What nonsense are you talking about..." Deco helped her sit up, exhausted, and sighed helplessly, gently stroking Tix's face. "How could I hate you? What am I thinking... And why do you think I want to be penetrated?"
+
+Tix glanced furtively at the dildo lying to the side; it still looked so menacing and terrifying. "Because... I've never seen you react so intensely before... My penis is smaller and shorter than it... I can't satisfy you like it does..."
+
+"Just because of that?" The reason was so bizarre that Deco even laughed.
+
+“Isn’t this enough?” Tix looked at Deco with his wet, puppy-dog eyes.
+
+“Okay, it’s alright.” Deco pulled Tix’s head into his arms, gently patting his back like a mother comforting a child, and softly soothingly said, “I don’t hate that dildo, because you gave it to me, but I don’t like it either… I like you more… Darling, Tix… I like you more. I like both your penis and you yourself. Don’t try to compete with a toy for size, okay? Didn’t you notice it couldn’t even give me an orgasm… I only like you… Nothing in this world can give me an orgasm more than your penis… Nothing else, no matter how thick or long, can compare to you…”
+
+Tix rested her head on Deco's chest, feeling a little better.
+
+His ear was pressed against her chest, and he could hear Deco's steady heartbeat. Deco's body temperature was slightly elevated, and her breasts were larger than when they first met, her nipples still hard from their recent sexual encounter.
+
+Tix gazed at the round, adorable pink nipple and placed a hand over the slightly protruding breast. Deco's breasts were small enough to be completely covered by one hand, and when kneaded, they felt as soft as dough. Tix held Deco's nipple between his thumb and forefinger, massaging the breast while kneading the nipple. Soon, he heard Deco's hungry moans.
+
+"Deco, do you love me...? Does my penis really feel good to you?" Even though he had already been comforted, Tix still asked childishly.
+
+“Of course.” Deco stroked Tix’s soft, golden hair.
+
+Someone gave them a push, and the two of them fell onto the heavy mattress. Tix's head was still pressed against Deco's chest, and he lay on Deco's chest, using the soft breasts as his pillow.
+
+Tix kneaded and played with Deco's other nipple, and heard Deco continue, "I love you so much, darling, I'll always love you, don't doubt my feelings for you... And you've always been so good in bed, making me feel so good... Just thinking about your penis is enough to keep me wet all day, I'm always hoping you'll penetrate me... Darling, I love you..."
+
+“I love you too, Deco…” Tix replied softly, but with all his might.
+
+Tix felt his face turn red. He shyly tried to cover his face, but somehow, the hand that had moved away from Deco's breasts reached towards Deco's private parts.
+
+Sliding down her lower abdomen, past her erect clitoris, and parting her labia minora, Tix groped and inserted his fingers into Deco's wet vagina.
+
+The arm-mounted dildo had been removed for some time, and Deco's vagina could finally contract completely on its own elasticity, but it was still not as tight as before. Tix inserted one knuckle of his finger, and he felt Deco trying to contract her vaginal opening in response to his efforts, but with little success.
+
+But Tix's fingers were still too thin. Deco groaned softly, clenching her legs and contracting her vagina, trying to find some pleasure from the insertion of his fingers.
+
+"Mmm...I want it so much...Darling, give me more, okay..." Deco murmured, holding Tix's head.
+
+Tix inserted his second finger.
+
+“Not enough… Darling, I want your penis, I can’t wait, can you penetrate me…” Deco spread her legs.
+
+“Of course, Deco…” Tix reluctantly climbed off Deco’s chest, squeezed his body between Deco’s legs, held his now-erect penis, and pressed it against the opening and closing vagina that was eagerly waiting for him.
+
+　　
+
             </div>
           </div>
-          <div class="panel chinese-panel">
+          <div class="panel">
             <div class="panel-head"><span>中文</span><span>2</span></div>
-            <div class="panel-body">
-              <p>音乐从窗边淡淡流进来，像一段没有歌词的旧信。她的手指停在键盘上，久久没有落下，仿佛想把话语留在空气里，再等一等。</p>
-              <p>某种温柔不是轰然出现，而是在试探中逐渐成形；它像灯光一点点亮起，又在不被看见时悄悄落回去。</p>
-            </div>
+            <div class="text-content">
+tix花了一些时间才搞清楚自己身处的情况——这是一个孤立在海上的小岛，岛上只有他跟deco两个人，这座岛没有跟外界沟通的方法，不过好在这里基础设施齐全，还有一指大手给他们食物，礼物，有时候还会做一些游戏，提供必要的建议和帮助。
+
+　　看起来，即便不跟外界沟通，他们也能生活地很好。
+
+　　tix跟deco的性格都不是追根究底的人，他们很自然地接受了岛上的生活。而且deco接受地比tix更快。tix花了两个多月才认清自己的处境，deco则看起来在第一天就生活地很自如了。
+
+　　tix看到她很自然地享受岛上的海滩，餐馆和摩天轮，看到她向大手索要很多商店里的东西，看到她总是跟大手玩游戏，甚至，她还要求大手安排他们两个住在同一栋房屋里，而且还是同一张床上。
+
+　　他们认识的第三天就同居了。deco连续两天去找那只大手说她饥渴地没有办法忍耐，大手拒绝了他两次，直到第三次才同意。
+
+　　tix很震惊，一个处女竟然能够饥渴到这种程度。要知道，他们认识的第一个晚上可是在tix的床上性爱了一整个通宵，之后的两天他们也没有停止性爱！如果不是因为自己的阴茎切实地触碰到了deco的处女膜，tix绝对不会相信她是处女。
+
+　　除了性爱之外，deco在其他方面也很开放……deco一直都在说tix可爱，说她爱tix……
+
+　　tix听着这些话，心里五味杂陈。他记性不好，反应也很慢，他有些无法接受和理解，他无法理清自己的感情，他没办法给deco同等的回应。每当deco表白时，他就这样尴尬地沉默着，既不答应，也不拒绝。
+
+　　……花了两个多月的时间，tix才终于对这个小岛和他跟deco之间的关系有些感知了，除了诱人的身体和性爱之外，他也开始看注意到deco的一些其他部分，这让他有些不安，他总是在不安。
+
+　　deco最近总是嗜睡，每天都要睡12个小时以上，她的性欲似乎更强了，每天都要缠着tix性爱好几次（虽然之前的次数也差不多，但是考虑到deco睡觉的时间增加了，实际上的频率是增加了）。她的体温似乎比之前更高，找大手索要食物的次数也开始变多。在性爱时，tix能感觉到deco的液体比之前要更汹涌，她的胸部似乎也比之前变大了一些（deco说是因为tix总是会揉）。除此之外，deco比之前更容易失禁了，就好像她的膀胱变小了一样，刚开始性爱deco就会大喊她要喷射了……他们曾经在一天之内换过三次床单，在那之后，大手给了他们一个防水垫……
+
+　　tix不知道在deco身上发生了什么，他有些担心deco病了。他曾经咨询过大手关于deco的事，大手让他不必担心……
+
+　　可tix怎么可能不担心呢？那是deco，虽然在tix心里，他还不太能接受这个女朋友，可他依旧会感到不安，他没办法放下心来。他最近担心deco的次数和程度都开始猛烈增加，他一直在想她，他不能接受她离开。
+
+　　然而，可怜的tix不知道自己能够做什么，思来想去，他决定向大手索要一件礼物，送给deco……至于送什么礼物，tix还得思考。
+
+　　大手并不会一直满足mii们的需求，有一次，tix想要那件狗狗制服做纪念，大手拒绝了，tix知道那是因为制服很贵，大手没钱。还有一次，deco问大手索要礼物，大手也没给。当时tix只是路过，听得不太清楚，现在回想起来，他能隐约记得似乎有个词，是“孩子”。
+
+　　有什么礼物是跟孩子相关的呢？如果送那件礼物给deco，会不会对她有帮助？tix坐在草坪边的长凳上思考。
+
+　　或许现在大手有钱了，可以负担的起那些礼物……在大手再次出现时，经过谨慎的思考，终于得出结论的tix索要了一件“小孩手臂一样又粗又长的dildo”。
+
+　　实物拿到手的时候狠狠地吓了tix一跳，他知道这会有些夸张，但没想到竟然这么夸张，天哪，这根假阳具估计能有9英尺长！半径也几乎是tix的1.5倍。假阳具的顶部是一个五指并拢，摆出一副要钻入某个狭窄孔洞样子的手……从外表看，这确实像是个孩子的手，但是，被这样的假阳具插入，deco不会坏掉吗？她真的是想要在这种东西吗？
+
+　　原本都已经下定决心的tix又开始惴惴不安起来。
+
+　　可是，东西都已经拿到手了，tix也只能拿去送给deco……现在是傍晚，太阳只留了一个深红色的半圆在海面上，这个时间，deco应该回到了他们的卧室，准备睡觉了吧。她最近总是格外嗜睡。。。
+
+　　
+
+　　
+
+　　
+
+　　Tix拿着那根假阳具，一路上都低着头，不知道在想什么，他的人虽然在这里，心思却已经被混乱的思想拖到很远的地方了，如果这里有车子的话，他可能会被汽车撞死，如果是他开车子的话，他可能会撞飞路人。
+
+　　不知何时他走回了他跟deco的小房间，那里的环境跟他们一开始性爱的卧室一模一样，一个白色为主，布置简单，五边形的卧室。
+
+　　deco并不如他预想的一般睡觉，她在跟大手交流，大手送给了她一样东西，之后就离开了。那是个由塑料盒包装的细长物体，单看包装感觉像是医疗器件，看不到上边文字的tix不知道那是什么，但是医疗器件的想法又让他开始担心起来，难道deco则真的生了什么重病，需要什么东西来治疗吗？
+
+　　这里有没有医院，如果这个小盒子治不好她该怎么办呢？如果她的病越来越重了该怎么办呢？如果她因为这场疾病卧床不起该怎么办呢，如果她因为这场疾病……死掉了……该怎么办呢……
+
+　　tix越想越担心，他感觉整个人都不好了。
+
+　　这时deco收完了东西，才发现tix在场，在deco发现之前，混乱的tix急忙把假阳具藏到了身后——他突然觉得在deco生病时给她送一个这样的玩具，自己简直不是人，简直是最恶劣的变态！
+
+　　deco的身体还面对着刚刚跟大手对话的方向，她从手中的小盒子上抬起头来，先是视线转向tix，看到tix的一瞬间，她立刻笑了出来，她的笑容很可爱，而且相比于之前有些狡黠地坏笑，现在的deco看起来有种做母亲的温柔。
+
+　　deco把头也转向tix，问道：“亲爱的，你回来了。你有什么事情吗？这么神神秘秘的？”
+
+　　tix顿时羞耻地红了脸，将假阳具在背后藏得更深，吞吞吐吐地说：“没，没什么……”
+
+　　deco并没有深究，她低头去研究手里的盒子。
+
+　　可这并没有让tix放心哪怕一点点……deco总是个非常敏锐，可以发现任何问题的人。如果是之前，自己藏起假阳具的行为根本瞒不过她的眼睛，可为什么今天她没发现？是以为她的病吗？
+
+　　在tix担心的时候，deco路过了他，打了个哈欠：“啊~~~亲爱的，我好困啊，我想睡觉了……”
+
+　　“可，床不在那个方向……”tix疑惑。
+
+　　“我要去卫生间，要测试一下……”deco没有回头，只是摇了摇她手中的那个小盒子。
+
+　　“那个……”tix想追问，可厕所门被关上。
+
+　　tix独自坐在床边，身边是那根手臂假阳具……
+
+　　deco要去测试……她的身体果然出现了问题……
+
+　　tix虽然只是低头看自己的脚尖，可是他的耳朵却一直都听着卫生间里deco的情况，他感觉自己像是手术室外的家属，焦急地期盼着医生能出来告诉他好消息，却又担心医生带来的其实是坏消息……
+
+　　如此紧张的结果，就是他虽然听到了deco从卫生间出来的声音，却忘记了收起假阳具，这让deco直接大叫了起来：“天哪，亲爱的，你身边的是什么？！一个假阳具吗？！”
+
+　　tix这才意识到自己的走神，急忙想要将假阳具藏起来：“不，不……这个……”
+
+　　结果deco在他之前拿到了假阳具，将那个看起来十分可怖的东西拿在手里仔细检查，从头到脚地看了一个遍，还跟自己的胳膊比较了一下。
+
+　　“它的尺寸好大啊，你想要把它插入我的子宫吗？”deco有些揶揄地看了tix一眼：“没想到你也这么变态，亲爱的，我觉得自己好像第一次认识你一样……”
+
+　　“插入……插入子宫？！”tix震惊的地重复了一遍deco话里的关键词：“不，我没有这么想过！我不是个变态！”
+
+　　“你就是这么想的！”deco随手将一个白色的细长条放在床头柜上，抱着那根假阳具扑倒在床上。
+
+　　她舔了舔假阳具的顶端，想做出一副诱惑的样子，可是却打了个哈欠出来，眼睛也快要睁不开了。
+
+　　“快让我们来试一下吧……”deco说话的声音越来越低。
+
+　　tix担忧地看着deco放在床头柜上的小东西，那像是一个什么检测试纸。
+
+　　tix再去看deco，她有非常重的黑眼圈，眼皮都快抬不起来了，一副好几天没睡的样子……
+
+　　tix小声地问：“可是你看起来很困了，deco，你应该睡觉……”
+
+　　tix还想问问那个检测试纸，但终究没有问出口。
+
+　　“不好，我要先试完再睡觉。”本来都已经昏昏欲睡的deco，在被tix拒绝后突然又精神了一下，抓着那根假阳具坐了起来。
+
+　　“你要是不愿意跟我一起尝试的话，我就自己来……”
+
+　　说罢，deco靠在床头的枕头那里，屈膝打开了她的双腿。
+
+　　deco没有穿她那套经典的吊带和短裤套装，她穿的是一件深蓝色，有白色心形小点缀的吊带睡裙。tix此时正坐在床尾，所以，当deco支起膝盖，打开双腿时，tix几乎是立刻就能看到她的隐私部位……
+
+　　那个总是张开着欢迎tix进入的小缝隙今天是关闭的，像是她的主人一样，透露出一种疲惫。可是或许她能意识到自己正在被爱人注视，当tix的视线落在上边时，她还是羞涩地收缩了一下。
+
+　　tix的心脏也跟着紧了一下。
+
+　　即便在过去的三个月中，tix每天都会看到那里，每天都会进入那里，可再次看到时tix还是觉得全身的血液似乎在一瞬之间就开始沸腾，对deco身体的担忧和焦虑被性欲压了过去，他觉得自己像是个变态一样，血液直冲下身，阴茎几乎立刻就开始发硬了。
+
+　　deco捏起裙角，将睡衣裙摆拉到小腹上，这样，她的整个隐私部位就全部露出来了。
+
+　　
+　　　　她抓起那根只是被轻轻舔舐了一下前端的手臂假阳具，接着，竟然什么准备都没做就直接往阴道里塞。
+
+　　“哇哇哇！你在做什么！”比deco痛苦的呻吟更早到来的是tix的惊呼，他十分惊慌地从deco手中夺过了那根强硬地如同强奸般插入deco的手臂假阳具。
+
+　　“呃呃呃……好痛！”deco后知后觉的喊疼，收起了自己的腿，侧躺在床上，两根胳膊都夹在腿间，安慰似得按摩自己的阴道口，好像那个粗暴的人不是自己。
+
+　　tix想把手臂假阳具收起来，但他也知道deco决定了的事不会轻易改变，他只能叹了口气，从床头的柜子抽屉里拿出一瓶润滑液。
+
+　　tix重新坐回deco的双腿之间，deco似乎从刚刚的疼痛中缓了回来，又回到了之前那副饥渴又魅惑的样子。她轻咬着下嘴唇，轻笑地看着tix，邀请他进入自己。
+
+　　tix咽了一下口水，将润滑液涂到整根手臂假阳具上，接着又挤了一些润滑液在deco的阴道口，他抚摸着那处柔软又温暖的地方，将润滑液涂抹均匀。
+
+　　deco有些抱怨地催促他：“快点进来吧，亲爱的，我已经等不及了……”
+
+　　假阳具的顶端抵住了deco的阴道入口，因为假阳具被刻意制作成了手的形状，那看起来就像是真的有人想要把手臂塞进deco的阴道一样……
+
+　　tix跟deco不是没在性爱上玩过更加激进的玩法，但是，那一般是大手安排他们这么玩的，无论是tix还是deco都是纯粹的承受方。可现如今呢，tix操纵着手里的假阳具的向前推进了一点，deco那饥渴的洞立刻就迎合了上来，像是贪吃的孩子一样将假阳具的前端包裹了进入。这是tix第一次主动做这种刺激的玩法，他感到自己的手在发抖。
+
+　　deco那敏感的阴道被撑开，她感到好像是内心中空缺的某个部分终于被填满了，近期变得异常饥渴的性欲终于得到了抚慰，快乐的感觉像是电流一样从阴道沿着神经一路流向大脑，deco的身体小小的痉挛了一下，发出满足的叹息。
+
+　　然而假阳具实在是太粗了，几乎是tix阴茎的两倍大小，deco只在它刚刚插入时舒服了一下下，很快的，她就高兴不起来了。
+
+　　即便她的身体经过三个多月的开发，早已经不是当初那个仅仅只是插入tix的阴茎就会疼到流眼泪的处女，可没经过很好前戏调动的阴道依旧很狭窄，tix只是将润滑液涂到了她的阴道口，没有均匀地涂抹阴道内部，她能感觉到自己的阴道内部依旧是干燥的，假阳具最初插入时会将润滑液也带入体内，可是插入的深度越深，润滑液的功效也就越弱。本就粗大的假阳具现在就像是一个要把她撕裂的刑具一样折磨着她。
+
+　　而tix刻意放缓的动作好像是屠夫用钝刀杀人一样，又加强了这种折磨的意味。
+
+　　deco看不见自己下体的情况，却能清晰地感受到那只被塑造成手形的假阳具，它那五根并拢的手指已经插入了自己的体内，并且在缓慢却不容抗拒地继续推进。到了手最粗的部分，也就是手指跟手掌相连的关节哪里，deco觉得那简直是要把自己撕成两半。
+
+　　然而，假阳具的前端却刚巧刺激到了她的G点，tix对她的敏感点实在是太了解了，完全没有寻找的过程，刚一插入就直奔她体内最敏感的地方，兴奋的感觉如海浪般向deco袭来，可痛苦也同样存在，她想要更多，她想要更加舒服，可她也痛到完全不敢动，两种完全不同的感受此消彼长，拉扯着她，让她本就因为困倦而不清晰的头脑变得更加混乱。
+
+　　“啊……亲爱的，他实在太大了，求你，慢一点点……”deco闭着眼睛，拼命地向身下伸手，像是抓住一根救命稻草一样抓住了tix的胳膊。她难得的摇着头，轻声祈求着tix，求他能够可怜她一下。然后她突然感到自己的阴道变得更加湿润了。
+
+　　deco原本以为是自己流血了，可睁开眼睛后，她看到那是tix为她挤出了更多的润滑液。
+
+　　“放松一点，deco……你太紧张了，这样会让你的阴道绞地更紧……”tix亲了亲她发抖的膝盖，柔声安慰。他将假阳具抽出来一点点，并抚摸了一下deco的阴蒂，那个可爱的小东西像是阴茎一样充血并硬了起来，像她的主人一样渴求着tix的关注。只是被tix揉了一下，强烈的刺激就让deco的身体就突然痉挛，正插着巨大假阳具的阴道狠狠收紧，假阳具的前端再次碾压G点，过量的刺激让女孩儿险些留下眼泪来，一股又一股的淫荡液体从阴道的深处流出，其中的大半被假阳具堵在阴道内，还有一部分溢出了阴道口，跟润滑液混合在一起，将deco和假阳具内内外外都润滑了一个遍。
+
+　　若不是有tix的手扶着假阳具，那根粗壮的手臂恐怕早已经在刚刚的一轮收紧中被挤出阴道了。见此情景，tix也知道deco感受到了快乐，他重新调整了假阳具的角度，接着就在完全没有提醒的情况下突然间狠狠插入。
+
+　　“啊！”
+
+　　假阳具最粗的部分在一瞬之间突破了狭窄的阴道口，疯狂地挤压着阴道内壁。deco虽然痛苦到表情都扭曲了，可是无法忽视的强烈刺激也让她感受到了前所未有的性奋。
+
+　　“天……天哪……”
+
+　　deco感觉自己都快要丧失语言能力了。
+
+　　虽然deco的阴道一直在收紧，好像是在品味吮吸假阳具一般，可是因为最粗的部分已经插入了阴道内部，他就像是个塞子一样将整根假阳具都卡在了阴道口，无论阴道如何收缩，都没办法将它挤出去。deco收缩阴道所能感受到的只有一波接着一波没有尽头的刺激。
+
+　　tix还坐在deco的两腿之间，deco完全没注意到，tix已经将自己的两只手都松开了，不需要tix的辅助，deco自己也能跟假阳具玩得很愉快……
+
+　　“亲爱的……”deco的声音里带了一些哭腔：“救救我，实在是太刺激了，我有些受不了了……”
+
+　　tix隔着裤子揉捏自己早就硬到极致的阴茎：“你其实很喜欢的，对吧……”
+
+　　deco是个有些强势的女孩儿，tix很少见到她这样哭泣的可爱样子，或者说，deco在被大手玩那些过分的玩法时也会哭泣，但是她很少向tix哭泣……虽然deco在哭，但是tix知道，那是她感到舒服时的反应……
+
+　　　　听着女孩可爱的哭声，看着她那被撑开的阴道，还有因为女孩儿收缩阴道的动作而不停颤动的巨大假阳具，tix拉开了自己的裤子拉链。
+
+　　“亲爱的，tix，亲爱的……”deco还是在呼喊着tix，她的手在下身不停摸索，想要触摸自己的爱人。
+
+　　tix握住了deco的手，肌肤相贴的感觉带给了deco一些安慰，但紧接着，tix将自己那坚硬的阴茎贴在了deco支起来的大腿上。
+
+　　女孩的大腿光滑又柔软，接触起来是跟阴道完全不同的感受，tix跪在deco的双腿之间，扭动腰部，让阴茎在大腿上蹭了几下。接着他调整了一下deco的姿势，将自己的阴茎挤进了deco的大腿和小腿之间。
+
+　　deco还在专心感受阴道内的假阳具，根本没时间在乎tix那根阴茎。tix就这样抱着deco的腿前后扭动腰部，抽插自己的阴茎，用deco柔软的双腿自慰。
+
+　　“亲爱的……你可不可以让它动一下……”
+
+　　不愧是deco，她很快就从那根巨大的手臂假阳具中找到了乐趣，直白又淫荡地向tix索要更多。
+
+　　tix觉得如果再继续下去，他可能会射精，于是便停止了自慰，从deco的腿间抽出自己的阴茎，虽说并没有射精，可溢出的前列腺液也已经让deco的腿湿漉漉的了。
+
+　　tix就这样盯着硬到极致的阴茎，压着deco的膝盖让她把腿打开地更大一些，接着直接挤到了deco身前。deco的洞就在tix的阴茎眼前，只要他想，随时都可以插入，而deco那饥渴到不停流口水的阴道也像是在欢迎tix一般蠕动收缩着。
+
+　　tix试着拉了一下手臂假阳具，发现它还结实地卡在阴道口，一点点都没办法退出来。
+
+　　既然不能出来，那tix握住了假阳具还遗留在deco体外的部分，旋转着向内插入。
+
+　　“哦！！天哪！！！这太刺激了！！”deco直接尖叫了起来。
+
+　　粗壮的假阳具碾压着deco体内所有敏感的角落，她的身体痉挛地更加严重，像是只脱水的鱼儿一样抓着tix的胳膊，除了大口喘气之外什么都做不到。
+
+　　“deco，你好可爱……”
+
+　　tix俯下身来，温柔地亲吻deco的嘴角。他一只手撑在deco肩膀附近，一只手抓着假阳具前后抽插，虽然亲吻的动作温柔，抽插的强度却凶狠，让deco除了阴道和假阳具之外什么都没办法想。
+
+　　其实，tix现在的姿势其实跟正常体位的性爱没有什么区别，他那坚硬的阴茎此刻正抵在deco的阴道附近，摩擦着deco敏感的阴蒂。
+
+　　被tix压在身上，阴道和阴蒂都接受着过量的刺激，deco本能地想要更多爱人的安抚，便紧紧地抱住了tix的脖子，在每次的惊呼之间都要与tix接吻。
+
+　　tix像是插入阴道一般耸动自己的腰部，将阴茎在阴蒂上边摩擦，前后抽插的动作将阴道那边的液体也带了过来，润滑着他们互相刺激着的敏感部位。deco的阴道就在下面一点点，如果tix某次抽插的动作比较大，他的阴茎能蹭到那根有他两倍粗的假阳具，阴茎再次向前顶时，阴茎前端会以一种想要插入一般的架势擦过阴道口，接着狠狠撞向deco的阴蒂，之后整根阴茎从上到下摩擦过脆弱敏感的阴蒂，deco早就因为过度刺激而兴奋地直翻白眼了。
+
+　　tix的身体又往下沉了一些，整个人都压在deco身上，她能感受到deco那微微隆起的胸部，她的胸部最近发育了好多，淫荡地乳头硬硬的立在那里，等待着有人能够揉捏。deco的肚子也有些轻微隆起，不知道是因为胖了还是其他原因。
+
+　　tix再一次将假阳具深深插入deco的体内，他与deco小腹相贴的那部分皮肤竟然也感受到了deco肚子的隆起，那根假阳具实在是太大了，每次插入都能让deco的肚子鼓起来一块。
+
+　　“啊……不，实在是太深了，快要插入子宫了……”deco失神地呼喊。
+
+　　tix看着身下的女孩兴奋到极致的脸，那根假阳具简直要让她的大脑坏掉一样。之前tix跟deco的性爱中，他自己的阴几乎从未让deco露出过这种快要死掉了一样的表情。
+
+　　“不……不要插入我的子宫……”deco还在呼喊。
+
+　　tix感受到假阳具还有好长一段留在deco的体外，如果他继续插入，假阳具完全可以深入deco的子宫，在之前他跟deco的性爱中，他自己的阴茎从未真的插入过deco的子宫内部。
+
+　　纵使deco留着眼泪摇头，tix却还是没有停止继续深入的打算，他握着手中的假阳具，回忆着deco子宫的位置，不断变换着姿势和角度，让假阳具的前端不断地撞击子宫口，只待子宫口也被刺激到放松的那一刻，让整根假阳具都狠狠插入。
+
+　　deco的拒绝没有任何成果，那根假阳具还是毫不留情地深入着，一副不插入子宫就绝不离开的架势。一阵艰辛的开拓之后，子宫口好像真的被撞击的再也没有了保护子宫的力气，微微张开了一个小口，给了假阳具插入的机会。
+
+　　如果换做是以前的deco，估计会对这种刺激的玩法张开双腿欢迎，可今天的deco却像是从噩梦中突然惊醒了一样，不知从哪里来了一股力气，竟然把tix从自己身上推开了。连带着那根假阳具也被从阴道里拔出了好多，淫乱的液体流的到处都是。
+
+　　假阳具的猛烈抽出让deco的阴道不再被填满，莫名的不安让她颤抖着收紧了阴道，她紧张地摸索着假阳具与自己的小腹，确定无事之后才稍微松了口气。
+
+　　　　“deco，你怎么了嘛？”tix本来已经在高潮边缘了，突然被推开，让他一下子从巅峰跌倒了谷底，就连阴茎都软了一些。此前的性爱中deco从未表现过如此强烈的拒绝，tix不知道发生了什么。
+
+　　deco咬着牙，将那根假阳具拔了出来，丢到一边：“我不想要它了。”
+
+　　tix看了看那个滚落到一边的假阳具，又看了看deco，她那刚刚被手臂假阳具插入的阴道一时间无法闭合，张开着一个大大的洞口，鲜嫩的粉色血肉裸露在外边，因为空虚而轻微收缩，好像在祈求什么东西再次填满它。
+
+　　“对不起……我以为你会喜欢……”tix沮丧地低着头，他的阴茎还硬着，他觉得自己被deco讨厌了。
+
+　　“你在说什么？”deco皱着眉看着他，好像在看一个傻子。
+
+　　“我……我以为你喜欢被插入子宫……对不起，对不起……我被你讨厌了……呜呜呜”tix说着说着就哽咽起来。
+
+　　“你在说什么傻话……”deco支撑着她疲惫的身体坐了起来，有些无奈地叹了口气，轻轻抚摸tix的脸：“我怎么会讨厌你呢？我在想什么……还有，你为什么觉得我想被插入子宫？”
+
+　　tix偷偷看了一眼被丢在一旁的假阳具，它还是那么狰狞可怕：“因为……我从没看过你像刚才那样反应激烈……我的阴茎比它小，也比它短……我没办法像它一样满足你……”
+
+　　“就因为这个？”理由实在太过离奇，deco甚至笑了起来。
+
+　　“难道这还不够吗？”tix用他湿漉漉的狗狗一样的眼睛看向deco。
+
+　　“好啦，没事啦。”deco把tix的头抱进怀里，像是妈妈安慰孩子一样轻轻拍着他的后背，柔声安慰：“我不讨厌那个假阳具，因为那是你送给我的，但我也不喜欢……我更喜欢你……亲爱的，tix……我更喜欢你。无论是你的阴茎还是你本人，我都喜欢。不要去跟一个玩具竞争大小好吗？你没注意到它都没能让我高潮吗……我只喜欢你……这个世界上没有什么能比你的阴茎更更让我达到高潮……其他再粗再长的东西都比不过你……”
+
+　　tix的头靠在deco怀里，感觉心情好了一点。
+
+　　他的耳朵紧贴在她的胸口，他能听到deco规律的心跳声。deco的体温偏高一点，她的胸部比初见时大了一些，乳头因为刚刚的性事还硬着。
+
+　　tix看着那个圆润可爱的粉色乳头，将一只手覆盖在了那只微微隆起的乳房上。deco的乳房小巧地一只手就能完全覆盖，揉捏一下，手感像是面团一样柔软。tix将deco的乳头夹在虎口哪里，一边按摩乳房，一边揉捏乳头。很快地，他就听到了deco饥渴的呻吟声。
+
+　　“deco，你爱我吗……我的阴茎真的让你很舒服吗？”虽然已经被安慰过了，可是tix依旧孩子气地追问。
+
+　　“当然了。”deco抚摸着tix柔软的金色头发。
+
+　　不知是谁推了一把，他们两个人躺倒进了厚重的床垫里，tix的脑袋还是紧贴着deco的胸部，他就躺在deco的胸部上，让柔软的胸部做他的枕头。
+
+　　tix揉捏把玩着deco的另一只乳头，听到deco继续说：“我很爱你，亲爱的，我永远都爱你，不用怀疑我对你的感情……而且，你在性爱上一直都做得很好，让我非常舒服……只是想想你的阴茎就足够让我湿润一整天了，我无时无刻不在期盼着你能插入我……亲爱的，我爱你……”
+
+　　“我也爱你，deco……”tix虽然小声，但是却努力地回应着。
+
+　　tix感觉自己的脸红了，他羞涩地想要捂着自己的脸，可不知道怎么的，那只从乳房上移开的手竟然伸向了deco下半身的隐私部位。
+
+　　沿着小腹一路下滑，路过硬着的阴蒂，翻开小阴唇，tix摸索着将自己的手指插入了deco湿润的阴道中。
+
+　　手臂假阳具已经抽出有段时间了，deco的阴道终于可以依靠自己的弹性完全收缩，可依旧不像之前一样紧致，tix插入了手指的一个指节，他感受到deco迎合着他努力收缩阴道口，却收效甚微。
+
+　　可是tix的手指还是太细了，deco轻声呻吟着，夹紧双腿，收缩阴道，想要从手指的插入中寻找一些快乐。
+
+　　“嗯……我好想要……亲爱的，给我更多，好吗……”deco抱着tix的头呢喃。
+
+　　tix插入了他的第二根手指。
+
+　　“还不够……亲爱的，我想要你的阴茎，我等不及了，你可以插入我吗……”deco张开了她的腿。
+
+　　“当然了，deco……”tix颇有些不舍地从deco的胸部爬起来，将自己的身体挤进deco的双腿之间，扶着自己又重新坚硬起来的阴茎，抵住了那一张一合饥渴地等待着自己的阴道。
+</div>
           </div>
         </div>
       </article>
     </section>
   </main>
 
-  <nav class="bottom-nav" aria-label="Chapter navigation">
-    <a class="is-current" href="#chapter-1"><span class="chapter-label">tomodachi</span> · Chapter 1</a>
-    <a href="#chapter-2"><span class="chapter-label">tomodachi</span> · Chapter 2</a>
-    <a href="../sexual-performance-assessment/index.html"><span class="chapter-label">Sexual performance assessment</span></a>
-    <a href="../school/index.html"><span class="chapter-label">school</span></a>
+  <nav class="bottom-nav" aria-label="Reader controls">
+    <a href="#top">Back to top</a>
+    <a href="#chapter-2">Go to latest</a>
+    <a href="../index.html">Back to archive</a>
   </nav>
 
   <script>
     const sizeInput = document.getElementById('fontSize');
     const resetBtn = document.getElementById('resetSize');
     const root = document.documentElement;
+
     sizeInput.addEventListener('input', (event) => root.style.setProperty('--reader-size', event.target.value + 'px'));
     resetBtn.addEventListener('click', () => { root.style.setProperty('--reader-size', '18px'); sizeInput.value = '18'; });
   </script>

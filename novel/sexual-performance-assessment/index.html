@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sexual performance assessment | Silent Orchard</title>
+  <title>sexual-performance-assessment | Silent Orchard</title>
   <style>
     :root {
       --bg: #0b1020;
@@ -26,202 +26,57 @@
       line-height: 1.7;
     }
     a { color: inherit; text-decoration: none; }
-    h1, h2, h3 { margin: 0; font-family: "Cormorant Garamond", "Noto Serif SC", serif; font-weight: 500; }
+    h1, h2 { margin: 0; font-family: "Cormorant Garamond", "Noto Serif SC", serif; font-weight: 500; }
 
-    .topbar {
-      border-bottom: 1px solid var(--line);
-      padding: 18px 0;
-      background: rgba(11, 16, 32, 0.84);
-    }
-    .topbar-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .brand {
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-    .nav {
-      display: flex;
-      gap: 20px;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+    .topbar { border-bottom: 1px solid var(--line); padding: 18px 0; background: rgba(11,16,32,0.84); }
+    .topbar-inner { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+    .brand { font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; }
+    .nav { display:flex; gap:20px; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); }
+    .page { max-width:1200px; margin:0 auto; padding:24px 20px 80px; }
+    .header { padding:10px 0 22px; }
+    .eyebrow { display:inline-block; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+    h1 { font-size: clamp(2.6rem, 5vw, 5rem); line-height:0.96; margin-bottom:8px; }
+    .meta { color: var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform: uppercase; }
+    .toolbar { display:flex; justify-content:flex-end; align-items:center; gap:12px; margin:12px 0 24px; color:var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .toolbar input[type="range"] { width:170px; accent-color: var(--accent); }
+    .toolbar button { background: rgba(255,255,255,0.03); color:var(--text); border:1px solid var(--line); border-radius:999px; padding:8px 12px; cursor:pointer; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .chapter-wrap { display:grid; grid-template-columns: 1fr; gap:28px; margin-bottom:28px; }
+    .chapter { border:none; border-radius:0; overflow:visible; background:transparent; padding:0; margin:0; }
+    .chapter h2 { font-size: clamp(1.9rem, 3vw, 2.8rem); padding:0 0 12px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:16px; }
 
-    .page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 20px 80px;
-    }
-    .header {
-      padding: 10px 0 22px;
-    }
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-    h1 {
-      font-size: clamp(2.6rem, 5vw, 5rem);
-      line-height: 0.96;
-      margin-bottom: 8px;
-    }
-    .meta {
-      color: var(--muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .toolbar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 12px;
-      margin: 12px 0 24px;
-      color: var(--muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .toolbar input[type="range"] {
-      width: 170px;
-      accent-color: var(--accent);
-    }
-    .toolbar button {
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px 12px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .chapter-wrap {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-bottom: 28px;
-    }
-    .chapter {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      overflow: hidden;
-      background: rgba(17, 24, 39, 0.9);
-    }
-    .chapter h2 {
-      font-size: clamp(1.9rem, 3vw, 2.8rem);
-      padding: 18px 18px 10px;
-    }
     .lang-grid {
       display: flex;
       gap: 18px;
-      padding: 0 18px 18px;
+      align-items: stretch;
     }
     .panel {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.02);
-      overflow: hidden;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      overflow: visible;
       min-width: 0;
+      flex: 1 1 auto;
     }
-    .panel-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .panel-body {
-      padding: 18px 18px 12px;
+
+    .panel-head { display:flex; justify-content:space-between; gap:12px; padding:0 0 10px; border-bottom:none; color:var(--muted); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
+
+    .text-content {
       font-size: var(--reader-size);
       line-height: 2;
-    }
-    .english-panel { flex: 7; }
-    .chinese-panel { flex: 3; }
-    .panel-body p {
-      margin: 0 0 1.1em;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
 
-    .bottom-nav {
-      position: sticky;
-      bottom: 0;
-      z-index: 20;
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      background: rgba(11, 16, 32, 0.94);
-      border-top: 1px solid var(--line);
-      padding: 12px 20px;
-      backdrop-filter: blur(12px);
-    }
-    .bottom-nav a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex: 0 0 auto;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.02);
-      color: var(--text);
-      border-radius: 999px;
-      padding: 9px 14px;
-      white-space: nowrap;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .bottom-nav a.is-current {
-      border-color: rgba(214, 196, 161, 0.5);
-      background: rgba(214, 196, 161, 0.08);
-    }
-    .bottom-nav .chapter-label {
-      max-width: 180px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    @media (max-width: 900px) {
-      .lang-grid {
-        flex-direction: column;
-      }
-      .chapter-wrap {
-        grid-template-columns: 1fr;
-      }
-    }
-    @media (max-width: 680px) {
-      .nav { display: none; }
-      .toolbar {
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-      .bottom-nav a .chapter-label {
-        display: none;
-      }
-      .bottom-nav a {
-        padding: 9px 12px;
-      }
-    }
+    .chapter-info { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; margin:0 0 16px; color:var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .chapter-info a { color:var(--text); border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:2px; }
+    .bottom-nav { position: sticky; bottom:0; z-index:20; display:flex; gap:10px; overflow-x:auto; background: rgba(11,16,32,0.94); border-top:1px solid var(--line); padding:12px 20px; backdrop-filter:blur(12px); }
+    .bottom-nav a { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; border:1px solid var(--line); background: rgba(255,255,255,0.02); color: var(--text); border-radius:999px; padding:9px 14px; white-space:nowrap; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .bottom-nav a.is-current { border-color: rgba(214,196,161,0.5); background: rgba(214,196,161,0.08); }
+    @media (max-width:900px){ .lang-grid{ flex-direction:column; } .chapter-wrap{ grid-template-columns:1fr; } }
+    @media (max-width:680px){ .nav{ display:none; } .toolbar{ justify-content:space-between; flex-wrap:wrap; } .bottom-nav a .chapter-label{ display:none; } .bottom-nav a{ padding:9px 12px; } }
   </style>
 </head>
-<body>
+<body id="top">
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">Silent Orchard</div>
@@ -235,8 +90,8 @@
   <main class="page">
     <header class="header">
       <div class="eyebrow">Reader</div>
-      <h1>Sexual performance assessment</h1>
-      <div class="meta">2 chapters • archive</div>
+      <h1>sexual-performance-assessment</h1>
+      <div class="meta">2 chapters • draft</div>
     </header>
 
     <div class="toolbar">
@@ -245,46 +100,648 @@
       <button id="resetSize" type="button">Reset</button>
     </div>
 
+    <div class="chapter-info" aria-label="Current chapter navigation">
+      <span>Current:</span>
+      <a href="#chapter-1">Chapter 1</a>
+      <span>•</span>
+      <a href="#chapter-2">Chapter 2</a>
+    </div>
+
     <section class="chapter-wrap">
+      <!-- ========== CHAPTER 1 ========== -->
       <article class="chapter" id="chapter-1">
         <h2>Chapter 1</h2>
         <div class="lang-grid">
-          <div class="panel english-panel">
+          <div class="panel">
             <div class="panel-head"><span>English</span><span>1</span></div>
-            <div class="panel-body">
-              <p>When the light fell from the ceiling, every inch of the room seemed to be interrogated all over again. She stood before the mirror, lowering her gaze to her own shadow, as if awaiting a verdict that had never truly been completed.</p>
-              <p>The assessment began with rules, not emotion. The inspecting gaze was more precise than any language, like an invisible hand tapping on the skin, trying to pull out the unnatural from each subtle detail.</p>
-              <p>She did not rush to explain, nor did she rush to defend herself. Because the answer had already been written into the glass and the air at that very moment, waiting only for someone to notice it.</p>
+            <div class="text-content">
+Sexual performance assessment, consecutive orgasms, forced orgasms, prostate stimulation, dry orgasms
+
+　　
+
+"We are going to do some assessments today... Please come to the conference room on the top floor at a certain time."
+
+You arrived at the meeting room at the time you had arranged with your secretary. The meeting room was on the top floor of the symbiotic building. Inside, there were only some filing cabinets, a small table, and two chairs, nothing else.
+
+The secretary stood ramrod straight next to one of the chairs, holding a folder in her hand, waiting for you to appear like an NPC in a game.
+
+“Tix, right? Come here and sit down,” the secretary said, gesturing to the metal armchair next to him.
+
+"Okay, manager." Why did you have to sit down, and specifically next to him...? You felt a little strange, but you obediently sat down next to the secretary.
+
+This is a large metal armchair, which looks very similar to the chair that President Washizu has in his office.
+
+As soon as you sit down, your secretary adjusts the back of your chair so that you lean back as if you're half-reclining.
+
+"Huh? Do we have to do that?" You felt increasingly puzzled and asked without realizing it.
+
+"Hmm... there are still some preparations to be made." The secretary's somewhat indistinct voice came from behind you as he opened a filing cabinet, seemingly to take something out.
+
+You hear the clanging of small metal objects and a sense of unease rises within you. Sure enough, when the secretary comes into view again, he is carrying some leather belts with metal buckles, which look like dog collars.
+
+The secretary placed the folder on the small table next to you, skillfully grabbed your left ankle, lifted your knee, and pressed your thigh and calf tightly together. Then, she quickly used a belt to bind it.
+
+His movements were incredibly swift; your body was even more obedient to him than you could move yourself. In just a few seconds, your thighs and calves were locked together, with no way to break free.
+
+Then the secretary did the same thing again, fixing your right leg as well, forcing both your legs to bend and pressing them against the armrest of the chair. You felt your lower body being pulled and spread open, your legs like the letter M, unable to move, your private parts forced to be exposed. Although you were still wearing pants, this position still made you very uneasy.
+
+Slow to react, you finally recovered from your initial shock and asked, "Manager... what kind of assessment are we doing? Why are we making this gesture?"
+
+The secretary was just about to secure your legs to the armrest when he heard your words, and he paused in his hand holding the straps.
+
+Didn't the president tell you?
+
+"Huh?" You quickly recall, did President Washizu say anything to you? "It seems like he didn't."
+
+“That shouldn’t be the case…” The secretary flipped through the contents of the folder: “According to the interview evaluation, President Washizu said you are very open-minded and worth cultivating… Are you sure you don’t know anything?”
+
+The word "openness" carries a strong sense of ambiguity, reminding you of the morning's interview when President Washizu pressed you against his desk and then pressed his entire body against you. His rough, large hand lifted your chin, while his other hand caressed your thin chest, lingering near your collar, almost penetrating your clothes.
+
+Your small frame was enveloped in Washizu's shadow. You were stunned by his strong body and solid muscles; the faint scent of sweat on his skin was incredibly alluring, exuding masculine hormones. You knew perfectly well that he was only gently caressing you, but his size and strength were simply too much. The pressure of his hand on your lungs made it hard to breathe. You felt like you were going to be crushed to death.
+
+Your face is flushed with excitement and shame, you can't utter a complete sentence, yet you're eagerly anticipating what will happen next.
+
+Seeing your reaction, President Washizu seemed very satisfied. He chuckled, moved away from you, marked something on your interview evaluation form, and told you that you had passed the interview.
+
+He assigned you to the sales department to work as a subordinate of the secretary, and then the secretary invited you here for an onboarding assessment.
+
+"Openness... doesn't mean... what you were looking forward to doing with President Washizu this morning, right...?"
+
+Seeing your still incredulous expression, the secretary explained somewhat helplessly, "You know we're the sales department, right? We need to deal directly with clients, which naturally includes attracting clients... Some clients might make rather unreasonable demands, so we need some employees who are more accepting... Of course, we will try our best to ensure the safety of our employees." The secretary quickly added.
+
+"As for the scope of safety..." the secretary carefully chose her words, "it's the content of this assessment. I need to assess your limits so I can better arrange work for you... Although it's a bit strange why you weren't aware of it, since even the president said you're open-minded, it should be fine. Please cooperate with my assessment; it's for your own good."
+
+After hearing this, you'll feel your jaw drop. Is the job Washi-no-Sora has assigned you to be a gigolo?! How can you accept this?!
+
+You want to get up from the chair, but your bound legs prevent you from using your strength, so you can only twist and turn in the chair.
+
+The secretary sighed and, with slow but forceful movements, pressed you back into your seat. She picked up the straps from the desk and secured your legs to the armrests on either side of the chair, rendering you completely immobile.
+
+“That’s why I’m putting you in restraints…” the secretary said. “You might regret it at any time. For your own good, the restraints will help you persevere until the evaluation is over. Otherwise…” The secretary turned to a page in the folder and showed it to you: “According to the contract terms, you will have to pay huge compensation and may even face imprisonment.”
+
+"What?! Impossible!" you screamed, unwilling to accept it.
+
+"You signed this yourself, and your signature is here." The secretary flipped the contract over, and your signature and seal were clearly visible.
+
+You remember now, this was something President Washizu tricked you into signing during the interview. At that time, you had just sat up from the table, your head was still fuzzy, and you were still immersed in the excitement of being pressed down on the table and stroked by a powerful man... Your brain wasn't working at all! When Washizu asked you to sign and stamp, you just did as he said.
+
+You were so frustrated you almost wanted to die on the spot. How could you have been so blinded by lust? Now that you've signed this contract, how are you going to live the rest of your life?
+
+The secretary and the contract in his hand are right in front of you, and you suddenly jump up, wanting to tear the paper off.
+
+However, the secretary simply took a few light steps back, dodging your attack. He put the folder away and said to you in a gentle tone, "I don't recommend that you tear it up. It's just a photocopy, tearing it up won't do any good... If I were you, I would obediently listen to you. You can make money just by lying down and spreading your legs... As for your salary, the president will not treat you unfairly."
+
+Your legs are still fixed to the armrests of the chair, and the act of reaching out makes you feel as if your lower body is being torn apart... You lie back in the chair in frustration, annoyed that you are not flexible enough.
+
+The secretary seemed to think you had accepted reality. He put the folder back on the table, then picked up a sealed package. Inside was a small scalpel, but it appeared to contain only the handle. The secretary then took out a small paper package, tore it open by the top, and used tweezers to attach the blade to the handle. You realized this was a highly professional, aseptic procedure, like the preparation for a medical operation. The thought of being the one who would bear the brunt of it all made you extremely uncomfortable.
+
+He walked up to you, between your legs, and gently stroked your tight crotch with his left hand. You felt a chill run down your spine as you looked at the gleaming scalpel.
+
+"Manager..." you call him softly.
+
+"Relax, don't tremble." The secretary commanded you in a gentle yet extremely cold voice: "This knife is very sharp, you don't want your penis to be cut off, do you?"
+
+"No..." you bite your lip.
+
+The secretary pulled up a piece of fabric from your crotch, where your penis had pushed it higher than the rest of your pants. Like a professional surgeon, he precisely cut the seams connecting the fabric with a scalpel, without severing the fabric itself. With just a few cuts at a few key seams, your jeans fell apart, revealing loose, soft white cotton underwear underneath.
+
+You feel your penis has lost the protection of your jeans, it feels a little cool, and you want to get engorged.
+
+“My pants…why…” You don’t understand why the secretary would do such a thing. He could have let you take off your pants yourself instead of cutting them up…You’re a poor wretch, and this is the only pair of pants you can wear out the door.
+
+The secretary pointed the knife at your underwear: "Don't worry. The company will provide you with a uniform."
+
+"I...I, I also have days off where I can wear my own clothes..." You originally thought that rest was a matter of course, but when you thought about the unfair contract that President Washizu had cheated you out of, you became doubtful again and added, "I can rest, right?"
+
+“Uh…” the secretary hesitated for a moment.
+
+"Does this mean I'll have to work 24/7 from now on?" You almost burst into tears.
+
+“You have days off, but…” the secretary changed the subject, “As far as I know, President Washizu intends for you to stay at the Washizu mansion on your days off. He seems to have other plans for you, and he also has other considerations regarding your attire…”
+
+"What? What does he want me to do?"
+
+"Hmm..." Judging from the secretary's expression, he clearly knew something, but in the end he only replied, "Right now, you should focus your energy on the evaluation. You'll find out what happens later."
+
+"No..." You can imagine that it's a hell that even a secretary wouldn't want to talk about. You're really going to cry now.
+
+But instead of comforting you, the secretary swiftly slashed your underwear into pieces with a scalpel, exposing your penis directly to the air.
+
+Being coldly scrutinized by your secretary isn't the most shameful thing. What's even more shameful is that your penis is already slightly engorged with blood, and it seems eager to jump out of the incision made by the secretary, limply raising its head and swaying in the air.
+
+"No..." The knife being pointed at your genitals arouses you even more. You look like a masochist or a sex addict. You feel tears welling up in your eyes.
+
+The secretary looked at your penis with a slightly displeased expression. But this wasn't because of your lewdness, but because: "Your penis is too small, far from the normal size..."
+
+Such a blunt comment made you blush, almost forgetting your miserable situation, and you started to argue: "I...I can still grow up..."
+
+The secretary gave you a slightly disdainful look, as if he didn't believe you, but he quickly added, "Never mind, I'm just here for an evaluation. As for whether or not to have the enlargement surgery, that's up to President Washiu to decide."
+
+"Enlargement surgery?!" You can hardly believe your ears: "No, please, I can still grow, give me time, I don't want to have surgery on my penis."
+
+The secretary shrugged helplessly: "It's not up to me to decide. As I said, it's up to Lord Washizu to decide."
+
+He didn't want to waste time on meaningless topics, and ignoring your crying, he said, "Alright, let's start the first assessment now. Just relax."
+
+The secretary told you to relax, but he took a tube of lubricant and squeezed a lot of the cool liquid onto your penis.
+
+"Ah..." You shivered from the sudden stimulation. Thick lubricant flowed down from the head of your penis, accumulating at the base, where it was then scooped up by your secretary and carefully spread all over the shaft.
+
+"My God..." you exclaimed softly, your penis fully erect, almost bursting with hardness. The secretary coldly went about her work as if fiddling with some kind of machine, completely ignoring you.
+
+You feel his long, slender fingers gently caressing your entire penis, and as he applies lubricant to the head of your penis, his slightly rough palm directly stimulates your most sensitive spot.
+
+"Ah, ah... no..." Before you could even savor it, you uncontrollably reached orgasm, your penis twitched, and you ejaculated into your secretary's hand.
+
+The secretary looked at the white liquid in her palm and at you, still immersed in your orgasm, somewhat shocked: "So fast? I was just applying lubricant. How are you so sensitive?"
+
+"Ha...ha..." Gasping for breath after the climax, you found yourself apologizing for some reason: "I'm sorry...I...I came too fast..."
+
+The secretary ignored your crying and instead rubbed your semen between his fingertips. He spread his fingers, and the semen formed a silvery thread on his fingertips. He asked you, "Your semen is too thin. Have you masturbated in the last three days?"
+
+"Ah..." You were so shocked you couldn't speak, and shame made you blush instantly.
+
+The secretary, however, didn't care about your feelings and pressed, "When did you masturbate?"
+
+"Yesterday...last night..." you mumbled in a low voice, hoping the secretary didn't hear you.
+
+But the secretary heard this, pondered for a moment, then sighed and patted your thigh to put you at ease: "It's okay... don't blame yourself. The nature of our work makes it impossible for us to abstain from sex for long periods. Only in this state can we obtain more realistic evaluation data."
+
+Afterwards, the secretary wiped her hands clean and wrote something down on a form in the folder.
+
+You have no idea what he wrote. You feel that your most shameful moment has been permanently preserved by your secretary with cold yet meticulous care, as if a doctor had used a cold scalpel to cut open your body and examine its interior...
+
+You look at your lower body, legs wide open, bound to either side of the chair, your pants ripped open with a huge tear, your limp penis, still in the refractory period after ejaculation, draped over your lower abdomen. It's truly an unsightly sight...
+
+The secretary returned after finishing his notes, stretching his fingers as if preparing for a grand hand exercise. He asked, "Have you rested enough? The second round is about to begin."
+
+"What?" you exclaimed in disbelief. "How can there still be more? Wasn't it already over?"
+
+The secretary frowned: "What I need is your maximum data. You've only been rubbed a few times and ejaculated the first time... The real evaluation has only just begun."
+
+"No... Oh my god..." You were on the verge of tears when you realized that everything was far from over.
+
+Your body was far from recovered, and direct stimulation not only failed to arouse you but also caused you pain. You shook your head desperately, pleading with your secretary to be gentler, but he seemed not to hear you, simply continuing his work indifferently. Contrary to his expressionless face, his hands were incredibly skillful, manipulating your penis as if it were a magician's tool. You had never been touched by anyone before, and being served with such skill during your refractory period made your sensitive penis feel like it was about to break.
+
+Your hips began to sway uncontrollably, as if trying to escape your secretary's hands, but your legs were firmly bound to the chair, and you couldn't move. You covered your face with your hands, afraid to look at what was happening beneath you, but you could still hear your own shameful pleas for mercy. At this moment, you were somewhat glad that your secretary had tied you up; if it weren't for those straps, you didn't know how your body would have twisted and turned.
             </div>
           </div>
-          <div class="panel chinese-panel">
+          <div class="panel">
             <div class="panel-head"><span>中文</span><span>1</span></div>
-            <div class="panel-body">
-              <p>灯光从天花板落下时，房间的每一寸空气都像被重新审讯了一遍。她站在镜子前，低头看着自己的影子，仿佛正在等待一项从未真正完成的结论。</p>
-              <p>评估开始于规矩，而不是情绪。审视的目光比任何语言都更准确，像一只无形的手在皮肤上敲打，试图从每一处细节里挑出非自然的面孔。</p>
-              <p>她不急着解释，也不急着辩白。因为答案早就在那一瞬间被写进了玻璃和空气里，只等被人看见。</p>
+            <div class="text-content">
+　　性能力评估，连续高潮，强迫高潮，前列腺刺激，干性高潮
+
+　　
+
+　　“我们今天要做一些评估……请在某时某刻来到顶楼的某会议室。”
+
+　　你在跟秘书约好的时间来到了会议室，这间会议室在共生的顶楼，屋里只有一些文件柜，一个小桌子和两把椅子，除此之外别无他物。
+
+　　秘书笔直地站在其中一把椅子旁边，手里拿着一个文件夹，像是游戏里的npc一样等你出现。
+
+　　“tix对吧，过来这里，请坐下吧。”秘书指指他旁边的金属扶手椅说道。
+
+　　“好的，经理。”为什么只要你坐下，而且是坐在他身边呢……你感到有些奇怪，但还是顺从地坐在了秘书身边。
+
+　　这是一把很大的金属扶手椅，看起来跟社长室里鹫巢社长的椅子很像。
+
+　　你刚坐下，秘书就调整了座椅靠背，让你像是半躺一样往后靠。
+
+　　“咦？要这样做吗？”你感到越发奇怪，不觉问了出来。
+
+　　“嗯……还要做一些准备。”秘书有些含糊地声音从你身后传来，他打开了文件柜，似乎要拿一些东西出来。
+
+　　你听到一些金属小东西互相碰撞的声音，心中升起一股不安，果然，当秘书再次走进你的视线时，他的手里拿了一些带有金属锁扣的皮带，看起来像是栓狗的项圈。
+
+　　秘书将文件夹放在你身边的小桌子上，熟练地抓起你左边的脚腕，抬起你的膝盖，让大腿和小腿紧紧贴在一起，之后十分迅速地拿皮带进行了束缚。
+
+　　他的动作十分利落，你的身体在他的操纵下甚至比你自己动还要更听话，不过几秒钟的时间，你的大腿和小腿就被固定在一起了，没有办法挣脱。
+
+　　之后秘书又如法炮制，将你的右腿也固定住，你的两条腿都被迫曲起来，被秘书压到座椅扶手上。你感受到自己的下半身正被拉扯着张开，两条腿像是个字母M一样，无法动弹，隐秘的地方被迫展露出来，虽然你还穿着裤子，但这样的姿势依旧让你非常不安。
+
+　　慢反应的你终于从最初的震惊中回过神来，问道：“经理……我们要做什么评估？为什么要摆出这样的动作？”
+
+　　秘书这会儿正打算将你的腿固定到扶手上，听到你的话，他拿着束带的手顿了一下。
+
+　　“社长没有告诉你吗？”
+
+　　“咦？”你急速回忆，鹫巢社长有跟你说什么吗？“好像什么都没有。”
+
+　　“不应该啊……”秘书翻阅起了文件夹中的内容：“从面试评价上来看，鹫巢社长说你非常开放，值得好好培养……你确定你什么都不知道？”
+
+　　“开放……”这个词强烈的暧昧属性让你回忆起了，上午面试的时候，鹫巢社长把你按在了他的办公桌上，之后整个人都压了上来。他粗糙的大手挑起了你的下巴，另一只手抚摸着你单薄的胸口，在衣领附近徘徊，几乎要深入衣服。
+
+　　你瘦小的身体笼罩在鹫巢大人的阴影里，你震惊于他健壮的身体和结实的肌肉，他身上淡淡的汗味充满了迷人的男性激素。你很清楚他只是在轻轻地爱抚，可他块头和力气都太大了，那只手的力量压在肺部让你有些喘不过气来。你觉得你要被他压死了。
+
+　　你因为兴奋和羞耻而满脸通红，说不出一句完整的话，却期待着接下来还能发生什么。
+
+　　见你如此反应，鹫巢社长似乎是非常满意。他轻笑了一下，从你身上离开，在你的面试评价表上标记了什么，告诉你面试通过了。
+
+　　他把你安排到了营业部，去做秘书的下属，之后就是秘书约你来这里做入职评估。
+
+　　开放……不会指的就是……上午你正期待着能跟鹫巢社长做的事吧……
+
+　　见你还是一脸的不可置信，秘书有些无奈地解释：“你知道我们是营业部吧，我们需要直接跟客户对接，自然也包括拉客户……有些客户可能会提出比较过分的要求，所以我们需要一些，接受度比较广的员工……当然了，我们会尽量保证员工的安全。”秘书立刻补充。
+
+　　“至于安全的范围……”秘书斟酌着说法：“就是这次评估的内容，我要评估出你的极限，才能更好地为你安排工作……虽然有些奇怪你为什么不知情，但既然社长大人都说你开放，那应该是没问题。请你配合我的评估，这也是为你好。”
+
+　　听完你觉得自己的下巴都要惊掉了，鹫巢给你安排的工作就是去做鸭吗？！这怎么可以接受呢？
+
+　　你想从椅子上爬起来，但是被束缚住的双腿让你使不上力，只能在椅子上扭来扭去。
+
+　　秘书叹了口气，用缓慢但不容抗拒的动作将你重新按回座位上，从桌子上重新拿起束带，将你的双腿固定在椅子两侧的扶手上，这下你彻底动不了了。
+
+　　“这就是我为什么要给你上束缚……”秘书说道：“你可能会在任何时候后悔，为了你自己好，束缚能帮助你坚持到评估结束，不然……”秘书把文件夹中的某一页翻到你面前：“根据合同条款，你要付出巨额赔偿，或许还会有牢狱之灾。”
+
+　　“什么？！不可能！”你尖叫着，不愿意接受。
+
+　　“这是你自己签的，这里还有你的签名。”秘书把合同往后翻了翻，你的签名和印章无比清晰。
+
+　　你想起来，这是鹫巢社长在面试的时候诱惑你签下来的，那时候你才刚从桌子上坐起来，头脑还昏昏沉沉的，沉浸在被强大的男人压在桌子上抚摸的兴奋……脑子根本不转！鹫巢让你签字盖章的时候你就直接照做了。
+
+　　你懊恼地几乎想要当场死掉，怎么能这么精虫上脑呢！签了这份卖身契，自己的后半辈子可怎么过啊。
+
+　　秘书和他手里的那份合同就在你眼前，你突然蹦了起来想要去撕掉那张纸。
+
+　　然而秘书只是轻盈地后退了几步，躲过了你的袭击，他将文件夹收起来，好声好气地跟你说：“我不建议你撕掉它，这只是复印件而已，撕了也没用……如果我是你，我会乖乖听话，只是躺下张开腿就能赚钱……工资方面，社长大人不会亏待你的。”
+
+　　你的双腿还固定在座椅扶手上，伸手出去的动作让你觉得下半身好像被撕裂了一样……你挫败地躺回椅子上，懊恼于自己不够柔软。
+
+　　秘书似乎认为你已经接受了现实，他将文件夹放回桌子上，接着拿起一个密封的包装袋，打开之后，是一把小巧的手术刀，但似乎只有刀柄。秘书又拿出来一个小的纸质包装，捏着包装袋的顶端撕开，用一把镊子把刀头安装到刀柄上。你意识到这是非常专业的无菌操作手法，像是医疗手术的前期准备一样，想到自己就是那个要承受一切的人，你浑身的不自在。
+
+　　他走到你面前，你的两腿之间，左手轻轻抚摸你紧绷的裤裆。你感觉到看着那把寒光闪闪的手术刀，害怕地发抖。
+
+　　“经理……”你小声地叫他。
+
+　　“放松，不要发抖。”秘书用一种温柔但又十分冷漠的声音命令你：“这把刀十分锋利，你也不想被切断阴茎吧。”
+
+　　“不……”你咬紧嘴唇。
+
+　　秘书拉起你裤裆上的一块布料，那里被你的阴茎顶地比其他地方高。他像是一个专业的外科医生，操作着手术刀，精准地切断了链接布料的缝线，而没有切断布料本身。只在几个关键的接缝处切了几刀，你那条牛仔裤就分崩离析了，露出地下宽松柔软的白色纯棉内裤。
+
+　　你感到自己的阴茎失去了牛仔裤的保护，有些凉凉地，想要充血。
+
+　　“我的裤子……为什么……”你不理解秘书为什么要做这种事，他本可以让你自己脱掉裤子，而不是切碎它……你是个穷鬼，你只有这一条能穿出门的裤子。
+
+　　秘书开始将刀尖对准你的内裤：“不用担心。公司会为你提供工作制服。”
+
+　　“我……我，我也有可以穿自己衣服的休息日……”你原以为休息是天经地义的，可想到鹫巢社长欺骗你欠下的不平等合同，你又怀疑起来，补了一句：“我能休息的，对吧？”
+
+　　“呃……”秘书迟疑了一下。
+
+　　“难道以后我要7*24无休吗？”你几乎要哭起来。
+
+　　“你有休息日，但是……”秘书话锋一转：“据我所知，鹫巢社长打算让你在休息日里待在鹫巢宅邸，他对你似乎有别的安排，你的穿着他也另有考虑……”
+
+　　“什么？他要我做什么？”
+
+　　“嗯……”看秘书的表情，他很明显知道些什么，但是他最终只是回答：“现在，你还是把精力放在评估上比较好，之后的事你早晚会知道。”
+
+　　“不……”可以想象那是秘书都不愿意说出口的地狱，你这下真要哭出来了。
+
+　　但秘书并安慰你的意思，他操作着手术刀飞快地把你的内裤也切成碎片，这下你的阴茎直接暴露在了空气中。
+
+　　被秘书冷漠地审视自己的阴茎还不是最羞耻的，更羞耻的是，你的阴茎已经有些轻微充血了，他似乎是迫不及待地从秘书切开的切口里跳出来，软塌塌地抬着头，在空气里晃动。
+
+　　“不……”被刀子比划着下体让你更加兴奋，你看起来像是个有受虐狂或者性瘾患者，你觉得眼泪已经流出了眼眶。
+
+　　秘书看着你的阴茎，面色有些不悦。但这不是因为你的淫荡，而是因为：“你的阴茎有些太小了，离正常尺寸还差很远……”
+
+　　这样直白的点评让你的脸红了起来，简直要忘记了自己悲惨的处境，争辩起来：“我……我还能长大……”
+
+　　秘书略微有些蔑视地看了你一眼，似乎是不相信你的话，但是他很快又说：“算了，我只是来做评估的，至于要不要去做增大手术，那由鹫巢社长决定。”
+
+　　“增大手术？！”你简直不敢相信自己的耳朵：“不，求你，我还能长大，给我时间好吗，我不想在阴茎上做手术。”
+
+　　秘书无奈地耸耸肩：“这不由我决定，我说过了，那由鹫巢大人决定。”
+
+　　他不是很想在无意义的话题上浪费时间，无视哭泣的你说道：“好了，现在开始第一项评估吧，你只要放松就好了。”
+
+　　秘书嘴上说着让你放松，可他却拿过来了一管润滑液，将微凉的液体挤了好多在你的阴茎上。
+
+　　“啊……”你因为这突如其来的刺激而打了个寒战，粘稠的润滑液从阴茎的头部向下流淌，积攒到根部，又被秘书的手捧了起来，仔细的涂满整根柱身。
+
+　　“我的天哪……”你低声地惊呼，你的阴茎已经完全勃起了，硬到几近爆发。秘书像是在摆弄什么机械一样冷漠地做着自己的工作，完全不看你。
+
+　　你感受到他修长的手指轻柔地抚摸过整个阴茎，在将润滑液推向阴茎头部时，他那略微有些粗糙地掌心直接刺激到了你的你最敏感的地方。
+
+　　“啊，啊……不……”还没来得及仔细感受，你就不受控制地达到了高潮，阴茎抖了一下，射在了秘书的手里。
+
+　　秘书看着手心的白色液体，还有沉浸在高潮中的你，有些震惊：“这么快？我只是在做润滑而已。你怎么这么敏感？”
+
+　　“哈……哈……”高潮之后的你喘着粗气，心里不知道怎么想的，竟然道起歉来：“对不起……我……我太快了……”
+
+　　秘书没有理会你的哭泣，反而是用指尖搓捻着指尖你的精液。他分开手指，精液在指尖上拉起一根银丝，他问你：“你的精液太稀薄了，最近三天自慰过吗？”
+
+　　“啊……”你被惊到说不出话，羞耻让你一瞬之间就脸红了。
+
+　　秘书却并不在乎你的感受，追问：“什么时候自慰的？”
+
+　　“昨……昨天……晚上的时候……”你小声地含糊着回答，希望秘书没有听见。
+
+　　但秘书听到了，他沉思着，之后叹了口气，拍了拍你的大腿让你放松：“没事……不必自责，工作性质让我们没办法长期禁欲，你这样的状态才能得到更朴实的评估数据。”
+
+　　之后秘书擦干净了自己的双手，在文件夹内的某张表格上记录了些什么东西。
+
+　　你不知道他写了些什么，你感觉自己最羞耻的瞬间被秘书冷漠却又严谨地永久保存了，好像是被医生用冰冷的手术刀用破开身体检查内部一样……
+
+　　你看着自己的下半身，双腿大开，被束缚在椅子两侧，裤子被切了开巨大的口子，刚刚射精完，正处于不应期的疲软阴茎搭在小腹上，真是不像样啊……
+
+　　秘书记录完又又回来了，他做着手指的拉伸动作，似乎在为一场盛大的手部运动做准备，他问你休息好了吗？第二轮要开始了。
+
+　　“什么？”你感到难以置信：“怎么还有，不是已经结束了吗？”
+
+　　秘书皱眉：“我需要的是你的极限数据，你才刚被摩擦了几下，射了第一次而已……真正的评估才刚刚开始。”
+
+　　“不……天哪……”得知一切还远未结束的你欲哭无泪。
+
+　　你的身体还远没有恢复活力，直接的刺激不但没办法让你兴奋起来，反倒让你感觉到了痛苦。你拼命地摇头，用哭腔求着秘书轻一点，但他却好像没有听到你说的话，只是冷漠地工作着。与他毫无表情的脸相反，他的双手极富技巧，那双手简直像是在变魔术一样，将你的阴茎当做什么道具一样摆弄。你之前从未被其他人触摸过身体，在不应期被这样的技巧侍奉，让你敏感的阴茎好像要坏掉了一样。
+
+　　你的臀部也开始不受控制地摆动，像是要躲开秘书的手，可是你的双腿已经被牢牢地捆在椅子上了，你动弹不得。你用双手捂住脸，不敢看身下的情况，可你的耳边依旧能听见自己那令人羞耻的求饶声。这会儿，你倒有些庆幸秘书将你捆了起来，如果不是那些束带，你不知道自己的身体会扭动成什么样子。
+    
             </div>
           </div>
         </div>
       </article>
 
+      <!-- ========== CHAPTER 2 ========== -->
       <article class="chapter" id="chapter-2">
         <h2>Chapter 2</h2>
         <div class="lang-grid">
-          <div class="panel english-panel">
+          <div class="panel">
             <div class="panel-head"><span>English</span><span>2</span></div>
-            <div class="panel-body">
-              <p>Silence gradually took shape in the room, like a stone being polished into finer contours. At last, she raised her head, her gaze no longer evasive, but carrying the clarity that follows exhaustion.</p>
-              <p>When that boundary was gently opened, the real divide was not who stepped back first, but who finally admitted that being seen did not necessarily mean being understood.</p>
-              <p>The story had not truly ended; it had simply moved breathing from the surface to a deeper place, like dusk falling across wood grain, making the outlines more distinct.</p>
-            </div>
+            <div class="text-content">
+At the request of President Washizu, you arrive at his residence in the suburbs of Tokyo on a weekend morning.
+
+Your servant tells you that President Washizu is in the basement and asks you to go there too. You're a little confused about what you're doing in the basement so early in the morning, but you go anyway.
+
+On your way downstairs, you see that the basement door is not closed, and you think that President Washiu might have left the door open for you. However, as you get closer, you realize that something is wrong.
+
+There was an indescribable sweet scent in the air, a scent you'd only ever smelled on a secretary.
+
+From the day you started working with your secretary, you could smell that scent. At first, you thought it was the smell of your secretary's shampoo or laundry detergent, and you even wanted to ask him for the brand. But you quickly realized that it wasn't the smell of any cosmetics. That scent only appeared in the middle of your work, or when the work went deeper. At first, it was only faint, but as the secretary's naked body was fully explored, and as the men ejaculated, that scent became stronger and stronger, wafting into the air along with the smell of semen.
+
+Generally speaking, when the work process reaches this stage, you have little autonomy, so you never ask your secretary what it is.
+
+Until two days ago, you finished a relatively simple task in your hotel room. The secretary packed the signed contract into his backpack, carried you into the bathroom to wash you as usual, and then carried you out again. He's been like this since his first day on the job; after finishing, he's the only one allowed to wash you, but he never lets you help him, or even look at you. He always does his own cleaning.
+
+Previously, you were always very tired or in pain, and your secretary wouldn't let you help, so you didn't ask any questions. But this time, you feel that your physical condition is okay, and you want to help your secretary with cleaning.
+
+You tried knocking on the bathroom door, but the secretary didn't respond. You could hear the shower, though; perhaps she was taking a shower and hadn't heard you… You imagined her naked, completely soaked body, and blushed. It wasn't the first time you'd had sex with your secretary, but in reality, the opportunities for your skin to touch were pitifully few.
+
+You take a deep breath and push open the door, but what greets you, besides the thick mist, is that sweet scent whose origin you can never quite grasp.
+
+"Hmm...uh..." You heard the secretary's suppressed breathing.
+
+However, the secretary was nowhere to be seen in the shower room. It wasn't until you looked down that you saw her lying on the floor, holding onto the edge of the bathtub.
+
+And next to it was a tube with its cap already unscrewed, which looked like some kind of medicine.
+
+The secretary was barely supporting his body with his hands against the bathtub, lying on his side in an awkward position with his legs slightly bent, which meant that his buttocks were directly facing you on the other side of the bathroom door.
+
+You see his anus, which has just been penetrated by multiple men. Although it has been simply cleaned to remove the overflowing semen, the marks of over-dilation haven't been washed away immediately, leaving it wide open. You remember just now, a man tried to thrust his fist deep into your body, but the secretary stopped him. It was that man's large fist and forearm that prevented the secretary's anus from closing on its own. Now it's wide open, a sizable hole, the ravaged, tender red flesh faintly visible.
+
+But what will shock you most is that the secretary is struggling to fold his body and insert his fingers into that already pitiful anus. He has inserted three fingers, but it is still not enough, and he keeps pushing his wrist upward, trying to go even deeper.
+
+Never expecting to see such a scene, you were completely stunned.
+
+"Ah...no..." Whether it was touching his prostate or being caught in the act arousing him, the secretary suddenly screamed upon seeing you, his body suspiciously trembling. His voice wasn't as soft and seductive as when he served clients; instead, it was a mixture of shame, remorse, and barely suppressed sexual excitement.
+
+The secretary hurriedly pulled his finger out of his anus and tried to sit up, using the bathtub for support, but he slipped and nearly fell. You rushed forward to help him up: "I'm sorry, Manager! I just wanted to help; I didn't expect things to turn out like this!"
+
+"It's nothing..." the secretary said awkwardly. Although he was trying his best to lower his voice, you could still feel the irrepressible charm he exuded due to his physical arousal.
+
+The secretary tried to push you away, and you held onto his right hand, but strangely, he awkwardly pushed you away with his left. Only then did you notice that as the secretary pulled his fingers out, the mysterious sweet scent in the air became even stronger. And the source of the sweetness seemed to be the right hand the secretary was trying to hide—the hand that had just been inserted into his body.
+
+You noticed that his fingers were somewhat oily and shiny, not at all like they had been cleaned. This reminded you of the tube next to the secretary; judging from the metal tip, its contents were also an oily paste.
+
+Did you just see a secretary applying these things deep into her body?
+
+You pick up the pipe; it's in a foreign language you can't understand. You can't help but ask, "Manager, what's this...?"
+
+...The secretary's expression was full of shock and shame. He seemed to want to take the hose from your hand, but in the end he didn't move. He just remained silent for a long time, not knowing whether he didn't want to tell you or didn't know how to start the conversation.
+
+The secretary was ultimately a gentle person; he sighed and said, "This is... for work..."
+
+"For work?" you wonder. "Do I need to apply it too?"
+
+"No, no, no, you don't need it." The secretary hurriedly explained, "Well... this is just to maintain certain things... you don't need it now, and hopefully you never will."
+
+"Oh..." The secretary explained, but you were even more confused. However, seeing that the secretary didn't want you to know too much, you didn't press further, but simply asked with concern, "Do you need me to help you apply it?"
+
+"No, no." You see the secretary blushing; he's still refusing you.
+
+"I'm almost done. You can go now. I'll handle the rest myself."
+
+...
+
+Snapping out of your reverie, you're still on that staircase with its faintly sweet smell, at the end of which lies the basement with its door ajar.
+
+Although the purpose of this drug with such a strong odor is still unclear, it's obvious that it's not something an ordinary person would use. Had the secretary been here before? It requires some complicated steps to release the drug's scent; did the secretary perhaps perform those tasks here—those things only done during work or evaluations?
+
+You continue forward with unease, and as you approach the gate, your unease intensifies; you hear suppressed breathing.
+
+"Um...uh..."
+
+Someone was in the basement, breathing heavily, and his voice sounded like he was in pain.
+
+You lowered your footsteps and gently pushed open the door.
+
+In the pitch-black basement, there was only a dim nightlight on the floor. The yellowish light couldn't even reach the wall not far away, but it allowed you to see the object in the middle of the room that was constantly trembling... Some kind of machine was moving rhythmically, with pistons moving back and forth, and the object in front of the machine, the one emitting painful gasps, was distorted and difficult to recognize, but you could still tell that it was a person.
+
+The man had his hands tied behind his back, was kneeling on the ground, and except for his buttocks which were forcibly raised, everything else was pressed to the floor.
+
+You see him wearing a tight-fitting black leather jacket and black high-heeled leather boots. The layers of straps on the jacket seem to bind him very tightly. A leg-spreading device is strapped to his knees, forcing him to spread his legs wide as the machine behind him shoves a horrifying-looking stick into his body.
+
+You haven't tried the sex machine yourself, but you've seen it in videos before, so you recognized it immediately. However, the dildo fixed to the top of the machine is larger than any dildo you've seen in any videos before. Compared to the average penis size of the clients you serve, this dildo is twice the size of an average person's and thicker than your own arm.
+
+The sex machine operated with great force, almost always pulling the dildo out completely each time, the immense pulling sensation making the person lying on the ground tremble all over, before inserting it all the way in again, making the person pant as they were pressed down hard.
+
+You feel terrified. Wouldn't you die from being penetrated by such a torture device? Why don't you crawl forward a little and get away from the sex machine? Why do you always let the dildo go all the way into your body, not letting go of even a little bit...?
+
+You quickly realized why: the man was wearing a dog collar, the chain ending right on the sex machine. If he dared to crawl forward, he would be strangled by the collar. And now, he had the chain taut, the collar likely pressing hard against his throat. That's probably why he couldn't groan or cry out in pain, only making heavy breathing sounds like someone with terminal lung disease.
+
+You looked at the person's face. In the dim light, you couldn't see clearly. You could only make out that something was stuffed into his mouth, and he was wearing an eye patch. His short black hair was now soaked with sweat and lay limply on his scalp. Against the backdrop of the all-black surgical instruments, his skin was as pale as a dead man's.
+
+Even if you can't see his face clearly, you'll immediately recognize him as the secretary.
+
+What's he doing here?! Didn't President Washizu invite you today? Where's President Washizu? Why isn't he here?
+
+You didn't dwell on these problems for too long. You felt that your first priority was to make your secretary less miserable, so you wanted to step in and help.
+
+Your first thought was to remove the secretary's blindfold, but as soon as you squatted down in front of him, you made another discovery—although the secretary was wearing a collar, you could still see an unnatural protrusion in his throat, and his neck was much thicker than usual.
+
+You've only ever seen this kind of thing when a secretary is giving oral sex, and only when someone's penis is ridiculously large enough to penetrate deep into their esophagus.
+
+So, is this seemingly ordinary black gag actually filled with an oversized dildo? Goodness, it's very easy to choke when something is inserted into your throat. You've tried oral sex a few times before and choked more than once. You feel that the most urgent thing right now is to pull the dildo out of your secretary's mouth.
+
+You untie the band around the back of his head, lift his chin so he can tilt his head back, and slowly pull the black object out of his mouth.
+
+Even though you're moving very slowly, the secretary keeps gagging. This rubber dildo is bigger than a regular dildo. When it's pulled out of the secretary's throat, the overflowing saliva pulls out strands of silver. When it finally leaves the mouth, it bounces elastically, as if showing off its terrifying nature.
+
+With his throat freed, you notice that the secretary is visibly more relaxed. Although the enormous sex machine is still behind him, at least now he can lie on the ground a little more comfortably.
+
+You toss the dildo aside and try to remove the blindfold from your secretary, but then she starts crying.
+
+You've never seen your secretary cry; he always appears mature and reliable in your presence, as if he'll never break down.
+
+However, now he has completely softened, as if those dildos have utterly shattered his self-esteem, making him no longer care about his dignity even in front of you, his subordinate.
+
+You hear him sobbing softly; the dildo seems to have hurt his throat, his voice is hoarse and unclear, yet he keeps muttering to himself. You bring your ear closer and hear him say in a tone more pitiful than a puppy begging its owner for mercy, "Please... please have pity on me... please... Lord Washizu..."
+
+Mr. Washizu?! The moment the president's name appeared, you recoiled as if struck by lightning. You realized that you hadn't uttered a single word since entering the room, and the secretary, possibly confused from their frenzied sex, might have mistaken you for President Washizu.
+
+For a moment, you were at a loss. Should you explain to the secretary that he had mistaken you for someone else? Or should you play along and try to get him out of there first?
+
+You begin to hate your own slow brain and foolish personality. You're frozen in place, unable to do anything. Meanwhile, the secretary's throat has improved slightly. But because he hasn't received a response, the grief in his voice grows stronger. His soft murmurs have turned into real sobs, incessantly pleading with Lord Washizu to save him. You never knew he carried so much bitterness worthy of such weeping; you never knew he could plead so humbly…
+
+Just as you were wondering what to do, you heard the rhythmic sound of leather shoes on the stairs outside the basement door. Someone was coming.
+
+"I was just going to pick up something, how come you two are already playing around? Hmm? Two capable junior employees?"
+
+Before you could even prepare yourself, the basement door was flung open, and there stood the president of Washizu, whom you had long admired. From the moment he pushed you over during the interview, you couldn't help but think of him from time to time. You missed his muscles, his scent, and his assertive personality.
+
+Even now, backlit by the light, he still possessed a well-developed physique. Wearing only a shirt, his muscular arms were clearly visible, and his strong chest was exposed outside the collar of his shirt, which was only buttoned at the bottom. Lord Washizu stood upright in the doorway, hands on his hips.
+
+And you, the secretary, are kneeling on the floor, endlessly subjected to the abuse of the sex machine, while you kneel beside him, bewildered and helpless. Your bodies are both shrouded in the shadow of Lord Washizu, coldly looked down upon by him as if he were not looking at "capable employees," but merely inanimate tools.
+     </div>
           </div>
-          <div class="panel chinese-panel">
+          <div class="panel">
             <div class="panel-head"><span>中文</span><span>2</span></div>
-            <div class="panel-body">
-              <p>沉默在房间里慢慢成形，像一块石头被磨成更多的轮廓。她终于抬起头，眼神不再躲闪，反而带着一点疲惫后的清醒。</p>
-              <p>当那条边界被轻轻划开时，真正的分界并不在于谁先退一步，而在于谁终于承认：被看见，未必意味着被理解。</p>
-              <p>故事并没有真的结束，它只是把呼吸从表层移到了更深处，像暮色落在木纹上，轮廓愈发清晰。</p>
+            <div class="text-content">
+应鹫巢社长的要求，你在周末的上午来到他位于东京郊区的宅邸。
+
+　　用人告诉你鹫巢社长在地下室，要你也过去，你有些奇怪这么一大早的待在地下室做什么，可是你还是去了。
+
+　　在下楼的途中，你看到地下室的门没有关，想到这可能是鹫巢社长为你留门，可是随着走近，你察觉到了什么不对劲。
+
+　　空气中弥漫着一种难以言说的甜美的味道，你只在秘书身上闻到过那种味道。
+
+　　从你开始跟秘书共事的那天起，你就能闻到那味道了，你一开始你为是秘书的洗发水或者洗衣液的味道，甚至还想问他要牌子，但是你很快意识到那不是任何日化用品的味道，那种味道只在你们工作的中途，或者说是工作到比较深入的阶段时才出现，一开始只是比较幽微，可是随着秘书赤裸的身体被彻底开发，随着男人们的精液射出，那种味道会变得越发强烈，跟精液的味道一起飘散在空气中。
+
+　　一般而言，当工作的进程走到这一步时，你就没什么自主能力了，所以你从未问过秘书那究竟是什么。
+
+　　直到前两天，你们在酒店的房间了做完了一份相对来说简单的工作。秘书将签好字的合同收紧背包，像往常一样把你抱进浴室清洗，之后又把你抱出来。他从第一天工作时就这样了，结束之后只允许他为你清洗，可是却从不让你帮他，甚至就连看也不让你看，每次他的清洁工作都是自己完成的。
+
+　　之前你总是很累或者很痛，秘书不让你插手，你也就没有多问，可是这次，你感觉自己的身体状况还好，你也想帮助秘书清洁。
+
+　　你试着敲了一下浴室的门，秘书没有回应，但是有淋浴的声音，或许是秘书正在洗澡，没有听到……你想象着秘书赤裸着身体被完全打湿的样子，脸红了起来。你不是一次跟秘书一同性爱了，但实际上，你们肌肤相贴的机会少得可怜。
+
+　　你深呼吸了一口，推门而入，然而迎面撞来的，除了浓郁的水雾之外，还有那种你总是不知道来由的甜蜜气味。
+
+　　“嗯……呃……”你听到了秘书压抑的喘息声。
+
+　　然而淋浴房内，却不见秘书的踪影，直到视角向下，你才看到了趴在地上，手扶着浴缸边缘的秘书。
+
+　　以及旁边一个已经拧开了盖子，看起来像是什么药物的管子。
+
+　　秘书的手靠着浴缸勉强支撑着身体，身体则是用一种别扭的姿势侧躺着，双腿微微曲起，这导致他的屁股直直的对着卫生间大门那边的你。
+
+　　你看到他刚刚被多个男人进入过的肛门。虽然此刻它已经经过了简单的清洗，洗去了满溢的精液，可是过度扩张的痕迹没没办法立刻洗掉，大大地敞开着。你想起来刚刚，有个男人想要把拳头深入你的身体，却被秘书给挡了下来。正是那个男人肥大的拳头和小臂让秘书的肛门没有办法靠自己闭合。现在它正敞开着一个不小的洞，饱受摧残的嫩红色血肉隐隐可见。
+
+　　然而最让你震惊的，是秘书正在努力地折起自己的身体，将手指送入那已经足够可怜的肛门里。他整整塞入了三根手指，可是却犹嫌不足，还在不停地向上送手腕，想要进入更深的地方。
+
+　　从未想过会看到这样的场景，你直接愣在了原地。
+
+　　“啊……不……”不知是碰到了前列腺，还是被人撞见更兴奋了。秘书的在见到你时突然尖叫了一声，身体也很可疑地抖了一下。那声音并不像他服务客户时一样柔媚，却混杂了羞耻，惭愧以及压抑不住的性奋。
+
+　　秘书急忙把手指从肛门中拔出来，想要扶着浴缸坐起来，却不小心打了个滑，险些摔倒。你急忙上前两步想扶起他：“对不起，经理！我只是想来帮忙，我没想到事情会变成这样！”
+
+　　“没事……”秘书别扭地开口，他虽然已经在拼命压低自己的声音了，但是你还是能感受到，那股因为身体的性奋而压抑不住的媚气。
+
+　　秘书想要推开你，你扶的是他的右手，可奇怪的是，他却别扭地用左手推。这时你才注意到，随着秘书拔出自己的手指，空气中那股神秘的甜味变得更加浓郁了。而甜味的来源，似乎就是秘书想要藏起来的，那只刚刚还插在他身体里的右手。
+
+　　你看到他的手指有些油亮亮地，完全不像是清洁完之后干净的样子，这让你想到了秘书身边的那一管东西，从金属管口上来看，他的内容物也是油质的膏状物。
+
+　　难道你刚刚看到的，是秘书把这些东西涂进身体深处的场景吗？
+
+　　你捡起管子，上边是外文你看不懂，忍不住发问：“经理，这是……？”
+
+　　……秘书的表情满是震惊与羞耻，他似乎想要从你手中夺走软管，但最终还是没有动作，他只是沉默良久，不知道是不想告诉你，还是不知道该如何开口。
+
+　　秘书终究还是个温柔的人，他叹了口气说道：“这是，为了工作……”
+
+　　“为了工作？”你疑惑：“那我也需要涂吗？”
+
+　　“不不不，你不用。”秘书急忙解释：“嗯……这只是为了维持某些东西……你现在用不到，希望你永远也用不到。”
+
+　　“哦……”秘书解释了一番，你却更迷糊了。不过见秘书不想让你知道太多，你也没有继续追问，只是关心地问：“需要我帮你涂吗？”
+
+　　“不用，不用。”你看到秘书的脸红了，他还在拒绝你。
+
+　　“我已经差不多做完了，你出去就好，剩下的我自己处理。”
+
+　　……
+
+　　从回忆中回过神来，你还在那个隐隐有甜腻味道的楼梯上里，尽头就是虚掩着房门的地下室。
+
+　　虽然还没搞清楚如此味道的药物到底有什么作用，但很明显，那东西不是一般人会用的。难道秘书之前来过这里吗？要让药物的味道散发出来，需要一些很麻烦的步骤，难道，秘书曾经在这里做过那些，那些只有在工作和评估中才会做的事？
+
+　　你带着不安继续前进，在接近大门时，心中的不安更加强烈了，你听到了压抑的喘息声。
+
+　　“唔……呃……” 
+
+　　有人在地下室里，他在难耐地喘息，他的声音听起来很痛苦。
+
+　　你压低了脚步声，轻轻推开门。
+
+　　漆黑的地下室里，只在地板上放了一盏幽暗的小夜灯，昏黄的光甚至无法照到不远处的墙壁，却能让你看清房间中间那个不停颤动着的物体……有什么机械正在规律地运动着，一前一后地坐着活塞运动，而机械前边的物体，也就是发出痛苦喘息的物体，虽然姿势扭曲难以辨认，但你还是能看出来，那是个人。
+
+　　那个人双手反绑身后，跪趴在地上，除了屁股被强制性地抬高之外，其他的一切都被压在地板上。
+
+　　你看到他身上穿着贴身的黑色皮衣，脚上一双黑色的高跟皮靴，皮衣上层层叠叠的束带好像把他捆绑地很结实。他的膝盖那里被绑了一个分腿器，这让他只能大张着腿，接受身后的机械将一根看起来十分可怖的棍子捅进他的身体。
+
+　　你还没亲自试过性爱机器，但你之前在视频里看到过，所以，一下子就认出来了。只是，那个固定在机器顶端的假阳具比你之前看到的任何一个视频中的假阳具都要大，如果按照你服务的客户们的平均阴茎大小来比较，这跟假阴茎足足是普通人的两倍大，比你自己的手臂还要粗。
+
+　　那个性爱机器运作起来的幅度很大，几乎每次都是将假阳具全部抽出，巨大的抽离感让趴着的人浑身发抖，然后再全部插入，让那人一边喘息一边被狠狠地下压。
+
+　　你感到很可怕，被这样的刑具插入，难道不会死吗？为什么不向前爬一点，躲开性爱机器呢？为什么每次都要让假阳具全部都插入身体，一点都不肯放过呢……
+
+　　很快你搞明白了为什么，那个人的脖子上带了狗用的项圈，铁链的尽头就在性爱机器上，如果那个人敢往前爬，他只会被项圈勒死。而现在的情况，他已经将那根铁链绷得笔直了，恐怕项圈正狠狠地压迫着他的喉咙，大概也是因此，他没办法呻吟或者呼痛，只能发出好像肺病晚期患者那样沉重的呼吸声。
+
+　　你看向了那个人的脸，在昏黄的灯光中，你看不太清楚，只能勉强看出他嘴里被塞入了什么东西，眼上也带着眼罩，他黑色的短发现在已经被汗水浸湿了，软塌塌地贴着头皮，在全黑的术具的衬托下，他的皮肤惨白地像是死人。
+
+　　即便看不清脸，你也立刻就认出来了，他就是秘书。
+
+　　他怎么会在这里？！今天不是鹫巢社长约你来吗？鹫巢社长呢？他怎么不在？
+
+　　你没被这些问题耽误太久，你觉得自己的第一要务是让秘书不那么痛苦，于是便想要上去帮忙。
+
+　　你首先想要摘掉秘书的眼罩，可刚刚在他面前蹲下，你又有了一个发现——虽然秘书带了项圈，但你依然能看出来，他的喉咙那里有不自然的突起，他的脖子比平时粗很多。
+
+　　这种情况，你只在秘书口交时看到过，而且是为那些阴茎大到离谱，足以深深插入食管的人口交时看到过。
+
+　　所以，这个看起来平平无奇的黑色口塞，里边实际是一根超大号的假阳具吗？天哪，喉咙被插入东西时非常容易呛到，你之前试过几次口交，被呛到过不止一次，你觉得现在的当务之急是拔掉秘书嘴里的假阳具。
+
+　　你解开他后脑的束带，拖着他的下巴让他仰起头来，缓慢的将他口中的黑色物体向外拉。
+
+　　即便你的动作已经很慢了，可秘书还是不停地干呕，这跟橡胶假阳具比一般的假阳具都要大，拉出秘书的喉咙时，溢出的口水牵出根根银丝，最终脱离口腔时，他还富有弹性地跳了一下，仿佛在展示自己的可怕。
+
+　　喉咙获得自由后，你注意到秘书明显放松了一些，虽然他的身后依然有那个巨大的性爱机器，但是至少现在，他可以趴地稍微舒服一点了。
+
+　　你把假阳具丢在一边，想为秘书解开眼罩，可这时，秘书却哭了起来。
+
+　　你从未见过秘书哭泣，他在你面前总是一副成熟又可靠，好像永远不会崩溃的样子。
+
+　　然而现在，他完完全全软了下来，好像那些假阳具完全击溃了他的自尊，让他即便在你这个下属面前，也不在顾忌尊严。
+
+　　你听到他小声地哭诉着什么，假阳具似乎伤害到了他的喉咙，他声音嘶哑，说话说不清楚，却还在不停地喃喃自语。你将耳朵凑近，听到他用一种比小狗祈求主人怜惜还要更加可怜的语气，说着：“求求您……求求您可怜可怜我吧……求求您了……鹫巢大人……”
+
+　　鹫巢大人？！社长的名字一出现，你如五雷轰顶般躲开了。你意识到，自从你进入这个房间以来，你还没有说过任何一句话，秘书有可能因为疯狂的性爱而意识混乱，将你错认成了鹫巢社长。
+
+　　你一瞬间不知道应该怎么办了，要向秘书说明他认错人了吗？还是将错就错，先将他救出来？
+
+　　你又开始痛恨自己迟钝的大脑和愚蠢的性格，你现在僵在原地，什么都做不了。另一边，秘书喉咙的情况稍微好了一点。可因为迟迟没有等来回应，他声音中的悲痛变得愈发强烈，他已经从小声地呢喃变成了真正的哭泣，不停地祈求鹫巢大人能够救他。你从不知道他的心里有那么多苦楚值得如此哭泣，你从不知道原来他也可以如此卑微地祈求……
+
+　　在你不知所措之间，地下室的门外想起了皮鞋踩在楼梯上时规律的脚步声，有人来了。
+
+　　“老夫只是去拿点儿东西，你们两个怎么就先玩起来了？嗯？两个能干的小员工？”
+
+　　尚未等你有所准备，地下室的门就被直接推开了，迎面而来的，就是你向往已久的鹫巢社长。从面试时被他推倒的那一刻起，你总是会时不时地想起他，你怀念他的肌肉，他身上的味道，他强势的性格。
+
+　　此刻背光站在门口的他依旧身材发达，只穿着衬衫让他那结实的手臂肌肉呼之欲出，健壮的胸膛露在只扣了下边几颗扣子的衬衣领口外边。鹫巢大人叉着腰，笔直地站在门口。
+
+　　而你们，秘书趴在地上接受性爱机器无止境的凌虐，你跪坐在他旁边，茫然无措。你们的身体都被笼罩在鹫巢大人的阴影里，被他冷漠地俯视着，好像他看的不是“能干的员工”，只是一些无生命的工具。
             </div>
           </div>
         </div>
@@ -292,26 +749,18 @@
     </section>
   </main>
 
-  <nav class="bottom-nav" aria-label="Chapter navigation">
-    <a class="is-current" href="#chapter-1"><span class="chapter-label">Sexual performance assessment</span> · Chapter 1</a>
-    <a href="#chapter-2"><span class="chapter-label">Sexual performance assessment</span> · Chapter 2</a>
-    <a href="../tomodachi/index.html"><span class="chapter-label">tomodachi</span></a>
-    <a href="../school/index.html"><span class="chapter-label">school</span></a>
+  <nav class="bottom-nav" aria-label="Reader controls">
+    <a href="#top">Back to top</a>
+    <a href="#chapter-2">Go to latest</a>
+    <a href="../index.html">Back to archive</a>
   </nav>
 
   <script>
     const sizeInput = document.getElementById('fontSize');
     const resetBtn = document.getElementById('resetSize');
     const root = document.documentElement;
-
-    sizeInput.addEventListener('input', (event) => {
-      root.style.setProperty('--reader-size', event.target.value + 'px');
-    });
-
-    resetBtn.addEventListener('click', () => {
-      root.style.setProperty('--reader-size', '18px');
-      sizeInput.value = '18';
-    });
+    sizeInput.addEventListener('input', (event) => root.style.setProperty('--reader-size', event.target.value + 'px'));
+    resetBtn.addEventListener('click', () => { root.style.setProperty('--reader-size', '18px'); sizeInput.value = '18'; });
   </script>
 </body>
 </html>

@@ -40,25 +40,45 @@
     .toolbar { display:flex; justify-content:flex-end; align-items:center; gap:12px; margin:12px 0 24px; color:var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
     .toolbar input[type="range"] { width:170px; accent-color: var(--accent); }
     .toolbar button { background: rgba(255,255,255,0.03); color:var(--text); border:1px solid var(--line); border-radius:999px; padding:8px 12px; cursor:pointer; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
-    .chapter-wrap { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:18px; margin-bottom:28px; }
-    .chapter { border:1px solid var(--line); border-radius:18px; overflow:hidden; background: rgba(17,24,39,0.9); }
-    .chapter h2 { font-size: clamp(1.9rem, 3vw, 2.8rem); padding:18px 18px 10px; }
-    .lang-grid { display:flex; gap:18px; padding:0 18px 18px; }
-    .panel { border:1px solid var(--line); border-radius:16px; background: rgba(255,255,255,0.02); overflow:hidden; min-width:0; }
-    .panel-head { display:flex; justify-content:space-between; gap:12px; padding:12px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
-    .panel-body { padding:18px 18px 12px; font-size:var(--reader-size); line-height:2; }
-    .panel-body p { margin:0 0 1.1em; }
-    .english-panel { flex:7; }
-    .chinese-panel { flex:3; }
+    .chapter-wrap { display:grid; grid-template-columns: 1fr; gap:28px; margin-bottom:28px; }
+    .chapter { border:none; border-radius:0; overflow:visible; background:transparent; padding:0; margin:0; }
+    .chapter h2 { font-size: clamp(1.9rem, 3vw, 2.8rem); padding:0 0 12px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:16px; }
+
+    /* ---- 改动点 1：flex 自适应宽度 ---- */
+    .lang-grid {
+      display: flex;
+      gap: 18px;
+      align-items: stretch;  /* 保证两列高度相同，底部对齐 */
+    }
+    .panel {
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      overflow: visible;
+      min-width: 0;          /* 防止 flex 溢出 */
+      flex: 1 1 auto;        /* 宽度根据内容自适应，但会填满容器 */
+    }
+
+    .panel-head { display:flex; justify-content:space-between; gap:12px; padding:0 0 10px; border-bottom:none; color:var(--muted); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
+
+    /* ---- 改动点 2：文本容器保留换行 ---- */
+    .text-content {
+      font-size: var(--reader-size);
+      line-height: 2;
+      white-space: pre-wrap;   /* 保留换行符，自动折行 */
+      word-wrap: break-word;
+    }
+
+    .chapter-info { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; margin:0 0 16px; color:var(--muted); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .chapter-info a { color:var(--text); border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:2px; }
     .bottom-nav { position: sticky; bottom:0; z-index:20; display:flex; gap:10px; overflow-x:auto; background: rgba(11,16,32,0.94); border-top:1px solid var(--line); padding:12px 20px; backdrop-filter:blur(12px); }
     .bottom-nav a { display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; border:1px solid var(--line); background: rgba(255,255,255,0.02); color: var(--text); border-radius:999px; padding:9px 14px; white-space:nowrap; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; }
     .bottom-nav a.is-current { border-color: rgba(214,196,161,0.5); background: rgba(214,196,161,0.08); }
-    .bottom-nav .chapter-label { max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
     @media (max-width:900px){ .lang-grid{ flex-direction:column; } .chapter-wrap{ grid-template-columns:1fr; } }
     @media (max-width:680px){ .nav{ display:none; } .toolbar{ justify-content:space-between; flex-wrap:wrap; } .bottom-nav a .chapter-label{ display:none; } .bottom-nav a{ padding:9px 12px; } }
   </style>
 </head>
-<body>
+<body id="top">
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">Silent Orchard</div>
@@ -82,22 +102,155 @@
       <button id="resetSize" type="button">Reset</button>
     </div>
 
+    <div class="chapter-info" aria-label="Current chapter navigation">
+      <span>Current:</span>
+      <a href="#chapter-1">Chapter 1</a>
+      <span>•</span>
+      <a href="#chapter-2">Chapter 2</a>
+    </div>
+
     <section class="chapter-wrap">
       <article class="chapter" id="chapter-1">
         <h2>Chapter 1</h2>
         <div class="lang-grid">
-          <div class="panel english-panel">
+          <div class="panel">
             <div class="panel-head"><span>English</span><span>1</span></div>
-            <div class="panel-body">
-              <p>The corridor after school was quieter than usual, as if every window were listening quietly to someone breathing. She set her bag in the corner of the desk, as if leaving a little room for herself before a conversation that would never be recorded.</p>
-              <p>School never lacked hints; it only needed one seemingly accidental gesture and one gaze that refused to turn away.</p>
+            <div class="text-content">
+You waited until everyone in the locker room had left before leaving the swimming pool. Whitney threw your clothes in the women's locker room, and you were worried that the girls would see your body. Only now did you dare to retrieve your clothes.
+
+Fortunately, there were no students left in either the men's or women's locker rooms, and you successfully retrieved your clothes.
+
+However, when you finished changing and tried to leave, Whitney blocked your way at the door. He was surrounded by several other students, all taller and stronger than you. They had already entered puberty and looked like men, while you were still just a thin boy, only reaching their shoulders. You had a thin chest and no Adam's apple, and the students looked at you with mockery and contempt.
+
+One of the students said, "Hey, did anyone see that shorty Tix just went into the girls' locker room? Is she a girl? Hahaha."
+
+One student chimed in, "Yeah, haha, only girls go to the women's locker room. Since you're a girl, what are you doing in the men's locker room?"
+
+"Are you here to steal something? Or to secretly leave love letters? Ugh... you're disgusting, no one will like you!"
+
+"Let's take a look at his schoolbag; there must be a cheesy love letter inside!"
+
+One of them snatched your backpack. You tried to get it back, but he passed it to another student like a ball. You ran to another student, but before you could get there, your backpack was in the hands of a third person. You were being kicked around like a ball by the group of students.
+
+Finally, the backpack came to a stop in Whitney's hands. He held it high, stood still, and looked down at you.
+
+"Give me back my backpack." You tiptoe to grab your backpack, but Whitney is just too tall. Once he raises his hand, you have no chance at all. You jump up and try to pull his sleeve, but all your efforts are like a teacup dog trying to fight off a gray wolf. In other people's eyes, it's just a joke.
+
+I don't know who kicked you.
+
+"Ugh..." You collapsed to the ground in pain.
+
+"How dare you get Whitney's clothes dirty! Do you know what you're going to do?" Whitney's students shouted.
+
+You lie on the ground, and when you look up, you see the boys' shoes and calves. They have dark, healthy skin and masculine leg hair. They are as strong and muscular as rugby players.
+
+The floor of the men's locker room was still damp. You didn't try to get up; instead, you instinctively curled up your small body. You knew you were about to get beaten up, and getting up or doing anything to resist would only make them beat you harder. It was better to curl up and protect yourself, at least to avoid getting a black eye and swollen face like before...
+
+You tell yourself not to struggle, not to cry for help, and try not to cry. Just remain unresponsive, like a puppet, and wait for them to hit you. They'll get bored and leave...
+
+However, the expected beating did not come. You secretly opened your eyes and saw that the boys' bodies had turned in a different direction, and the toes of their shoes were pointing in the same spot.
+
+Looking past their calves, you see a pair of cute women's shoes. Following the slender yet strong calves upwards, you see a black school uniform skirt that falls below the knee. The girl is rather thin; even with the belt pulled tightest, the skirt doesn't hug her body, looking loose and baggy. You don't know why she chose such an oversized skirt that clearly doesn't fit her, but the loose clothing only amplifies her cold and aloof demeanor. Looking further up, you see a girl with long, straight, thick black hair that reaches her chest. She deliberately pulls some hair forward to cover her shoulders and chest, and she has bangs long enough to cover her eyebrows.
+
+Judging from her appearance, she is a very shy girl who always tries to hide herself.
+
+Right now, she's standing in the corridor between the men's and women's locker rooms, holding a few books, looking at you. Somewhat unexpectedly, there's no fear or embarrassment in her expression; even facing the most powerful bullying group on campus, she doesn't resist making eye contact.
+
+You can't even see any emotion in her deep black eyes; her eyes are like the surface of a frozen lake, cold, indifferent, and without any ripples.
+
+You know her; she's a third-grade student, almost two years older than you. You once had the same math class with her, and her aloof and seemingly unapproachable demeanor left a deep impression on you.
+
+The boys started whispering among themselves, and surprisingly, they all knew the girl. You had no idea what they were talking about or what they planned to do to her.
+
+Lying on the ground, you were only thinking about protecting yourself, but for some reason, you suddenly wanted to loudly warn the girl to leave immediately. If you had the chance, you would even be willing to hug Whitney's leg and use your body to buy time for the girl so that she could avoid being bullied like you.
+
+However, before you could do anything, the girl left on her own. She went into the women's changing room and came out a short while later, wearing a white headset.
+
+She kept her head down, focused on her phone, and didn't look at you all again as she left, as if you didn't exist at all, as if to her you were just a pile of roadside trash that she had only glanced at once and then lost all interest in.
+
+The girl's appearance interrupted Whitney and his friends' bullying of you. After the girl left, the boys seemed to have reached a conclusion; they lost interest in continuing to beat you up, just like robbers who, upon discovering the police were nearby, could only leave dejectedly.
+
+Besides Whitney, he was also somewhat resentful: "She's just a skinny girl, and she doesn't even have any companions..."
+
+Another boy advised him, "It's best not to mess with her. I've heard that people who mess with her never end up well..."
+
+The boys threw their backpacks next to you and left without giving you another glance. You remained lying on the ground, and after a long while, you still couldn't understand your current situation.
+
+You weren't beaten up, and you didn't get the chance to be a hero and save the damsel in distress as you might have imagined. It seems that the girl's appearance saved you, and Whitney and his companions walked away...
+
+You get up from the damp floor, grab your backpack, and something's still a jumble—why would a bully like Whitney know that girl? Why are they afraid of her? And what's her name...?
+
+You've only taken a few classes with her, the girl doesn't talk much, you live far apart, and you have a bad memory... But after some thought, you finally remember her name—it's Deco.
             </div>
           </div>
-          <div class="panel chinese-panel">
+          <div class="panel">
             <div class="panel-head"><span>中文</span><span>1</span></div>
-            <div class="panel-body">
-              <p>放学后的走廊比平时更安静，仿佛每一扇窗都在悄悄听别人呼吸。她把书包放在桌角，像在一场不会被记录的对话前，先给自己留出一点余地。</p>
-              <p>校园从来不缺暗示，它只需要一个看似偶然的动作，和一个不肯转开的目光。</p>
+            <div class="text-content">
+　　你等到更衣室的人都离开之后，才离开游泳馆。whitney把你的衣服丢到了女更衣室，你很担心女孩儿们会看到你的身体，直到现在，你才敢去拿自己的衣服。
+
+　　幸好，无论是男更衣室还是女更衣室，都已经没有学生了，你成功拿到自己的衣服。
+
+　　然而，等你换完衣服，想要离开时，却被whitney堵在了门口。他的身边还围绕着几个其他的学生，他们都长得比你高大，比你强壮，他们已经进入了发育期，看起来像是一个男人一样，而你，现在还是只是一个瘦弱的男孩，你的身高只能到他们的肩膀，你的胸部很薄，你没有喉结，那群学生看你的眼神里都充满了戏谑与蔑视。
+
+　　其中一个学生说道:“嘿，有没有人看到，小矮子tix刚刚去女更衣室了，她是女孩子吗哈哈哈。”
+
+　　有学生附和:“对啊哈哈哈，只有女孩子才去女更衣室，既然你是女孩子，现在你又来男更衣室做什么呢?”
+
+　　”是来偷东西的吗?还是来偷偷放情书的，呃......你太恶心了，没有人会喜欢你的!”
+
+　　"让我们看看他的书包吧，他的书包里一定有一封肉麻的情书!”
+
+　　他们的一个夺走了你的书包，你想要去拿回来，书包却被他像是传球一样传到了他的另一个同伴手里，你又跑去另外一个学生那里，可还没等你跑到，你的书包又到了第三个人手里，你像是一个皮球一样被那群学生踢来踢去。
+
+　　最后，书包最终在whitney的手里停了下来，他将书包举高，站在原地，居高临下地看着你。
+
+　　“把书包还给我。”你踮起脚尖去抢自己的书包，可是whitney实在是太高了，他只要举起了手，你根本一点办法都没有，你跳起来，去拉他的衣袖，可这一切的努力都好像是一只茶杯犬想要反抗灰狼一样，落在别人的眼里只能是个笑话。
+
+　　不知道谁踹了你一脚。
+
+　　“呃......”你痛苦地倒在地上。
+
+　　“竟然敢弄脏whitney的衣服!你知道自己要面对什么吗?”whitney身边的学生大喊。
+
+　　你倒在地上，抬眼看到的是男孩子们的鞋子和小腿，他们有黝黑又健康的皮肤，有充满男子气概的腿毛，他们像是橄榄球运动员一样结实又强壮。
+
+　　男更衣室的地板还有些潮湿，你没有尝试爬起来，而是习惯性地蜷缩起自己瘦小的身体，因为你知道，接下来你要挨揍了，爬起来或者任何反抗的行为都只会让他们揍得更狠，还不如缩起身体保护自己，至少不要像之前一样又被揍得鼻青脸肿......
+
+　　你在心里劝告自己，不要挣扎，不要呼救，也尽量不要哭泣，毫无反应像是木偶一样等待他们的打吧，他们感到无趣之后就会离开了......
+
+　　然而，预料中的殴打并没有降临，你偷偷睁开眼睛，看到男孩子们的身体转了个方向，鞋尖指向了同一个位置。
+
+　　穿过他们的小腿，你向那个位置看过去，最先发现的，是一双可爱的女士皮鞋，沿着瘦却结实的小腿继续向上，你看到一条长到膝盖以下的黑色校服裙，那是个看起来有点瘦的女孩儿，校服裙的腰带即便拉到最紧，也不能贴合她的身体，看起来松松垮垮的。你不知道她为什么要选择一条明显不合自己身材的大号校服裙，但这样宽松的衣服更显示出一种冷漠又疏离的感觉。继续向上看去，女孩有一头长到胸口的黑色直发，乌黑又浓密，她刻意地将一部分头发拉到身前，遮盖自己的肩膀和胸部，她还留了刘海，长度足以遮住眉毛。
+
+　　从外表上来看，这是个十分害羞，总是想要隐藏自己的女孩儿。
+
+　　此时此刻，她正抱着几本书，站在男更衣室和女更衣室之间的走廊那里，看着你们。有些出乎预料的是，她的表情中并没有任何恐惧或者尴尬，即便与校园中最强势的霸凌团体面对面，她也并不抵触直接对视。
+
+　　从她深邃的黑色眼瞳中，你甚至看不任何感情，她那双眼睛仿佛是永冻冰湖的湖面，寒冷，冷漠，没有任何波澜。
+
+　　你认识她，她是三年级的学生，比你大了接近两岁，你曾经跟她上过同一节数学课，她冷漠到似乎拒人于千里之外的气质给你留下了深刻的印象。
+
+　　男孩们开始窸窸窣窣地讨论起来，令人惊讶的是，他们也都认识这个女孩。你不知道他们在讨论什么，以及他们打算对女孩做什么。
+
+　　躺在地上原本还只想着自保的你不知道因为什么原因，突然想要大声警告女孩儿赶紧离开，如果有机会的话，你甚至愿意抱住whitney的腿，用自己的身体为女孩儿拖时间，让女孩儿避免遭遇如自己一般的霸凌。
+
+　　然而，还未等你有所行动，女孩儿自己先离开了，她走进女更衣室，不久之后又走出来，耳朵上多了一个白色的头戴式耳机
+
+　　她低头专注于自己的手机，离开时完全没有再看你们这群人一眼，仿佛你们根本不存在，仿佛对她来说，你们只是一堆路边的垃圾，只是看过一眼之后，就再也提不起兴趣。
+
+　　那位女孩的出现打断了whitney和他的同伴们对你的霸凌，女孩儿离开之后，男孩们似乎讨论出了结果，他们没有了继续揍你的兴趣，好像准备抢劫的劫匪发现警察就在他们的身边，只能悻悻地离开。
+
+　　除了whitney，他还有些不忿:“只是一个瘦弱的女孩，还没有同伴......”
+
+　　另一个男孩劝他:“最好还是不要惹她，听说惹她的人都没有好结果........”
+
+　　男孩们把书包丢到你身边，走了，没有在多看你一眼，你依旧躺在地上，缓了好一会儿，没办法理解自己现在的处境。
+
+　　你并没有被揍，你也并没有机会如想象一般英雄救美，似乎，是那个女孩儿的出现拯救了你，whitney和他的同伴走开了...
+
+　　你从潮湿的地板上爬起来，抱起自己的书包，还有一些事情很混乱——为什么whitney这种霸凌者会认识那个女孩，为什么他们会害怕那个女孩，还有，那个女孩的名字......
+
+　　你只跟她一起上过几节课而已，女孩儿不常说话，你们离得很远，你的记性不好.....但是，经过一番思考，你终究还是想起来了，她的名字——是deco。
             </div>
           </div>
         </div>
@@ -106,18 +259,16 @@
       <article class="chapter" id="chapter-2">
         <h2>Chapter 2</h2>
         <div class="lang-grid">
-          <div class="panel english-panel">
+          <div class="panel">
             <div class="panel-head"><span>English</span><span>2</span></div>
-            <div class="panel-body">
-              <p>She wrote her name on the edge of the page, yet the handwriting felt like clouds blown by wind—both real and unreal. At that moment, all explanations about identity, age, and answers seemed to leak out like light through a crack in the door.</p>
-              <p>They all knew that youth was easily misunderstood because it always dressed gentleness as hesitation and courage as a silence one could not sustain.</p>
+            <div class="text-content">
+You saw that girl again during a lunch break one day.
             </div>
           </div>
-          <div class="panel chinese-panel">
+          <div class="panel">
             <div class="panel-head"><span>中文</span><span>2</span></div>
-            <div class="panel-body">
-              <p>她把名字写在纸边，字迹却像被风吹过的云，既真的又不真实。那一刻，所有关于身份、年龄与答案的解释，都像从门缝里漏出来的光。</p>
-              <p>他们都知道，青春最容易被误解，因为它总会把温柔装成一种迟疑，把勇敢说成一种无法自持的沉默。</p>
+            <div class="text-content">
+　　再一次见到那个女孩，是在某天的午间休息时。
             </div>
           </div>
         </div>
@@ -125,11 +276,10 @@
     </section>
   </main>
 
-  <nav class="bottom-nav" aria-label="Chapter navigation">
-    <a class="is-current" href="#chapter-1"><span class="chapter-label">school</span> · Chapter 1</a>
-    <a href="#chapter-2"><span class="chapter-label">school</span> · Chapter 2</a>
-    <a href="../sexual-performance-assessment/index.html"><span class="chapter-label">Sexual performance assessment</span></a>
-    <a href="../tomodachi/index.html"><span class="chapter-label">tomodachi</span></a>
+  <nav class="bottom-nav" aria-label="Reader controls">
+    <a href="#top">Back to top</a>
+    <a href="#chapter-2">Go to latest</a>
+    <a href="../index.html">Back to archive</a>
   </nav>
 
   <script>
