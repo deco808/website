@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZK6CD9HS88"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZK6CD9HS88');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Washizu Gaiden - Chapter 29</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6b8cae;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #d1e3f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: var(--card-bg);
+            border-bottom: 2px solid var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .header.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .title {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .comic-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        .comic-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .comic-image.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .loading-container {
+            text-align: center;
+            padding: 50px 20px;
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(74, 111, 165, 0.2);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            background: var(--card-bg);
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .footer.hidden {
+            transform: translateY(100%);
+        }
+        
+        .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            font-size: 1rem;
+            text-align: center;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .status-bar.hidden {
+            transform: translateY(100%);
+        }
+        
+        .progress-container {
+            width: 200px;
+            height: 8px;
+            background: rgba(74, 111, 165, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .completed-message {
+            color: #28a745;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-btn {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-btn i {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .nav-btn.prev {
+            border-color: var(--primary-color);
+        }
+        
+        .nav-btn.next {
+            border-color: var(--primary-color);
+        }
+        
+        .nav-btn.center {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .nav-btn.center:hover {
+            background: #3a5a80;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .nav-btn {
+                width: 80px;
+                height: 80px;
+                font-size: 0.9rem;
+            }
+            .nav-btn i {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="header">
+        <div class="title" id="chapterTitle">Legend of Washizu</div>
+        <div class="subtitle" id="chapterSubtitle">English Version</div>
+    </div>
+    
+    <div class="comic-container" id="comic-container">
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p>Loading comic, please wait...</p>
+            <p><i class="fas fa-cloud"></i> Using Cloudinary CDN</p>
+        </div>
+    </div>
+    
+    <div class="status-bar" id="statusBar">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Loading Progress: <span id="loadedCount">0</span>/<span id="totalCount">0</span></span>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <span class="completed-message" id="completedMessage"><i class="fas fa-check-circle"></i> Loaded!</span>
+    </div>
+    
+    <div class="nav-overlay" id="navOverlay">
+        <div class="nav-buttons">
+            <div class="nav-btn prev" id="prevBtn">
+                <i class="fas fa-arrow-left"></i>
+                Prev
+            </div>
+            <div class="nav-btn next" id="nextBtn">
+                <i class="fas fa-arrow-right"></i>
+                Next
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer" id="footer">
+        <div>Chapter 29</div>
+        <div style="font-size:0.9rem; color:#6c757d;">All rights reserved</div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ========================
+        // Configuration
+        // ========================
+        const chapterConfig = {
+            chapterNumber: 29,
+            chapterTitle: "Chapter 29",
+            imageUrls: [
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953804/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_1_axf2xf.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953995/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_2_yunuyx.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953992/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_4_blo4lp.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953805/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_5_pl892v.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953812/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_6_xpxrsf.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953805/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_7_f9bhdc.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953805/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_8_on3xhd.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953995/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_9_fzacqn.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953816/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_10_nmxbzc.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953814/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_11_pyeyjk.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953840/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_12_hlgm5c.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953842/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_13_uumqmx.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953842/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_14_wp7gqc.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953834/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_15_soo8il.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953837/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_16_ueuvf3.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953834/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_17_jekl4q.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953839/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_18_kxapkj.jpg",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953844/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_19_kezfwg.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953843/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_20_fgob8w.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953844/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_21_a6qmbs.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953855/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_22_op1bpn.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953850/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_23_a1letw.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953860/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_24_dlihim.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953850/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_26_xify2h.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953850/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_27_exxzox.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953849/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_28_mkx9nl.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953853/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_29_gjzxl4.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953861/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_30_lp7j5b.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953853/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_32_jruoew.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953853/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_33_dpauji.png",
+                "https://res.cloudinary.com/dbulxrm7b/image/upload/v1788953857/%E9%B9%AB%E5%B7%A2%E5%A4%96%E4%BC%A029_34_awtcji.png"
+            ]
+        };
+
+        // Auto-optimize Cloudinary URLs
+        (function optimizeCloudinaryUrls() {
+            chapterConfig.imageUrls = chapterConfig.imageUrls.map(url => {
+                if (!url.includes('res.cloudinary.com')) return url;
+                if (url.includes('/f_') || url.includes('/q_')) return url;
+                return url.replace(
+                    /(https:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/)(v\d+\/)/,
+                    '$1f_auto,q_auto/$2'
+                );
+            });
+        })();
+
+        // Set header
+        document.getElementById('chapterTitle').textContent = `Legend of Washizu ${chapterConfig.chapterNumber}`;
+        document.getElementById('chapterSubtitle').textContent = `${chapterConfig.chapterTitle} | In English`;
+
+        const comicContainer = document.getElementById('comic-container');
+        const loadedCount = document.getElementById('loadedCount');
+        const totalCount = document.getElementById('totalCount');
+        const progressBar = document.getElementById('progressBar');
+        const statusBarEl = document.getElementById('statusBar');
+        const header = document.getElementById('header');
+        const footer = document.getElementById('footer');
+        const navOverlay = document.getElementById('navOverlay');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let lastScrollTop = 0;
+
+        totalCount.textContent = chapterConfig.imageUrls.length;
+        comicContainer.innerHTML = '';
+
+        // Create images with lazy loading
+        chapterConfig.imageUrls.forEach((url, index) => {
+            const imgContainer = document.createElement('div');
+            imgContainer.className = 'img-container';
+            
+            const img = document.createElement('img');
+            img.dataset.src = url;
+            img.alt = `Page ${index + 1}`;
+            img.className = 'comic-image';
+            img.loading = "lazy";
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            delete img.dataset.src;
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            observer.observe(img);
+
+            img.onload = function() {
+                this.classList.add('loaded');
+                const loaded = parseInt(loadedCount.textContent) + 1;
+                loadedCount.textContent = loaded;
+                const progress = Math.floor((loaded / chapterConfig.imageUrls.length) * 100);
+                progressBar.style.width = `${progress}%`;
+
+                if (loaded === chapterConfig.imageUrls.length) {
+                    setTimeout(() => {
+                        statusBarEl.innerHTML = '<i class="fas fa-check-circle"></i> All images loaded!';
+                        statusBarEl.style.color = '#28a745';
+                    }, 500);
+                }
+            };
+
+            img.onerror = function() {
+                this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600"><rect width="400" height="600" fill="%23f8f9fa"/><text x="200" y="300" font-family="Arial" font-size="20" fill="%236c757d" text-anchor="middle">Image failed to load</text></svg>';
+                this.classList.add('loaded');
+                const loaded = parseInt(loadedCount.textContent) + 1;
+                loadedCount.textContent = loaded;
+                const progress = Math.floor((loaded / chapterConfig.imageUrls.length) * 100);
+                progressBar.style.width = `${progress}%`;
+            };
+
+            const pageNum = document.createElement('div');
+            pageNum.className = 'page-number';
+            pageNum.textContent = `Page ${index + 1}`;
+            pageNum.style.textAlign = 'center';
+            pageNum.style.margin = '5px 0 15px';
+            pageNum.style.color = '#6c757d';
+            pageNum.style.fontSize = '0.9rem';
+
+            imgContainer.appendChild(img);
+            imgContainer.appendChild(pageNum);
+            comicContainer.appendChild(imgContainer);
+        });
+
+        // ========== SCROLL HIDE – No auto-show at bottom ==========
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Only hide when scrolling down past threshold, show when scrolling up
+            if (currentScroll > lastScrollTop && currentScroll > 50) {
+                // Scrolling down → hide
+                header.classList.add('hidden');
+                footer.classList.add('hidden');
+                statusBarEl.classList.add('hidden');
+            } else {
+                // Scrolling up → show
+                header.classList.remove('hidden');
+                footer.classList.remove('hidden');
+                statusBarEl.classList.remove('hidden');
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+
+        // Toggle navigation overlay on body click
+        document.body.addEventListener('click', function(e) {
+            if (e.target.closest('.nav-btn')) return;
+            navOverlay.classList.toggle('active');
+        });
+
+        // Navigation buttons – link to previous/next chapters
+        prevBtn.addEventListener('click', function() {
+            window.location.href = `chapter28_english.html`;
+        });
+
+        nextBtn.addEventListener('click', function() {
+            window.location.href = `chapter30_english.html`;
+        });
+    });
+</script>
+</body>
+</html>
